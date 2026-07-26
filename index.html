@@ -572,7 +572,7 @@
           </div>
           <div class="flex gap-8">
             <button class="btn btn-secondary btn-sm" onclick="showHistoryPage()">📅 历史</button>
-            <button class="btn btn-secondary btn-sm" onclick="showTemplateDialog()">模板</button>
+            <button class="btn btn-secondary btn-sm" onclick="showImportDialog()">📥 导入</button>
             <button class="btn btn-primary btn-sm" onclick="showAddPlanDialog()">+ 新任务</button>
           </div>
         </div>
@@ -591,17 +591,176 @@
       ${tpls.length > 0 ? `
         <div class="card mt-16">
           <div class="card-header"><div class="card-title">📥 快速添加</div><span class="text-muted text-sm">来自其他模块</span></div>
-          ${tpls.map((t, i) => `
+          ${tpls.slice(0, 3).map((t, i) => `
             <div class="task-item" onclick="addTemplatePlan(${i})" style="cursor:pointer;">
               <div class="task-content"><div class="task-text">${escapeHtml(t.text)}</div><div class="task-meta"><span class="tag tag-accent">${t.source}</span></div></div>
               <span style="color:var(--primary);font-size:20px;">+</span>
             </div>`).join('')}
+          ${tpls.length > 3 ? `<div style="text-align:center;padding:8px;"><span style="color:var(--primary);cursor:pointer;" onclick="showImportDialog()">查看全部 ${tpls.length} 项 →</span></div>` : ''}
         </div>` : ''}
     `;
   }
-  function showTemplateDialog() {
+  function showImportDialog() {
     const tpls = getTemplatePlans();
-    openModal(`<h3>从模板添加</h3>${tpls.length === 0 ? '<p class="text-muted">暂无可用模板</p>' : tpls.map((t, i) => `<div class="task-item" onclick="addTemplatePlan(${i}); closeModal()" style="cursor:pointer;"><div class="task-content"><div class="task-text">${escapeHtml(t.text)}</div><div class="task-meta"><span class="tag tag-accent">${t.source}</span></div></div><span style="color:var(--primary);font-size:20px;">+</span></div>`).join('')}<div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">关闭</button></div>`);
+    const exerciseCount = (getStore(STORE_KEYS.exercise)?.customPlans || []).length + (getStore(STORE_KEYS.exercise)?.videos || []).length;
+    const readingCount = (getStore(STORE_KEYS.reading)?.books || []).length;
+    const creativeCount = (getStore(STORE_KEYS.creative)?.records || []).length;
+    const frontendCount = (getStore(STORE_KEYS.frontend)?.learningPlan || []).length;
+    
+    openModal(`<h3>📥 从其他模块导入</h3>
+      <p class="text-muted mb-12" style="font-size:13px;">将其他模块的内容添加为今日计划</p>
+      
+      <div style="background:#F0F5EE;border-radius:10px;padding:12px;margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div><strong>💪 每日锻炼</strong> <span class="text-muted" style="font-size:12px;">(${exerciseCount} 项)</span></div>
+          <button class="btn btn-primary btn-sm" onclick="importFromModule('exercise'); closeModal();">全部导入</button>
+        </div>
+        <div style="font-size:12px;color:#666;">自定义计划、锻炼视频等</div>
+      </div>
+      
+      <div style="background:#F0F5EE;border-radius:10px;padding:12px;margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div><strong>📖 每日阅读</strong> <span class="text-muted" style="font-size:12px;">(${readingCount} 本书)</span></div>
+          <button class="btn btn-primary btn-sm" onclick="importFromModule('reading'); closeModal();">全部导入</button>
+        </div>
+        <div style="font-size:12px;color:#666;">在读书籍的每日目标</div>
+      </div>
+      
+      <div style="background:#F0F5EE;border-radius:10px;padding:12px;margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div><strong>✍️ 创作打卡</strong> <span class="text-muted" style="font-size:12px;">(${creativeCount} 条记录)</span></div>
+          <button class="btn btn-primary btn-sm" onclick="importFromModule('creative'); closeModal();">全部导入</button>
+        </div>
+        <div style="font-size:12px;color:#666;">历史生成的文案记录</div>
+      </div>
+      
+      <div style="background:#F0F5EE;border-radius:10px;padding:12px;margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div><strong>💻 每日前端</strong> <span class="text-muted" style="font-size:12px;">(${frontendCount} 条)</span></div>
+          <button class="btn btn-primary btn-sm" onclick="importFromModule('frontend'); closeModal();">全部导入</button>
+        </div>
+        <div style="font-size:12px;color:#666;">学习计划和资讯</div>
+      </div>
+      
+      ${tpls.length > 0 ? `
+      <div class="divider"></div>
+      <strong style="margin-bottom:8px;display:block;">手动选择 (${tpls.length} 项)</strong>
+      <div style="max-height:200px;overflow-y:auto;">
+        ${tpls.map((t, i) => `<div class="task-item" onclick="addTemplatePlan(${i}); closeModal()" style="cursor:pointer;"><div class="task-content"><div class="task-text">${escapeHtml(t.text)}</div><div class="task-meta"><span class="tag tag-accent">${t.source}</span></div></div><span style="color:var(--primary);font-size:18px;">+</span></div>`).join('')}
+      </div>` : ''}
+      
+      <div class="modal-actions" style="margin-top:16px;">
+        <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+        <button class="btn btn-primary" onclick="importAll(); closeModal();">✨ 一键全部导入</button>
+      </div>`);
+  }
+  function importFromModule(module) {
+    const plans = getTodayPlans();
+    let addedCount = 0;
+    
+    if (module === 'exercise') {
+      const ex = getStore(STORE_KEYS.exercise);
+      if (ex?.customPlans) {
+        ex.customPlans.forEach(p => {
+          plans.push({ text: `💪 锻炼：${p}`, completed: false, createdAt: new Date().toISOString(), source: '每日锻炼' });
+          addedCount++;
+        });
+      }
+      if (ex?.videos) {
+        ex.videos.slice(0, 3).forEach(v => {
+          plans.push({ text: `🎬 跟练：${v.title}`, completed: false, createdAt: new Date().toISOString(), source: '每日锻炼' });
+          addedCount++;
+        });
+      }
+    } else if (module === 'reading') {
+      const rd = getStore(STORE_KEYS.reading);
+      if (rd?.books) {
+        rd.books.forEach(b => {
+          plans.push({ text: `📖 阅读：${b.title}${b.dailyGoal ? ' - ' + b.dailyGoal : ''}`, completed: false, createdAt: new Date().toISOString(), source: '每日阅读' });
+          addedCount++;
+        });
+      }
+    } else if (module === 'creative') {
+      const cr = getStore(STORE_KEYS.creative);
+      if (cr?.records) {
+        cr.records.slice(-3).forEach(r => {
+          plans.push({ text: `✍️ 创作：${r.template}`, completed: false, createdAt: new Date().toISOString(), source: '创作打卡' });
+          addedCount++;
+        });
+      }
+    } else if (module === 'frontend') {
+      const fe = getStore(STORE_KEYS.frontend);
+      if (fe?.learningPlan) {
+        fe.learningPlan.forEach(p => {
+          plans.push({ text: `💻 前端：${p}`, completed: false, createdAt: new Date().toISOString(), source: '每日前端' });
+          addedCount++;
+        });
+      }
+    }
+    
+    if (addedCount > 0) {
+      saveTodayPlans(plans);
+      renderPlanPage();
+      showToast(`已导入 ${addedCount} 项计划`, 'success');
+    } else {
+      showToast('该模块暂无内容可导入', 'error');
+    }
+  }
+  function importAll() {
+    const plans = getTodayPlans();
+    let addedCount = 0;
+    
+    const modules = ['exercise', 'reading', 'creative', 'frontend'];
+    modules.forEach(m => {
+      const tempPlans = [];
+      const orig = getTodayPlans;
+      
+      if (m === 'exercise') {
+        const ex = getStore(STORE_KEYS.exercise);
+        if (ex?.customPlans) {
+          ex.customPlans.forEach(p => {
+            tempPlans.push({ text: `💪 锻炼：${p}`, source: '每日锻炼' });
+          });
+        }
+      } else if (m === 'reading') {
+        const rd = getStore(STORE_KEYS.reading);
+        if (rd?.books) {
+          rd.books.forEach(b => {
+            tempPlans.push({ text: `📖 阅读：${b.title}${b.dailyGoal ? ' - ' + b.dailyGoal : ''}`, source: '每日阅读' });
+          });
+        }
+      } else if (m === 'creative') {
+        const cr = getStore(STORE_KEYS.creative);
+        if (cr?.records) {
+          cr.records.slice(-2).forEach(r => {
+            tempPlans.push({ text: `✍️ 创作：${r.template}`, source: '创作打卡' });
+          });
+        }
+      } else if (m === 'frontend') {
+        const fe = getStore(STORE_KEYS.frontend);
+        if (fe?.learningPlan) {
+          fe.learningPlan.forEach(p => {
+            tempPlans.push({ text: `💻 前端：${p}`, source: '每日前端' });
+          });
+        }
+      }
+      
+      tempPlans.forEach(p => {
+        plans.push({ text: p.text, completed: false, createdAt: new Date().toISOString(), source: p.source });
+        addedCount++;
+      });
+    });
+    
+    if (addedCount > 0) {
+      saveTodayPlans(plans);
+      renderPlanPage();
+      showToast(`✨ 已全部导入 ${addedCount} 项计划`, 'success');
+    } else {
+      showToast('暂无内容可导入', 'error');
+    }
+  }
+  function showTemplateDialog() {
+    showImportDialog();
   }
   function showAddPlanDialog() {
     openModal(`<h3>添加计划</h3><div class="form-group"><label>任务内容</label><textarea class="textarea" id="planText" placeholder="输入今日任务..."></textarea></div><div class="form-group"><label>完成时间（可选）</label><input type="time" class="input" id="planTime"></div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">取消</button><button class="btn btn-primary" onclick="addPlan()">添加</button></div>`);
