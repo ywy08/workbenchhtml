@@ -2,30 +2,38 @@ name: Daily Workbench Data Collector
 
 on:
   schedule:
-    - cron: '0 6 * * *'
-    - cron: '0 12 * * *'
-    - cron: '0 20 * * *'
+    - cron: '0 22 * * *'
+    - cron: '0 4 * * *'
+    - cron: '0 10 * * *'
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   collect-data:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install axios cheerio @octokit/rest
+        run: npm install axios @octokit/rest
 
-      - name: Collect data and update Gist
+      - name: Collect data and update daily-data.json
         env:
-          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
-          GIST_ID: ${{ secrets.GIST_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REF: ${{ github.ref }}
         run: |
           node scripts/collect.js
 
-      - name: Check Gist update
+      - name: Verify update
         run: |
-          echo "Data collection completed at $(date)"
+          echo "Data collection completed at $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+          echo "Data URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/daily-data.json"

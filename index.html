@@ -473,10 +473,11 @@
   }
   function openDouyin(q) { const u = encodeURIComponent(q); window.location.href = `snssdk1128://webview/?url=https%3A%2F%2Fwww.douyin.com%2Fsearch%2F${u}`; setTimeout(() => window.open(`https://www.douyin.com/search/${u}`, '_blank'), 500); }
   function openBilibili(q) { const u = encodeURIComponent(q); window.location.href = `bilibili://search?keyword=${u}`; setTimeout(() => window.open(`https://search.bilibili.com/all?keyword=${u}`, '_blank'), 500); }
+  const DEFAULT_DATA_URL = 'https://raw.githubusercontent.com/ywy08/workbenchhtml/main/daily-data.json';
   async function fetchGistData() {
     const s = getStore(STORE_KEYS.settings) || {};
-    if (!s.gistUrl) return null;
-    try { const r = await fetch(s.gistUrl + '?t=' + Date.now()); if (!r.ok) throw new Error(); return await r.json(); } catch { return null; }
+    const url = s.dataUrl || DEFAULT_DATA_URL;
+    try { const r = await fetch(url + '?t=' + Date.now()); if (!r.ok) throw new Error(); return await r.json(); } catch { return null; }
   }
   async function refreshAllData() {
     showToast('正在刷新数据...', 'info');
@@ -491,7 +492,7 @@
       showToast('数据刷新成功！', 'success');
       const active = document.querySelector('.nav-item.active');
       if (active) renderPage(active.dataset.page);
-    } else { showToast('无法获取远程数据，请先在设置中配置Gist地址', 'error'); }
+    } else { showToast('无法获取远程数据，请检查网络或在设置中配置数据地址', 'error'); }
   }
   function copyText(text) { navigator.clipboard.writeText(text).then(() => showToast('已复制到剪贴板', 'success')); }
 
@@ -1185,7 +1186,7 @@
     const gist = getStore(STORE_KEYS.gist);
     document.getElementById('content').innerHTML = `
       <div class="card"><div class="card-title mb-12">⚙️ 数据源配置</div>
-        <div class="form-group"><label>GitHub Gist 原始JSON地址</label><input type="text" class="input" id="gistUrl" value="${escapeHtml(s.gistUrl || '')}" placeholder="https://gist.githubusercontent.com/.../raw/..."></div>
+        <div class="form-group"><label>数据源JSON地址</label><input type="text" class="input" id="dataUrl" value="${escapeHtml(s.dataUrl || '')}" placeholder="https://raw.githubusercontent.com/.../daily-data.json"></div>
         <p class="text-muted text-sm mb-12">用于每日自动抓取的热榜、资讯等数据。留空则使用内置默认数据。</p>
         <button class="btn btn-primary w-full" onclick="saveGistUrl()">保存配置</button>
       </div>
@@ -1219,8 +1220,8 @@
     `;
   }
   function saveGistUrl() {
-    const url = document.getElementById('gistUrl').value.trim();
-    const s = getStore(STORE_KEYS.settings) || {}; s.gistUrl = url; setStore(STORE_KEYS.settings, s);
+    const url = document.getElementById('dataUrl').value.trim();
+    const s = getStore(STORE_KEYS.settings) || {}; s.dataUrl = url; setStore(STORE_KEYS.settings, s);
     showToast('配置已保存', 'success');
   }
   function changeTheme(color) {

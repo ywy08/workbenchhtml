@@ -1,7 +1,10 @@
 const { Octokit } = require('@octokit/rest');
+const fs = require('fs');
+const path = require('path');
 
-const octokit = new Octokit({ auth: process.env.GIST_TOKEN });
-const gistId = process.env.GIST_ID;
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+const [owner, repo] = (process.env.GITHUB_REPOSITORY || 'ywy08/workbenchhtml').split('/');
+const branch = (process.env.GITHUB_REF || 'refs/heads/main').replace('refs/heads/', '');
 
 function todayKey() {
   const d = new Date();
@@ -203,25 +206,43 @@ async function main() {
     `🔍 调研一个感兴趣的技术方向`
   ];
 
-  console.log('Updating Gist...');
+  console.log('Updating daily-data.json in repo...');
   
   try {
-    const gistContent = {
-      'daily-data.json': {
-        content: JSON.stringify(data, null, 2)
-      }
-    };
+    const filePath = 'daily-data.json';
+    const fileContent = JSON.stringify(data, null, 2);
+    const contentBuffer = Buffer.from(fileContent).toString('base64');
 
-    const gist = await octokit.gists.update({
-      gist_id: gistId,
-      ...gistContent
+    let sha = null;
+    try {
+      const { data: existingFile } = await octokit.repos.getContent({
+        owner,
+        repo,
+        path: filePath,
+        ref: branch
+      });
+      sha = existingFile.sha;
+    } catch (e) {
+      if (e.status !== 404) throw e;
+    }
+
+    const message = `📅 每日数据更新: ${date}\n\n自动采集更新热榜、灵感、前端资讯、锻炼素材`;
+    
+    const response = await octokit.repos.createOrUpdateFileContents({
+      owner,
+      repo,
+      path: filePath,
+      message,
+      content: contentBuffer,
+      branch,
+      sha
     });
 
-    const gistUrl = gist.data.files['daily-data.json'].raw_url;
-    console.log(`Gist updated successfully: ${gistUrl}`);
+    console.log(`File updated successfully: https://github.com/${owner}/${repo}/blob/${branch}/${filePath}`);
+    console.log(`Raw URL: https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${filePath}`);
     console.log(`Data for ${date} has been collected and stored.`);
   } catch (err) {
-    console.error('Error updating Gist:', err.message);
+    console.error('Error updating file:', err.message);
     throw err;
   }
 }
