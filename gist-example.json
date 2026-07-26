@@ -1,0 +1,91 @@
+{
+  "date": "2026-07-26",
+  "updatedAt": "2026-07-26T08:00:00.000Z",
+  "inspirations": {
+    "date": "2026-07-26",
+    "items": [
+      {"title": "职场新人避坑指南", "tag": "职场", "desc": "新人入职第一月真实经历避坑清单"},
+      {"title": "30分钟快手晚餐", "tag": "美食", "desc": "上班族必备快手菜谱摆盘精致"},
+      {"title": "极简主义穿搭", "tag": "时尚", "desc": "胶囊衣柜搭配一件多穿"},
+      {"title": "周末城市漫步", "tag": "生活", "desc": "小众打卡地治愈系vlog"},
+      {"title": "猫咪日常大赏", "tag": "萌宠", "desc": "喵主子一天搞笑瞬间合集"},
+      {"title": "健身小白入门", "tag": "运动", "desc": "零基础健身第一周真实反馈"},
+      {"title": "读书笔记分享", "tag": "知识", "desc": "本月最爱书单金句摘录"},
+      {"title": "改造出租屋", "tag": "家居", "desc": "500元预算ins风角落"},
+      {"title": "旅行vlog", "tag": "旅行", "desc": "小众目的地避开人潮"},
+      {"title": "手账排版教程", "tag": "手作", "desc": "新手友好手账布局灵感"}
+    ]
+  },
+  "videos": {
+    "date": "2026-07-26",
+    "items": [
+      {
+        "hotspot": "AI工具新突破",
+        "original": "最新AI模型发布引发热议",
+        "ideas": ["AI vs 人工同一任务对比挑战", "AI创意实验生成艺术作品", "AI科普系列通俗易懂"]
+      },
+      {
+        "hotspot": "网红美食探店翻车",
+        "original": "某网红餐厅实际与视频不符",
+        "ideas": ["实测验证真实记录体验", "科普网红营销套路", "反套路讽刺剧本创作"]
+      },
+      {
+        "hotspot": "热门影视剧结局",
+        "original": "某大结局引发观众讨论",
+        "ideas": ["替代结局剪辑创作", "深度解析角色动机", "街头采访观众看法"]
+      },
+      {
+        "hotspot": "社会新闻热点",
+        "original": "某社会事件引发广泛关注",
+        "ideas": ["事件时间线梳理", "专家观点分析解读", "科普延伸知识讲解"]
+      },
+      {
+        "hotspot": "国货品牌崛起",
+        "original": "某国货品牌海外走红",
+        "ideas": ["中外品牌深度测评", "国货品牌故事挖掘", "支持国货挑战发起"]
+      }
+    ]
+  },
+  "frontend": {
+    "date": "2026-07-26",
+    "news": [
+      {"title": "React 19 正式发布：全新编译器和Hooks优化", "source": "掘金前端", "url": "https://juejin.cn/frontend"},
+      {"title": "TypeScript 5.6 新特性解析", "source": "InfoQ", "url": "https://infoq.cn/topic/front-end"},
+      {"title": "Chrome DevTools 性能分析功能增强", "source": "Chrome DevTools", "url": "https://developer.chrome.com/docs/devtools/"},
+      {"title": "前端性能优化：View Transitions API实践", "source": "掘金前端", "url": "https://juejin.cn/frontend"},
+      {"title": "Vue 3.5 正式版发布", "source": "GitHub Trending", "url": "https://github.com/trending/javascript"},
+      {"title": "MDN新增WebGPU API文档", "source": "MDN", "url": "https://developer.mozilla.org/"}
+    ],
+    "learningPlan": [
+      "📖 精读 React 19 官方文档，重点理解新编译器工作原理",
+      "🛠️ 动手实践 View Transitions API，制作页面过渡效果",
+      "📝 整理 TypeScript 5.6 新特性笔记",
+      "🔍 调研 GitHub Trending 项目，了解热门新技术栈"
+    ]
+  },
+  "exercise": {
+    "date": "2026-07-26",
+    "gufa": [
+      {"title": "八段锦完整版", "duration": "30分钟", "platform": "douyin", "url": "https://www.douyin.com"},
+      {"title": "太极拳二十四式", "duration": "25分钟", "platform": "bilibili", "url": "https://www.bilibili.com"},
+      {"title": "五禽戏养生操", "duration": "20分钟", "platform": "douyin", "url": "https://www.douyin.com"}
+    ],
+    "eye": [
+      {"title": "眼球运动训练", "duration": "5分钟", "platform": "douyin", "url": "https://www.douyin.com"},
+      {"title": "眼部按摩放松", "duration": "10分钟", "platform": "bilibili", "url": "https://www.bilibili.com"},
+      {"title": "视力恢复训练", "duration": "15分钟", "platform": "douyin", "url": "https://www.douyin.com"}
+    ]
+  },
+  "hotSearch": [
+    {"title": "AI大模型最新突破", "hot": 9800000, "url": "https://www.toutiao.com"},
+    {"title": "新能源汽车销量创新高", "hot": 8500000, "url": "https://www.toutiao.com"},
+    {"title": "年轻人为什么不爱发朋友圈了", "hot": 7200000, "url": "https://www.toutiao.com"},
+    {"title": "多地出台楼市新政", "hot": 6800000, "url": "https://www.toutiao.com"},
+    {"title": "高温天气如何养生", "hot": 5600000, "url": "https://www.toutiao.com"},
+    {"title": "国产电影票房突破", "hot": 5200000, "url": "https://www.toutiao.com"},
+    {"title": "科技公司最新发布", "hot": 4800000, "url": "https://www.toutiao.com"},
+    {"title": "奥运赛事精彩回顾", "hot": 4500000, "url": "https://www.toutiao.com"},
+    {"title": "教育改革新动向", "hot": 3900000, "url": "https://www.toutiao.com"},
+    {"title": "生活小妙招大盘点", "hot": 3200000, "url": "https://www.toutiao.com"}
+  ]
+}

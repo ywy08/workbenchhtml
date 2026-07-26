@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#556B2F">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="日常工作台">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <title>日常工作台</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    :root {
+      --primary: #556B2F;
+      --primary-dark: #3F5224;
+      --primary-light: #7A9B3D;
+      --primary-bg: #f5f7f0;
+      --primary-hover: #6B8B3A;
+      --accent: #8FBC6C;
+      --text: #333;
+      --text-light: #666;
+      --text-muted: #999;
+      --card-bg: #ffffff;
+      --border: #e0e5d8;
+      --shadow: 0 2px 12px rgba(85, 107, 47, 0.08);
+      --shadow-hover: 0 4px 20px rgba(85, 107, 47, 0.15);
+      --radius: 16px;
+      --radius-sm: 8px;
+    }
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: var(--primary-bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+    .app { display: flex; height: 100vh; position: relative; }
+    .drawer {
+      position: fixed; left: -280px; top: 0;
+      width: 280px; height: 100%;
+      background: var(--primary); z-index: 1000;
+      transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex; flex-direction: column;
+      box-shadow: 4px 0 24px rgba(0,0,0,0.15);
+    }
+    .drawer.open { left: 0; }
+    .drawer-header {
+      padding: 32px 20px 20px; color: white;
+      background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .drawer-header::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 120px; height: 120px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .drawer-header::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; left: -20px;
+      width: 80px; height: 80px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .drawer-header-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .drawer-avatar {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.1));
+      border: 2px solid rgba(255,255,255,0.35);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      backdrop-filter: blur(8px);
+      flex-shrink: 0;
+    }
+    .drawer-title-group { flex: 1; min-width: 0; }
+    .drawer-header h1 {
+      font-size: 20px; font-weight: 700; margin-bottom: 2px;
+      letter-spacing: 0.5px;
+    }
+    .drawer-header p {
+      font-size: 13px; opacity: 0.75; font-weight: 400;
+    }
+    .drawer-quote {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.95);
+      position: relative;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      min-height: 20px;
+      z-index: 1;
+    }
+    .drawer-quote:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.25);
+    }
+    .drawer-quote::before {
+      content: '';
+      display: block;
+      width: 4px; height: 4px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    .drawer-quote .quote-tip {
+      opacity: 0.6;
+      font-size: 12px;
+      font-style: italic;
+    }
+    .drawer-quote::after {
+      content: '✏️ 点击修改';
+      position: absolute;
+      bottom: 8px; right: 12px;
+      font-size: 11px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .drawer-quote:hover::after { opacity: 0.7; }
+    .drawer-nav { flex: 1; overflow-y: auto; padding: 16px 12px; }
+    .nav-item {
+      display: flex; align-items: center;
+      padding: 14px 16px; border-radius: var(--radius-sm);
+      color: rgba(255,255,255,0.9); cursor: pointer;
+      transition: all 0.2s; margin-bottom: 4px; font-size: 15px; font-weight: 500;
+    }
+    .nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
+    .nav-item.active { background: rgba(255,255,255,0.2); color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .nav-icon { width: 28px; height: 28px; margin-right: 14px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .drawer-footer { padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .drawer-footer button {
+      width: 100%; padding: 12px; background: rgba(255,255,255,0.15);
+      border: none; border-radius: var(--radius-sm); color: white; font-size: 14px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: background 0.2s;
+    }
+    .drawer-footer button:hover { background: rgba(255,255,255,0.25); }
+    .overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4); z-index: 999;
+      opacity: 0; visibility: hidden; transition: all 0.3s;
+    }
+    .overlay.show { opacity: 1; visibility: visible; }
+    .main { flex: 1; display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+    .topbar {
+      background: white; padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04); flex-shrink: 0;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; }
+    .menu-btn {
+      width: 40px; height: 40px; border: none; background: var(--primary-bg);
+      border-radius: var(--radius-sm); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: var(--primary); transition: all 0.2s;
+    }
+    .menu-btn:hover { background: var(--border); }
+    .page-title { font-size: 18px; font-weight: 600; color: var(--text); }
+    .topbar-actions { display: flex; gap: 8px; }
+    .action-btn {
+      width: 40px; height: 40px; border: none; background: var(--primary-bg);
+      border-radius: var(--radius-sm); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--primary); transition: all 0.2s;
+    }
+    .action-btn:hover { background: var(--border); }
+    .content { flex: 1; overflow-y: auto; padding: 16px; -webkit-overflow-scrolling: touch; }
+    .page { display: none; animation: fadeIn 0.3s ease; }
+    .page.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow); transition: box-shadow 0.2s; }
+    .card:hover { box-shadow: var(--shadow-hover); }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .card-title { font-size: 17px; font-weight: 600; color: var(--text); }
+    .btn {
+      padding: 10px 20px; border: none; border-radius: var(--radius-sm); cursor: pointer;
+      font-size: 14px; font-weight: 500; transition: all 0.2s;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: var(--primary-bg); color: var(--primary); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: var(--border); }
+    .btn-sm { padding: 6px 12px; font-size: 12px; }
+    .input, .textarea {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      background: var(--primary-bg); font-size: 15px; color: var(--text);
+      transition: border-color 0.2s, background 0.2s; font-family: inherit;
+    }
+    .input:focus, .textarea:focus { outline: none; border-color: var(--primary); background: white; }
+    .textarea { min-height: 100px; resize: vertical; }
+    .progress-bar { width: 100%; height: 8px; background: var(--primary-bg); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-light), var(--accent)); border-radius: 4px; transition: width 0.4s ease; }
+    .progress-text { font-size: 13px; color: var(--text-light); margin-top: 6px; }
+    .tag { display: inline-flex; align-items: center; padding: 4px 10px; background: var(--primary-bg); color: var(--primary); border-radius: 12px; font-size: 12px; font-weight: 500; }
+    .tag-accent { background: #e8f5e9; color: #4caf50; }
+    .tag-warn { background: #fff3e0; color: #ff9800; }
+    .tag-info { background: #e3f2fd; color: #2196f3; }
+    .task-item { display: flex; align-items: center; padding: 14px 16px; background: var(--primary-bg); border-radius: var(--radius-sm); margin-bottom: 10px; transition: all 0.2s; cursor: default; }
+    .task-item:hover { background: #eef2e4; }
+    .task-item.completed { opacity: 0.6; }
+    .task-checkbox {
+      width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px;
+      margin-right: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all 0.2s;
+    }
+    .task-item.completed .task-checkbox { background: var(--primary); border-color: var(--primary); }
+    .task-checkbox svg { width: 14px; height: 14px; color: white; opacity: 0; transition: opacity 0.2s; }
+    .task-item.completed .task-checkbox svg { opacity: 1; }
+    .task-content { flex: 1; min-width: 0; }
+    .task-text { font-size: 15px; color: var(--text); line-height: 1.4; word-break: break-word; }
+    .task-item.completed .task-text { text-decoration: line-through; color: var(--text-muted); }
+    .task-meta { display: flex; gap: 8px; margin-top: 4px; font-size: 12px; color: var(--text-muted); }
+    .task-delete {
+      width: 28px; height: 28px; border: none; background: transparent; color: var(--text-muted);
+      cursor: pointer; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; flex-shrink: 0;
+    }
+    .task-delete:hover { background: #fee; color: #e74c3c; }
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+    .empty-state .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
+    .empty-state p { font-size: 14px; }
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); z-index: 2000;
+      display: none; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.show { display: flex; animation: fadeIn 0.2s; }
+    .modal {
+      background: white; border-radius: var(--radius); padding: 24px;
+      width: 100%; max-width: 400px; max-height: 80vh; overflow-y: auto; animation: slideUp 0.3s;
+    }
+    @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .modal h3 { font-size: 18px; margin-bottom: 16px; color: var(--text); }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; color: var(--text-light); margin-bottom: 6px; font-weight: 500; }
+    .modal-actions { display: flex; gap: 12px; margin-top: 20px; }
+    .modal-actions .btn { flex: 1; }
+    .inspiration-card { background: var(--primary-bg); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; border-left: 4px solid var(--primary); }
+    .inspiration-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    .inspiration-desc { font-size: 13px; color: var(--text-light); line-height: 1.5; margin-bottom: 10px; }
+    .inspiration-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .app-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500;
+      text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
+    }
+    .app-douyin { background: #000; color: white; }
+    .app-douyin:hover { background: #333; }
+    .app-bilibili { background: #fb7299; color: white; }
+    .app-bilibili:hover { background: #e85f85; }
+    .news-item { display: flex; padding: 14px; background: var(--primary-bg); border-radius: var(--radius-sm); margin-bottom: 10px; text-decoration: none; color: var(--text); transition: all 0.2s; }
+    .news-item:hover { background: #eef2e4; transform: translateX(4px); }
+    .news-content { flex: 1; min-width: 0; }
+    .news-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; color: var(--text); }
+    .news-source { font-size: 12px; color: var(--text-muted); }
+    .news-arrow { color: var(--text-muted); margin-left: 10px; align-self: center; }
+    .video-item { display: flex; align-items: center; padding: 14px; background: var(--primary-bg); border-radius: var(--radius-sm); margin-bottom: 10px; gap: 12px; }
+    .video-thumb { width: 80px; height: 50px; background: var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .video-info { flex: 1; min-width: 0; }
+    .video-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .video-meta { font-size: 12px; color: var(--text-muted); }
+    .video-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .tabs { display: flex; background: var(--primary-bg); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 16px; }
+    .tab { flex: 1; padding: 10px; text-align: center; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--text-light); transition: all 0.2s; border: none; background: transparent; }
+    .tab.active { background: white; color: var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+    .reading-book { display: flex; padding: 14px; background: var(--primary-bg); border-radius: var(--radius-sm); margin-bottom: 10px; gap: 12px; align-items: center; }
+    .book-cover { width: 50px; height: 70px; background: var(--primary); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; flex-shrink: 0; }
+    .book-info { flex: 1; min-width: 0; }
+    .book-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; color: var(--text); }
+    .book-progress { font-size: 12px; color: var(--text-muted); display: flex; gap: 12px; }
+    .stat-row { display: flex; gap: 12px; margin-bottom: 16px; }
+    .stat-card { flex: 1; background: var(--primary-bg); border-radius: var(--radius-sm); padding: 14px; text-align: center; }
+    .stat-value { font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+    .stat-label { font-size: 12px; color: var(--text-light); }
+    .ai-generate { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; border: none; padding: 14px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 16px; transition: transform 0.2s; }
+    .ai-generate:hover { transform: translateY(-2px); }
+    .ai-generate:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--text); color: white; padding: 12px 20px; border-radius: var(--radius-sm); font-size: 14px; z-index: 3000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+    .toast.show { opacity: 1; }
+    .toast.success { background: var(--primary); }
+    .toast.error { background: #e74c3c; }
+    .toast.info { background: #2196f3; }
+    .note-item { padding: 12px; background: var(--primary-bg); border-radius: var(--radius-sm); margin-bottom: 8px; }
+    .note-date { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+    .note-content { font-size: 14px; color: var(--text); line-height: 1.5; white-space: pre-wrap; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; }
+    .text-muted { color: var(--text-muted); }
+    .text-sm { font-size: 13px; }
+    .text-xs { font-size: 12px; }
+    .flex { display: flex; }
+    .flex-between { display: flex; align-items: center; justify-content: space-between; }
+    .gap-8 { gap: 8px; }
+    .gap-12 { gap: 12px; }
+    .mt-8 { margin-top: 8px; }
+    .mt-12 { margin-top: 12px; }
+    .mt-16 { margin-top: 16px; }
+    .mb-8 { margin-bottom: 8px; }
+    .mb-12 { margin-bottom: 12px; }
+    .mb-16 { margin-bottom: 16px; }
+    .w-full { width: 100%; }
+    .text-center { text-align: center; }
+    .hidden { display: none !important; }
+    .history-date-item {
+      display: flex; align-items: center; padding: 12px 14px;
+      background: var(--primary-bg); border-radius: var(--radius-sm);
+      margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+    }
+    .history-date-item:hover { background: #eef2e4; transform: translateX(3px); }
+    .history-date-info { flex: 1; min-width: 0; }
+    .history-date-label { font-size: 14px; font-weight: 500; color: var(--text); }
+    .history-date-stat { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+    .history-completed { color: var(--primary); font-weight: 600; font-size: 13px; }
+    .history-incomplete { color: #e67e22; font-weight: 600; font-size: 13px; }
+    .history-day-badge {
+      width: 44px; height: 44px; background: white;
+      border-radius: 10px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      flex-shrink: 0; margin-right: 12px;
+    }
+    .history-day-badge .month { font-size: 10px; color: var(--text-muted); }
+    .history-day-badge .day { font-size: 18px; font-weight: 700; color: var(--primary); }
+    .custom-plan-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; background: var(--primary-bg);
+      border-radius: var(--radius-sm); margin-bottom: 8px;
+    }
+    .custom-plan-item input { flex: 1; }
+    .weekday-tag { font-size: 11px; color: var(--primary); font-weight: 500; }
+    .hot-search-list { display: flex; flex-direction: column; gap: 0; }
+    .hot-search-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid var(--primary-bg);
+      text-decoration: none; color: var(--text); transition: background 0.2s;
+    }
+    .hot-search-item:last-child { border-bottom: none; }
+    .hot-search-item:hover { background: var(--primary-bg); margin: 0 -16px; padding: 12px 16px; }
+    .hot-rank {
+      width: 24px; height: 24px; border-radius: 6px;
+      background: var(--border); color: var(--text-muted);
+      font-size: 12px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .hot-rank.rank-top {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+      color: white;
+    }
+    .hot-rank:nth-child(2) { background: linear-gradient(135deg, #ffa502, #ff7f50); }
+    .hot-rank:nth-child(3) { background: linear-gradient(135deg, #ff6348, #ff4757); }
+    .hot-info { flex: 1; min-width: 0; }
+    .hot-title { font-size: 14px; font-weight: 500; margin-bottom: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .hot-heat { font-size: 12px; color: var(--text-muted); }
+    .hot-arrow { color: var(--text-muted); font-size: 18px; flex-shrink: 0; }
+    @media (max-width: 480px) {
+      .card { padding: 16px; }
+      .content { padding: 12px; }
+      .topbar { padding: 12px 16px; }
+      .page-title { font-size: 16px; }
+      .stat-row { flex-wrap: wrap; }
+      .stat-card { min-width: calc(50% - 6px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="overlay" id="overlay"></div>
+    <aside class="drawer" id="drawer">
+      <div class="drawer-header">
+        <div class="drawer-header-top">
+          <div class="drawer-avatar">🌿</div>
+          <div class="drawer-title-group">
+            <h1>日常工作台</h1>
+            <p id="currentDate"></p>
+          </div>
+        </div>
+        <div class="drawer-quote" id="drawerQuote" onclick="editQuote()"></div>
+      </div>
+      <nav class="drawer-nav" id="drawerNav"></nav>
+      <div class="drawer-footer">
+        <button onclick="refreshAllData()">
+          <span>🔄</span>
+          <span>刷新数据</span>
+        </button>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-btn" onclick="toggleDrawer()">☰</button>
+          <h2 class="page-title" id="pageTitle">每日计划</h2>
+        </div>
+        <div class="topbar-actions">
+          <button class="action-btn" onclick="refreshAllData()" title="刷新数据">🔄</button>
+        </div>
+      </header>
+      <div class="content" id="content"></div>
+    </main>
+  </div>
+  <div class="modal-overlay" id="modal">
+    <div class="modal" id="modalContent"></div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script>
+  const NAV_ITEMS = [
+    { id: 'plan', icon: '📋', title: '每日计划' },
+    { id: 'inspiration', icon: '💡', title: '选题灵感' },
+    { id: 'video', icon: '🎬', title: '爆款二创' },
+    { id: 'creative', icon: '✍️', title: '创作打卡' },
+    { id: 'frontend', icon: '💻', title: '每日前端' },
+    { id: 'exercise', icon: '🏃', title: '每日锻炼' },
+    { id: 'reading', icon: '📚', title: '每日阅读' },
+    { id: 'settings', icon: '⚙️', title: '设置' }
+  ];
+  const STORE_KEYS = {
+    plans: 'dw_plans', inspirations: 'dw_inspirations', videoIdeas: 'dw_video_ideas',
+    creative: 'dw_creative', frontend: 'dw_frontend', exercise: 'dw_exercise',
+    reading: 'dw_reading', settings: 'dw_settings', gist: 'dw_gist_data',
+    hotSearch: 'dw_hot_search'
+  };
+  function getStore(key) { try { const d = localStorage.getItem(key); return d ? JSON.parse(d) : null; } catch { return null; } }
+  function setStore(key, v) { localStorage.setItem(key, JSON.stringify(v)); }
+  function todayKey() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+  function showToast(msg, type='info') { const t = document.getElementById('toast'); t.textContent = msg; t.className = `toast show ${type}`; setTimeout(() => t.className = 'toast', 2500); }
+  function escapeHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+  function toggleDrawer() { document.getElementById('drawer').classList.toggle('open'); document.getElementById('overlay').classList.toggle('show'); }
+  function closeDrawer() { document.getElementById('drawer').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); }
+  function openModal(html) { document.getElementById('modalContent').innerHTML = html; document.getElementById('modal').classList.add('show'); }
+  function closeModal() { document.getElementById('modal').classList.remove('show'); }
+  document.getElementById('overlay').addEventListener('click', closeDrawer);
+  document.getElementById('modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
+  function initNav() {
+    document.getElementById('drawerNav').innerHTML = NAV_ITEMS.map(it =>
+      `<div class="nav-item" data-page="${it.id}" onclick="navigateTo('${it.id}')"><span class="nav-icon">${it.icon}</span><span>${it.title}</span></div>`
+    ).join('');
+  }
+  function navigateTo(pageId) {
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.page === pageId));
+    document.getElementById('pageTitle').textContent = NAV_ITEMS.find(i => i.id === pageId).title;
+    closeDrawer();
+    renderPage(pageId);
+  }
+  function renderPage(pageId) {
+    const renderers = { plan: renderPlanPage, inspiration: renderInspirationPage, video: renderVideoPage,
+      creative: renderCreativePage, frontend: renderFrontendPage, exercise: renderExercisePage,
+      reading: renderReadingPage, settings: renderSettingsPage };
+    document.getElementById('content').innerHTML = '';
+    if (renderers[pageId]) renderers[pageId](document.getElementById('content'));
+  }
+  function openDouyin(q) { const u = encodeURIComponent(q); window.location.href = `snssdk1128://webview/?url=https%3A%2F%2Fwww.douyin.com%2Fsearch%2F${u}`; setTimeout(() => window.open(`https://www.douyin.com/search/${u}`, '_blank'), 500); }
+  function openBilibili(q) { const u = encodeURIComponent(q); window.location.href = `bilibili://search?keyword=${u}`; setTimeout(() => window.open(`https://search.bilibili.com/all?keyword=${u}`, '_blank'), 500); }
+  async function fetchGistData() {
+    const s = getStore(STORE_KEYS.settings) || {};
+    if (!s.gistUrl) return null;
+    try { const r = await fetch(s.gistUrl + '?t=' + Date.now()); if (!r.ok) throw new Error(); return await r.json(); } catch { return null; }
+  }
+  async function refreshAllData() {
+    showToast('正在刷新数据...', 'info');
+    const data = await fetchGistData();
+    if (data) {
+      setStore(STORE_KEYS.gist, { data, updatedAt: new Date().toISOString() });
+      if (data.inspirations) setStore(STORE_KEYS.inspirations, data.inspirations);
+      if (data.frontend) setStore(STORE_KEYS.frontend, data.frontend);
+      if (data.videos) setStore(STORE_KEYS.videoIdeas, data.videos);
+      if (data.exercise) setStore(STORE_KEYS.exercise, data.exercise);
+      if (data.hotSearch) setStore(STORE_KEYS.hotSearch, { date: todayKey(), items: data.hotSearch });
+      showToast('数据刷新成功！', 'success');
+      const active = document.querySelector('.nav-item.active');
+      if (active) renderPage(active.dataset.page);
+    } else { showToast('无法获取远程数据，请先在设置中配置Gist地址', 'error'); }
+  }
+  function copyText(text) { navigator.clipboard.writeText(text).then(() => showToast('已复制到剪贴板', 'success')); }
+
+  // === 每日计划 ===
+  function getTodayPlans() { const a = getStore(STORE_KEYS.plans) || {}; return a[todayKey()] || []; }
+  function saveTodayPlans(p) { const a = getStore(STORE_KEYS.plans) || {}; a[todayKey()] = p; setStore(STORE_KEYS.plans, a); }
+  function getTemplatePlans() {
+    const t = [];
+    const fe = getStore(STORE_KEYS.frontend); if (fe && fe.learningPlan) fe.learningPlan.forEach(i => t.push({ text: i, source: '每日前端' }));
+    const ex = getStore(STORE_KEYS.exercise); if (ex && ex.customPlans) ex.customPlans.forEach(i => t.push({ text: i, source: '每日锻炼' }));
+    const rd = getStore(STORE_KEYS.reading); if (rd && rd.books) rd.books.forEach(b => { if (b.dailyGoal) t.push({ text: `阅读：${b.title} - ${b.dailyGoal}`, source: '每日阅读' }); });
+    return t.slice(0, 5);
+  }
+  function renderPlanPage() {
+    const plans = getTodayPlans();
+    const done = plans.filter(p => p.completed).length;
+    const total = plans.length;
+    const prog = total > 0 ? Math.round((done / total) * 100) : 0;
+    const tpls = getTemplatePlans();
+    document.getElementById('content').innerHTML = `
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">今日进度</div>
+            <div class="progress-text">${done} / ${total} 完成 · ${prog}%</div>
+          </div>
+          <div class="flex gap-8">
+            <button class="btn btn-secondary btn-sm" onclick="showHistoryPage()">📅 历史</button>
+            <button class="btn btn-secondary btn-sm" onclick="showTemplateDialog()">模板</button>
+            <button class="btn btn-primary btn-sm" onclick="showAddPlanDialog()">+ 新任务</button>
+          </div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${prog}%"></div></div>
+      </div>
+      ${plans.length === 0 ? `
+        <div class="card"><div class="empty-state"><div class="icon">📋</div><p>暂无计划，点击添加今日任务</p></div></div>
+      ` : plans.map((p, i) => `
+        <div class="task-item ${p.completed ? 'completed' : ''}">
+          <div class="task-checkbox" onclick="togglePlan(${i})">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="task-content"><div class="task-text">${escapeHtml(p.text)}</div><div class="task-meta">${p.time ? `<span>🕐 ${p.time}</span>` : ''}${p.source ? `<span class="tag">${p.source}</span>` : ''}</div></div>
+          <button class="task-delete" onclick="deletePlan(${i})">✕</button>
+        </div>`).join('')}
+      ${tpls.length > 0 ? `
+        <div class="card mt-16">
+          <div class="card-header"><div class="card-title">📥 快速添加</div><span class="text-muted text-sm">来自其他模块</span></div>
+          ${tpls.map((t, i) => `
+            <div class="task-item" onclick="addTemplatePlan(${i})" style="cursor:pointer;">
+              <div class="task-content"><div class="task-text">${escapeHtml(t.text)}</div><div class="task-meta"><span class="tag tag-accent">${t.source}</span></div></div>
+              <span style="color:var(--primary);font-size:20px;">+</span>
+            </div>`).join('')}
+        </div>` : ''}
+    `;
+  }
+  function showTemplateDialog() {
+    const tpls = getTemplatePlans();
+    openModal(`<h3>从模板添加</h3>${tpls.length === 0 ? '<p class="text-muted">暂无可用模板</p>' : tpls.map((t, i) => `<div class="task-item" onclick="addTemplatePlan(${i}); closeModal()" style="cursor:pointer;"><div class="task-content"><div class="task-text">${escapeHtml(t.text)}</div><div class="task-meta"><span class="tag tag-accent">${t.source}</span></div></div><span style="color:var(--primary);font-size:20px;">+</span></div>`).join('')}<div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">关闭</button></div>`);
+  }
+  function showAddPlanDialog() {
+    openModal(`<h3>添加计划</h3><div class="form-group"><label>任务内容</label><textarea class="textarea" id="planText" placeholder="输入今日任务..."></textarea></div><div class="form-group"><label>完成时间（可选）</label><input type="time" class="input" id="planTime"></div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">取消</button><button class="btn btn-primary" onclick="addPlan()">添加</button></div>`);
+  }
+  function addPlan() {
+    const text = document.getElementById('planText').value.trim();
+    const time = document.getElementById('planTime').value;
+    if (!text) { showToast('请输入任务内容', 'error'); return; }
+    const plans = getTodayPlans();
+    plans.push({ text, time, completed: false, createdAt: new Date().toISOString() });
+    saveTodayPlans(plans); closeModal(); renderPlanPage(); showToast('已添加', 'success');
+  }
+  function addTemplatePlan(i) {
+    const t = getTemplatePlans()[i];
+    const plans = getTodayPlans();
+    plans.push({ text: t.text, time: '', completed: false, createdAt: new Date().toISOString(), source: t.source });
+    saveTodayPlans(plans); renderPlanPage(); showToast('已添加到今日计划', 'success');
+  }
+  function togglePlan(i) { const p = getTodayPlans(); p[i].completed = !p[i].completed; saveTodayPlans(p); renderPlanPage(); }
+  function deletePlan(i) { const p = getTodayPlans(); p.splice(i, 1); saveTodayPlans(p); renderPlanPage(); }
+  function showHistoryPage() {
+    const all = getStore(STORE_KEYS.plans) || {};
+    const dates = Object.keys(all).filter(d => all[d] && all[d].length > 0).sort().reverse();
+    if (dates.length === 0) {
+      openModal(`<h3>📅 历史计划</h3><div class="empty-state"><div class="icon">📭</div><p>暂无历史计划记录</p></div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">关闭</button></div>`);
+      return;
+    }
+    const totalDays = dates.length;
+    const totalTasks = dates.reduce((s, d) => s + all[d].length, 0);
+    const totalDone = dates.reduce((s, d) => s + all[d].filter(p => p.completed).length, 0);
+    const avgRate = totalTasks > 0 ? Math.round((totalDone / totalTasks) * 100) : 0;
+    openModal(`
+      <h3>📅 历史计划</h3>
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-value">${totalDays}</div><div class="stat-label">记录天数</div></div>
+        <div class="stat-card"><div class="stat-value">${totalTasks}</div><div class="stat-label">总任务数</div></div>
+        <div class="stat-card"><div class="stat-value">${avgRate}%</div><div class="stat-label">平均完成率</div></div>
+      </div>
+      <div style="max-height:300px;overflow-y:auto;">
+        ${dates.map(d => {
+          const dayPlans = all[d];
+          const done = dayPlans.filter(p => p.completed).length;
+          const total = dayPlans.length;
+          const rate = total > 0 ? Math.round((done / total) * 100) : 0;
+          const isToday = d === todayKey();
+          const dt = new Date(d);
+          const weekday = ['周日','周一','周二','周三','周四','周五','周六'][dt.getDay()];
+          return `
+            <div class="history-date-item" onclick="viewDayPlan('${d}')">
+              <div class="history-day-badge">
+                <span class="month">${dt.getMonth()+1}月</span>
+                <span class="day">${dt.getDate()}</span>
+              </div>
+              <div class="history-date-info">
+                <div class="history-date-label">${d} ${isToday ? '<span class="tag tag-accent" style="margin-left:6px;">今天</span>' : '<span class="weekday-tag">'+weekday+'</span>'}</div>
+                <div class="history-date-stat">${done}/${total} 完成 · 完成率 ${rate}%</div>
+              </div>
+              <span class="${rate === 100 ? 'history-completed' : 'history-incomplete'}">${rate}%</span>
+            </div>`;
+        }).join('')}
+      </div>
+      <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">关闭</button></div>
+    `);
+  }
+  function viewDayPlan(date) {
+    const all = getStore(STORE_KEYS.plans) || {};
+    const plans = all[date] || [];
+    const done = plans.filter(p => p.completed).length;
+    const total = plans.length;
+    const rate = total > 0 ? Math.round((done / total) * 100) : 0;
+    const dt = new Date(date);
+    const weekday = ['周日','周一','周二','周三','周四','周五','周六'][dt.getDay()];
+    openModal(`
+      <h3>📖 ${date} ${weekday}</h3>
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-value">${total}</div><div class="stat-label">总任务</div></div>
+        <div class="stat-card"><div class="stat-value">${done}</div><div class="stat-label">已完成</div></div>
+        <div class="stat-card"><div class="stat-value">${rate}%</div><div class="stat-label">完成率</div></div>
+      </div>
+      <div class="progress-bar mb-12"><div class="progress-fill" style="width:${rate}%"></div></div>
+      <div style="max-height:300px;overflow-y:auto;">
+        ${plans.length === 0 ? '<p class="text-muted text-center">当日无计划</p>' : plans.map(p => `
+          <div class="task-item ${p.completed ? 'completed' : ''}" style="cursor:default;">
+            <div class="task-checkbox" style="pointer-events:none;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="task-content">
+              <div class="task-text">${escapeHtml(p.text)}</div>
+              <div class="task-meta">${p.time ? `<span>🕐 ${p.time}</span>` : ''}${p.source ? `<span class="tag">${p.source}</span>` : ''}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="showHistoryPage()">← 返回</button>
+        <button class="btn btn-secondary" onclick="closeModal()">关闭</button>
+      </div>
+    `);
+  }
+
+  // === 选题灵感 ===
+  function getInspirations() {
+    const local = getStore(STORE_KEYS.inspirations);
+    if (local && local.date === todayKey()) return local.items;
+    const d = [{title:'职场新人避坑指南',tag:'职场',desc:'新人入职第一月真实经历避坑'},{title:'30分钟快手晚餐',tag:'美食',desc:'上班族必备快手菜谱'},{title:'极简主义穿搭',tag:'时尚',desc:'胶囊衣柜一件多穿'},{title:'周末城市漫步',tag:'生活',desc:'小众打卡地治愈系vlog'},{title:'猫咪日常大赏',tag:'萌宠',desc:'喵主子一天搞笑合集'},{title:'健身小白入门',tag:'运动',desc:'零基础健身真实反馈'},{title:'读书笔记分享',tag:'知识',desc:'本月最爱书单金句'},{title:'改造出租屋',tag:'家居',desc:'500元ins风角落'},{title:'旅行vlog',tag:'旅行',desc:'小众目的地宝藏地'},{title:'手账排版教程',tag:'手作',desc:'新手友好手账布局'}];
+    setStore(STORE_KEYS.inspirations, { date: todayKey(), items: d });
+    return d;
+  }
+  function renderInspirationPage() {
+    const items = getInspirations();
+    document.getElementById('content').innerHTML = `
+      <div class="card"><div class="card-header"><div><div class="card-title">💡 今日选题灵感</div><div class="text-sm text-muted mt-8">共 ${items.length} 条</div></div><button class="btn btn-secondary btn-sm" onclick="regenerateInspirations()">🔄 换一批</button></div></div>
+      ${items.map((it, i) => `
+        <div class="inspiration-card">
+          <div class="flex-between mb-8"><div class="inspiration-title">${i+1}. ${escapeHtml(it.title)}</div><span class="tag">${escapeHtml(it.tag)}</span></div>
+          <div class="inspiration-desc">${escapeHtml(it.desc)}</div>
+          <div class="inspiration-actions">
+            <button class="app-link app-douyin" onclick="openDouyin('${escapeHtml(it.title)}')"><span>🎵</span><span>抖音搜索</span></button>
+            <button class="app-link app-bilibili" onclick="openBilibili('${escapeHtml(it.title)}')"><span>📺</span><span>B站搜索</span></button>
+          </div>
+        </div>`).join('')}
+    `;
+  }
+  function regenerateInspirations() {
+    const d = [{title:'下班后的副业收入',tag:'副业',desc:'普通人可做的5种副业真实收入'},{title:'独处的乐趣',tag:'生活',desc:'一个人看电影吃火锅的快乐'},{title:'秋冬穿搭',tag:'时尚',desc:'氛围感秋冬穿搭温柔知性'},{title:'咖啡日记',tag:'美食',desc:'周末咖啡馆手冲入门'},{title:'读书分享',tag:'知识',desc:'改变人生的3本书'},{title:'居家健身',tag:'运动',desc:'无需器械全身燃脂21天效果'},{title:'宠物日常',tag:'萌宠',desc:'狗狗第一次见雪的反应'},{title:'城市citywalk',tag:'生活',desc:'老城区隐藏宝藏'},{title:'职场穿搭',tag:'职场',desc:'办公室穿搭专业时尚'},{title:'手作时光',tag:'手作',desc:'周末陶艺治愈慢生活'}];
+    setStore(STORE_KEYS.inspirations, { date: todayKey(), items: d });
+    renderInspirationPage(); showToast('已生成新一批灵感', 'success');
+  }
+
+  // === 爆款二创 ===
+  function getVideoIdeas() {
+    const local = getStore(STORE_KEYS.videoIdeas);
+    if (local && local.date === todayKey()) return local.items;
+    return getDefaultVideoIdeas();
+  }
+  function getDefaultVideoIdeas() {
+    return [
+      { hotspot: 'AI工具新突破', original: '最新AI模型发布引发热议', ideas: ['AI vs 人工同一任务对比挑战','AI创意实验生成艺术作品','AI科普系列通俗易懂'] },
+      { hotspot: '网红美食探店翻车', original: '某网红餐厅实际与视频不符', ideas: ['实测验证真实记录体验','科普网红营销套路','反套路讽刺剧本创作'] },
+      { hotspot: '热门影视剧结局', original: '某大结局引发观众讨论', ideas: ['替代结局剪辑创作','深度解析角色动机','街头采访观众看法'] },
+      { hotspot: '社会新闻热点', original: '某社会事件引发广泛关注', ideas: ['事件时间线梳理','专家观点分析解读','科普延伸知识讲解'] },
+      { hotspot: '国货品牌崛起', original: '某国货品牌海外走红', ideas: ['中外品牌深度测评','国货品牌故事挖掘','支持国货挑战发起'] }
+    ];
+  }
+  function getHotSearchData() {
+    const local = getStore(STORE_KEYS.hotSearch);
+    if (local && local.date === todayKey()) return local.items;
+    return [
+      { title: 'AI大模型最新突破', hot: 9800000, url: 'https://www.toutiao.com' },
+      { title: '新能源汽车销量创新高', hot: 8500000, url: 'https://www.toutiao.com' },
+      { title: '年轻人为什么不爱发朋友圈了', hot: 7200000, url: 'https://www.toutiao.com' },
+      { title: '多地出台楼市新政', hot: 6800000, url: 'https://www.toutiao.com' },
+      { title: '高温天气如何养生', hot: 5600000, url: 'https://www.toutiao.com' },
+      { title: '国产电影票房突破', hot: 5200000, url: 'https://www.toutiao.com' },
+      { title: '科技公司最新发布', hot: 4800000, url: 'https://www.toutiao.com' },
+      { title: '奥运赛事精彩回顾', hot: 4500000, url: 'https://www.toutiao.com' },
+      { title: '教育改革新动向', hot: 3900000, url: 'https://www.toutiao.com' },
+      { title: '生活小妙招大盘点', hot: 3200000, url: 'https://www.toutiao.com' }
+    ];
+  }
+  function formatHot(n) {
+    if (n >= 10000) return (n / 10000).toFixed(1) + '万';
+    return n;
+  }
+  function renderVideoPage() {
+    const ideas = getVideoIdeas();
+    const hotList = getHotSearchData();
+    document.getElementById('content').innerHTML = `
+      <div class="card">
+        <div class="card-header"><div><div class="card-title">🔥 今日热榜</div><div class="text-sm text-muted mt-8">实时热点 · 共 ${hotList.length} 条</div></div><button class="btn btn-secondary btn-sm" onclick="refreshAllData()">🔄</button></div>
+        <div class="hot-search-list">
+          ${hotList.map((h, i) => `
+            <a class="hot-search-item" href="${h.url || 'https://www.toutiao.com'}" target="_blank" rel="noopener">
+              <span class="hot-rank ${i < 3 ? 'rank-top' : ''}">${i + 1}</span>
+              <div class="hot-info">
+                <div class="hot-title">${escapeHtml(h.title)}</div>
+                <div class="hot-heat">🔥 ${formatHot(h.hot)}</div>
+              </div>
+              <span class="hot-arrow">›</span>
+            </a>`).join('')}
+        </div>
+      </div>
+      <div class="card"><div class="card-header"><div><div class="card-title">🎬 爆款二创灵感</div><div class="text-sm text-muted mt-8">聚合今日热点输出二创方向</div></div><button class="btn btn-secondary btn-sm" onclick="generateVideoIdeas()">✨ 生成</button></div></div>
+      ${ideas.map((idea, i) => `
+        <div class="card">
+          <div class="flex mb-12"><span class="tag tag-warn mr-8">热点 ${i+1}</span><strong>${escapeHtml(idea.hotspot)}</strong></div>
+          <p class="text-muted text-sm mb-12">📰 原素材：${escapeHtml(idea.original)}</p>
+          <div class="divider"></div>
+          <strong class="mb-8" style="display:block;">💡 二创方向：</strong>
+          ${idea.ideas.map((s, j) => `<div class="task-item"><div class="task-content"><div class="task-text">${j+1}. ${escapeHtml(s)}</div></div></div>`).join('')}
+          <div class="flex gap-8 mt-12">
+            <button class="app-link app-douyin" onclick="openDouyin('${escapeHtml(idea.hotspot)}')"><span>抖音</span></button>
+            <button class="app-link app-bilibili" onclick="openBilibili('${escapeHtml(idea.hotspot)}')"><span>B站</span></button>
+          </div>
+        </div>`).join('')}
+    `;
+  }
+  async function generateVideoIdeas() {
+    showToast('AI正在生成...', 'info');
+    await new Promise(r => setTimeout(r, 1500));
+    const n = [
+      { hotspot: '远程办公常态化', original: '越来越多企业采用混合办公模式', ideas: ['远程办公效率技巧分享','不同职业远程真实一天','远程设备选购指南'] },
+      { hotspot: '环保生活方式', original: '低碳生活成为新趋势', ideas: ['24小时零废弃挑战','环保好物测评体验','传统消费vs极简生活'] },
+      { hotspot: '短视频电商新玩法', original: '直播带货新模式兴起', ideas: ['无人直播运营技巧','短视频引流电商方法','私域变现路径探索'] }
+    ];
+    setStore(STORE_KEYS.videoIdeas, { date: todayKey(), items: n });
+    renderVideoPage(); showToast('已生成新二创方向', 'success');
+  }
+
+  // === 创作打卡 ===
+  function getCreativeData() { return getStore(STORE_KEYS.creative) || { templates: [], records: [] }; }
+  function renderCreativePage() {
+    const d = getCreativeData();
+    const today = d.records.filter(r => r.date === todayKey());
+    document.getElementById('content').innerHTML = `
+      <div class="card">
+        <div class="card-header"><div class="card-title">✍️ 创作打卡</div><button class="btn btn-secondary btn-sm" onclick="showTemplateDialog2()">+ 管理模板</button></div>
+        ${d.templates.length === 0 ? `<div class="empty-state"><div class="icon">📝</div><p>请先添加文案模板</p></div>` : d.templates.map((t, i) => `
+          <div class="task-item"><div class="task-content"><div class="task-text">${escapeHtml(t.name)}</div><div class="task-meta"><span>${escapeHtml(t.content.substring(0,30))}...</span></div></div><button class="btn btn-primary btn-sm" onclick="useTemplate(${i})">使用</button></div>`).join('')}
+      </div>
+      ${today.length > 0 ? `<div class="card"><div class="card-title mb-12">📋 今日创作记录</div>${today.map(r => `<div class="note-item"><div class="note-content">${escapeHtml(r.content)}</div></div>`).join('')}</div>` : ''}
+    `;
+  }
+  function showTemplateDialog2() {
+    const d = getCreativeData();
+    openModal(`<h3>管理模板</h3>
+      <div class="form-group"><label>模板名称</label><input type="text" class="input" id="tplName" placeholder="如：产品推荐、情感文案"></div>
+      <div class="form-group"><label>模板内容</label><textarea class="textarea" id="tplContent" placeholder="用 {素材} 作为占位符"></textarea></div>
+      <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">取消</button><button class="btn btn-primary" onclick="saveTemplate()">保存</button></div>
+      ${d.templates.length > 0 ? `<div class="divider"></div><strong>已有模板：</strong>${d.templates.map((t, i) => `<div class="task-item"><div class="task-content"><div class="task-text">${escapeHtml(t.name)}</div></div><button class="task-delete" onclick="deleteTemplate(${i})">✕</button></div>`).join('')}` : ''}`);
+  }
+  function saveTemplate() {
+    const n = document.getElementById('tplName').value.trim();
+    const c = document.getElementById('tplContent').value.trim();
+    if (!n || !c) { showToast('请填写完整', 'error'); return; }
+    const d = getCreativeData(); d.templates.push({ name: n, content: c }); setStore(STORE_KEYS.creative, d);
+    closeModal(); renderCreativePage(); showToast('模板已保存', 'success');
+  }
+  function deleteTemplate(i) { const d = getCreativeData(); d.templates.splice(i, 1); setStore(STORE_KEYS.creative, d); showTemplateDialog2(); showToast('已删除', 'success'); }
+  function useTemplate(i) {
+    const d = getCreativeData(); const t = d.templates[i];
+    openModal(`<h3>使用：${escapeHtml(t.name)}</h3>
+      <div class="form-group"><label>素材文字</label><textarea class="textarea" id="material" placeholder="输入或粘贴素材..."></textarea></div>
+      <div class="form-group"><label>素材链接（可选）</label><input type="text" class="input" id="materialUrl" placeholder="粘贴链接..."></div>
+      <button class="ai-generate" onclick="generateContent(${i})"><span>✨</span><span>AI生成抖音文案</span></button>
+      <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">取消</button></div>`);
+  }
+  async function generateContent(ti) {
+    const btn = event.target; btn.disabled = true; btn.textContent = '生成中...';
+    const d = getCreativeData(); const t = d.templates[ti];
+    const m = document.getElementById('material').value.trim();
+    const mu = document.getElementById('materialUrl').value.trim();
+    await new Promise(r => setTimeout(r, 1500));
+    const result = `【${t.name}】\n\n${t.content.replace('{素材}', m || '精彩内容')}\n\n#抖音 #短视频 #每日打卡`;
+    d.records.push({ date: todayKey(), template: t.name, material: m, materialUrl: mu, content: result, generatedAt: new Date().toISOString() });
+    setStore(STORE_KEYS.creative, d);
+    openModal(`<h3>✨ AI生成结果</h3>
+      <div class="note-item"><div class="note-content" style="white-space:pre-wrap;">${escapeHtml(result)}</div></div>
+      <div class="flex gap-8 mt-12"><button class="btn btn-primary" onclick="copyText('${result.replace(/'/g, "\\'")}'); closeModal(); renderCreativePage()">复制保存</button><button class="btn btn-secondary" onclick="closeModal(); renderCreativePage()">关闭</button></div>`);
+    btn.disabled = false;
+  }
+
+  // === 每日前端 ===
+  function getFrontendData() {
+    const local = getStore(STORE_KEYS.frontend);
+    if (local && local.date === todayKey()) return local;
+    const def = {
+      news: [
+        { title: 'React 19 正式发布：全新编译器和Hooks优化', source: '掘金前端', url: 'https://juejin.cn/frontend' },
+        { title: 'TypeScript 5.6 新特性解析', source: 'InfoQ', url: 'https://infoq.cn/topic/front-end' },
+        { title: 'Chrome 128 DevTools性能分析功能增强', source: 'Chrome DevTools', url: 'https://developer.chrome.com/docs/devtools/' },
+        { title: '前端性能优化：View Transitions API实践', source: '掘金前端', url: 'https://juejin.cn/frontend' },
+        { title: 'GitHub Trending: Vue 3.5登顶本周榜首', source: 'GitHub Trending', url: 'https://github.com/trending/javascript' },
+        { title: 'MDN新增WebGPU API文档', source: 'MDN', url: 'https://developer.mozilla.org/' }
+      ],
+      learningPlan: ['📖 精读React 19官方文档','🛠️ 实践View Transitions API','📝 整理TypeScript新特性笔记','🔍 调研GitHub Trending热门项目']
+    };
+    setStore(STORE_KEYS.frontend, { date: todayKey(), ...def });
+    return { date: todayKey(), ...def };
+  }
+  function renderFrontendPage() {
+    const d = getFrontendData();
+    const customPlans = d.customPlans || [];
+    document.getElementById('content').innerHTML = `
+      <div class="card"><div class="card-header"><div><div class="card-title">💻 每日前端资讯</div><div class="text-sm text-muted mt-8">${d.news.length} 条资讯</div></div><button class="btn btn-secondary btn-sm" onclick="generateLearningPlan()">✨ AI生成</button></div></div>
+      <div class="card"><div class="card-title mb-12">📰 前沿资讯</div>${d.news.map(n => `<a class="news-item" href="${n.url}" target="_blank" rel="noopener"><div class="news-content"><div class="news-title">${escapeHtml(n.title)}</div><div class="news-source">📌 ${escapeHtml(n.source)}</div></div><span class="news-arrow">›</span></a>`).join('')}</div>
+      <div class="card">
+        <div class="flex-between mb-12">
+          <div class="card-title">🎯 AI学习计划</div>
+          <span class="tag">${d.learningPlan.length} 项</span>
+        </div>
+        ${d.learningPlan.map((p, i) => `
+          <div class="task-item">
+            <div class="task-content"><div class="task-text">${escapeHtml(p)}</div></div>
+            <div class="flex gap-8">
+              <button class="btn btn-secondary btn-sm" onclick="addToPlan(${JSON.stringify(p)}, '每日前端')">+计划</button>
+              <button class="task-delete" onclick="deleteAiPlan(${i})">✕</button>
+            </div>
+          </div>`).join('')}
+        ${d.learningPlan.length === 0 ? '<p class="text-muted text-center">点击上方"AI生成"创建学习计划</p>' : ''}
+      </div>
+      <div class="card">
+        <div class="flex-between mb-12">
+          <div class="card-title">✏️ 自定义计划</div>
+          <button class="btn btn-primary btn-sm" onclick="addCustomPlan()">+ 添加</button>
+        </div>
+        ${customPlans.length === 0 ? `<div class="empty-state" style="padding:20px;"><p class="text-sm">点击"+ 添加"创建自己的学习计划</p></div>` : customPlans.map((p, i) => `
+          <div class="task-item">
+            <div class="task-content"><div class="task-text">${escapeHtml(p)}</div></div>
+            <div class="flex gap-8">
+              <button class="btn btn-secondary btn-sm" onclick="addToPlan(${JSON.stringify(p)}, '每日前端')">+计划</button>
+              <button class="task-delete" onclick="deleteCustomPlan(${i})">✕</button>
+            </div>
+          </div>`).join('')}
+      </div>
+    `;
+  }
+  function deleteAiPlan(i) {
+    const d = getFrontendData();
+    d.learningPlan.splice(i, 1);
+    setStore(STORE_KEYS.frontend, d);
+    renderFrontendPage();
+  }
+  function addCustomPlan() {
+    openModal(`<h3>添加自定义学习计划</h3>
+      <div class="form-group"><label>计划内容</label><textarea class="textarea" id="customPlanText" placeholder="如：学习Vue 3 Composition API"></textarea></div>
+      <div class="form-group"><label>快捷模板</label>
+        <div class="flex gap-8 flex-wrap">
+          <button class="btn btn-secondary btn-sm" onclick="document.getElementById('customPlanText').value='阅读一篇技术文章'">📖 阅读文章</button>
+          <button class="btn btn-secondary btn-sm" onclick="document.getElementById('customPlanText').value='完成一个编程练习'">💻 编程练习</button>
+          <button class="btn btn-secondary btn-sm" onclick="document.getElementById('customPlanText').value='学习一个新技术/框架'">🎓 学习新技术</button>
+          <button class="btn btn-secondary btn-sm" onclick="document.getElementById('customPlanText').value='整理学习笔记'">📝 整理笔记</button>
+        </div>
+      </div>
+      <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">取消</button><button class="btn btn-primary" onclick="saveCustomPlan()">保存</button></div>`);
+  }
+  function saveCustomPlan() {
+    const t = document.getElementById('customPlanText').value.trim();
+    if (!t) { showToast('请输入计划内容', 'error'); return; }
+    const d = getFrontendData();
+    d.customPlans = d.customPlans || [];
+    d.customPlans.push(t);
+    setStore(STORE_KEYS.frontend, d);
+    closeModal();
+    renderFrontendPage();
+    showToast('已添加', 'success');
+  }
+  function deleteCustomPlan(i) {
+    const d = getFrontendData();
+    d.customPlans.splice(i, 1);
+    setStore(STORE_KEYS.frontend, d);
+    renderFrontendPage();
+  }
+  function generateLearningPlan() {
+    showToast('AI正在生成学习计划...', 'info');
+    setTimeout(() => {
+      const p = ['📖 深入阅读React 19新特性文档','🛠️ Canvas API实现数据可视化','📝 CSS Container Queries最佳实践','🔍 Edge Runtime前端部署方案','💡 Web Components共存实践'];
+      const d = getFrontendData(); d.learningPlan = p; setStore(STORE_KEYS.frontend, d);
+      renderFrontendPage(); showToast('已生成学习计划', 'success');
+    }, 1500);
+  }
+  function addToPlan(text, source) {
+    const plans = getTodayPlans();
+    plans.push({ text, time: '', completed: false, createdAt: new Date().toISOString(), source });
+    saveTodayPlans(plans); showToast('已添加到计划', 'success');
+  }
+
+  // === 每日锻炼 ===
+  function getExerciseData() {
+    const local = getStore(STORE_KEYS.exercise);
+    if (local && local.date === todayKey()) return local;
+    return {
+      date: todayKey(),
+      gufa: [
+        { title: '八段锦完整版', duration: '30分钟', platform: 'douyin', url: 'https://www.douyin.com' },
+        { title: '太极拳二十四式', duration: '25分钟', platform: 'bilibili', url: 'https://www.bilibili.com' },
+        { title: '五禽戏养生操', duration: '20分钟', platform: 'douyin', url: 'https://www.douyin.com' }
+      ],
+      eye: [
+        { title: '眼球运动训练', duration: '5分钟', platform: 'douyin', url: 'https://www.douyin.com' },
+        { title: '眼部按摩放松', duration: '10分钟', platform: 'bilibili', url: 'https://www.bilibili.com' },
+        { title: '视力恢复训练', duration: '15分钟', platform: 'douyin', url: 'https://www.douyin.com' }
+      ],
+      customVideos: []
+    };
+  }
+  function saveExerciseData(d) { setStore(STORE_KEYS.exercise, d); }
+  function renderExercisePage() {
+    const d = getExerciseData();
+    document.getElementById('content').innerHTML = `
+      <div class="card">
+        <div class="card-header"><div class="card-title">🏃 每日锻炼</div>
+          <div class="flex gap-8">
+            <button class="btn btn-secondary btn-sm" onclick="showExerciseAiDialog()">🤖 AI推荐</button>
+            <button class="btn btn-secondary btn-sm" onclick="showAddVideoDialog()">+ 添加</button>
+          </div>
+        </div>
+        <div class="tabs">
+          <button class="tab active" data-tab="gufa" onclick="switchExerciseTab('gufa')">古法健身操</button>
+          <button class="tab" data-tab="eye" onclick="switchExerciseTab('eye')">眼保健操</button>
+          <button class="tab" data-tab="custom" onclick="switchExerciseTab('custom')">自定义</button>
+        </div>
+      </div>
+      <div id="gufaList" class="exercise-list">${(d.gufa||[]).map((v,i) => renderVideoItem(v, 'gufa', i)).join('') || '<div class="card"><div class="empty-state"><p>暂无视频</p></div></div>'}</div>
+      <div id="eyeList" class="exercise-list hidden">${(d.eye||[]).map((v,i) => renderVideoItem(v, 'eye', i)).join('') || '<div class="card"><div class="empty-state"><p>暂无视频</p></div></div>'}</div>
+      <div id="customList" class="exercise-list hidden">${(d.customVideos||[]).map((v,i) => renderVideoItem(v, 'customVideos', i)).join('') || '<div class="card"><div class="empty-state"><div class="icon">🎥</div><p>暂无自定义视频，点击上方按钮添加</p></div></div>'}</div>
+    `;
+  }
+  const EXERCISE_POOL = {
+    gufa: [
+      { title: '八段锦完整版', duration: '30分钟', platform: 'douyin', url: 'https://www.douyin.com', tags: ['养生', '全身', '气血'] },
+      { title: '太极拳二十四式', duration: '25分钟', platform: 'bilibili', url: 'https://www.bilibili.com', tags: ['武术', '太极', '身心'] },
+      { title: '五禽戏养生操', duration: '20分钟', platform: 'douyin', url: 'https://www.douyin.com', tags: ['养生', '模仿', '活络'] },
+      { title: '六字诀养气功', duration: '20分钟', platform: 'bilibili', url: 'https://www.bilibili.com', tags: ['呼吸', '养生', '调息'] },
+      { title: '八段锦分解教学', duration: '40分钟', platform: 'douyin', url: 'https://www.douyin.com', tags: ['教学', '入门', '详细'] },
+      { title: '金刚功长寿功', duration: '30分钟', platform: 'douyin', url: 'https://www.douyin.com', tags: ['道家', '养生', '长寿'] },
+      { title: '甩手功养生操', duration: '15分钟', platform: 'bilibili', url: 'https://www.bilibili.com', tags: ['简易', '上手快', '关节'] },
+      { title: '经络拍打操', duration: '20分钟', platform: 'douyin', url: 'https://www.douyin.com', tags: ['经络', '排毒', '放松'] },
+      { title: '颈椎养生操', duration: '10分钟', platform: 'bilibili', url: 'https://www.bilibili.com', tags: ['颈椎', '办公室', '舒缓'] },
+      { title: '腰椎保健操', duration: '15分钟', platform: 'douyin', url: 'https://www.douyin.com', tags: ['腰椎', '办公族', '核心'] },
+      { title: '踮脚养生法', duration: '10分钟', platform: 'bilibili', url: 'https://www.bilibili.com', tags: ['腿部', '循环', '简单'] },
+      { title: '午间养生操', duration: '15分钟', platform: 'douyin', url: 'https://www.douyin.com', tags: ['午间', '放松', '办公'] }
+    ],
+    eye: [
+      { title: '眼球运动训练', duration: '5分钟', platform: 'douyin', url: 'https://www.douyin.com', tags: ['眼球', '放松', '视力'] },
+      { title: '眼部按摩放松', duration: '10分钟', platform: 'bilibili', url: 'https://www.bilibili.com', tags: ['按摩', '放松', '疲劳'] },
+      { title: '视力恢复训练', duration: '15分钟', platform: 'douyin', url: 'https://www.douyin.com', tags: ['视力', '恢复', '训练'] },
+      { title: '眼保健操标准版', duration: '5分钟', platform: 'bilibili', url: 'https://www.bilibili.com', tags: ['标准', '学生', '舒缓'] },
+      { title: '缓解视疲劳眼部瑜伽', duration: '10分钟', platform: 'douyin', url: 'https://www.douyin.com', tags: ['瑜伽', '视疲劳', '放松'] },
+      { title: '转眼球护眼法', duration: '3分钟', platform: 'bilibili', url: 'https://www.bilibili.com', tags: ['简单', '护眼', '办公室'] },
+      { title: '热敷眼睛方法', duration: '5分钟', platform: 'douyin', url: 'https://www.douyin.com', tags: ['热敷', '干涩', '舒适'] },
+      { title: '视网膜保护操', duration: '8分钟', platform: 'bilibili', url: 'https://www.bilibili.com', tags: ['视网膜', '深度', '保护'] },
+      { title: '老花眼预防操', duration: '10分钟', platform: 'douyin', url: 'https://www.douyin.com', tags: ['预防', '老花', '中老年'] },
+      { title: '儿童护眼操', duration: '5分钟', platform: 'bilibili', url: 'https://www.bilibili.com', tags: ['儿童', '护眼', '预防近视'] }
+    ]
+  };
+  function showExerciseAiDialog() {
+    openModal(`<h3>🤖 AI 智能推荐</h3>
+      <div class="form-group"><label>描述你的需求</label>
+        <textarea class="textarea" id="aiExerciseInput" placeholder="如：颈椎不舒服、想减肥、改善视力、腰椎疼痛..."></textarea>
+      </div>
+      <div class="form-group"><label>快捷标签</label>
+        <div class="flex gap-8 flex-wrap">
+          ${['颈椎','腰椎','减肥','视力','养生','放松','办公室','中老年','入门','强效'].map(t => 
+            `<button class="btn btn-secondary btn-sm" onclick="document.getElementById('aiExerciseInput').value='${t}'">${t}</button>`
+          ).join('')}
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+        <button class="btn btn-primary" onclick="aiRecommendExercise()">获取推荐</button>
+      </div>`);
+  }
+  function aiRecommendExercise() {
+    const q = document.getElementById('aiExerciseInput').value.trim();
+    if (!q) { showToast('请输入需求', 'error'); return; }
+    showToast('AI正在匹配素材...', 'info');
+    setTimeout(() => {
+      const all = [...EXERCISE_POOL.gufa.map(v => ({...v, cat: '古法健身操'})), ...EXERCISE_POOL.eye.map(v => ({...v, cat: '眼保健操'}))];
+      const qLower = q.toLowerCase();
+      const scored = all.map(v => {
+        let score = 0;
+        const text = (v.title + v.tags.join('') + v.cat).toLowerCase();
+        if (text.includes(qLower)) score += 10;
+        qLower.split(/[，,、\s]+/).forEach(k => {
+          if (k && text.includes(k)) score += 5;
+        });
+        if (qLower.includes('颈椎') && (v.tags.includes('颈椎') || v.title.includes('颈椎'))) score += 15;
+        if (qLower.includes('腰椎') && (v.tags.includes('腰椎') || v.title.includes('腰椎'))) score += 15;
+        if (qLower.includes('视力') && (v.tags.includes('视力') || v.title.includes('视力'))) score += 15;
+        if (qLower.includes('减肥') && (v.duration && parseInt(v.duration) >= 20)) score += 8;
+        if (qLower.includes('办公室') && (v.tags.includes('办公室') || v.title.includes('办公'))) score += 10;
+        if (qLower.includes('入门') && (v.tags.includes('入门') || v.title.includes('入门'))) score += 8;
+        return {...v, score};
+      });
+      const results = scored.filter(v => v.score > 0).sort((a,b) => b.score - a.score).slice(0, 5);
+      if (results.length === 0) {
+        openModal(`<h3>🤖 推荐结果</h3>
+          <div class="empty-state"><div class="icon">🔍</div><p>没有找到匹配的素材</p><p class="text-sm text-muted">试试其他关键词：颈椎、腰椎、减肥、视力...</p></div>
+          <div class="modal-actions"><button class="btn btn-primary" onclick="closeModal()">知道了</button></div>`);
+        return;
+      }
+      openModal(`<h3>🤖 为你推荐（${q}）</h3>
+        <div style="max-height:400px;overflow-y:auto;">
+          ${results.map((v, i) => `
+            <div class="card" style="margin-bottom:10px;padding:12px;">
+              <div class="flex-between">
+                <div>
+                  <div class="card-title" style="font-size:14px;">${escapeHtml(v.title)}</div>
+                  <div class="text-sm text-muted">${v.cat} · ${v.duration}</div>
+                </div>
+                <div class="flex gap-8">
+                  <button class="app-link app-douyin" onclick="openDouyin('${escapeHtml(v.title)}')" style="padding:4px 8px;font-size:12px;">抖音</button>
+                  <button class="app-link app-bilibili" onclick="openBilibili('${escapeHtml(v.title)}')" style="padding:4px 8px;font-size:12px;">B站</button>
+                </div>
+              </div>
+              <div class="flex gap-8 mt-8">
+                ${v.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+              </div>
+            </div>`).join('')}
+        </div>
+        <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">关闭</button></div>`);
+      showToast(`已为你推荐 ${results.length} 条素材`, 'success');
+    }, 1200);
+  }
+  function renderVideoItem(v, type, i) {
+    const platformBtn = v.platform === 'douyin'
+      ? `<button class="app-link app-douyin" onclick="openDouyin('${escapeHtml(v.title)}')" style="padding:6px 10px;font-size:12px;">抖音</button>`
+      : `<button class="app-link app-bilibili" onclick="openBilibili('${escapeHtml(v.title)}')" style="padding:6px 10px;font-size:12px;">B站</button>`;
+    return `<div class="video-item">
+      <div class="video-thumb">${v.platform === 'douyin' ? '🎵' : '📺'}</div>
+      <div class="video-info"><div class="video-title">${escapeHtml(v.title)}</div><div class="video-meta">${v.duration || ''}</div></div>
+      <div class="video-actions">
+        ${platformBtn}
+        <a href="${v.url}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="padding:6px 10px;font-size:12px;">网页</a>
+      </div>
+    </div>`;
+  }
+  function switchExerciseTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    ['gufaList','eyeList','customList'].forEach(id => document.getElementById(id).classList.add('hidden'));
+    document.getElementById(tab === 'gufa' ? 'gufaList' : tab === 'eye' ? 'eyeList' : 'customList').classList.remove('hidden');
+  }
+  function showAddVideoDialog() {
+    openModal(`<h3>添加视频</h3>
+      <div class="form-group"><label>视频标题</label><input type="text" class="input" id="vTitle" placeholder="视频名称"></div>
+      <div class="form-group"><label>时长</label><input type="text" class="input" id="vDuration" placeholder="如：30分钟"></div>
+      <div class="form-group"><label>平台</label><select class="input" id="vPlatform"><option value="douyin">抖音</option><option value="bilibili">B站</option></select></div>
+      <div class="form-group"><label>链接</label><input type="text" class="input" id="vUrl" placeholder="视频链接"></div>
+      <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">取消</button><button class="btn btn-primary" onclick="addVideo()">添加</button></div>`);
+  }
+  function addVideo() {
+    const t = document.getElementById('vTitle').value.trim();
+    const d = document.getElementById('vDuration').value.trim();
+    const p = document.getElementById('vPlatform').value;
+    const u = document.getElementById('vUrl').value.trim();
+    if (!t) { showToast('请输入标题', 'error'); return; }
+    const data = getExerciseData();
+    data.customVideos = data.customVideos || [];
+    data.customVideos.push({ title: t, duration: d, platform: p, url: u });
+    saveExerciseData(data); closeModal(); renderExercisePage(); showToast('已添加', 'success');
+  }
+
+  // === 每日阅读 ===
+  function getReadingData() {
+    return getStore(STORE_KEYS.reading) || { books: [], notes: [], readingDays: {} };
+  }
+  function renderReadingPage() {
+    const d = getReadingData();
+    const totalDays = Object.keys(d.readingDays || {}).length;
+    const todayBooks = d.books.filter(b => b.lastRead === todayKey());
+    document.getElementById('content').innerHTML = `
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-value">${d.books.length}</div><div class="stat-label">📚 在读书籍</div></div>
+        <div class="stat-card"><div class="stat-value">${totalDays}</div><div class="stat-label">📅 阅读天数</div></div>
+        <div class="stat-card"><div class="stat-value">${d.notes.length}</div><div class="stat-label">📝 阅读笔记</div></div>
+      </div>
+      <div class="card"><div class="card-header"><div class="card-title">📖 我的书架</div><button class="btn btn-secondary btn-sm" onclick="showAddBookDialog()">+ 加书</button></div>
+        ${d.books.length === 0 ? `<div class="empty-state"><div class="icon">📚</div><p>还没有书籍，点击添加开始阅读</p></div>` : d.books.map((b, i) => `
+          <div class="reading-book">
+            <div class="book-cover">📖</div>
+            <div class="book-info">
+              <div class="book-title">${escapeHtml(b.title)}</div>
+              <div class="book-progress">
+                <span>📊 ${b.progress || 0}%</span>
+                <span>${b.dailyGoal || '未设置目标'}</span>
+                ${b.lastRead === todayKey() ? '<span class="tag tag-accent">今日已读</span>' : ''}
+              </div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="markRead(${i})">打卡</button>
+          </div>`).join('')}
+      </div>
+      ${d.notes.length > 0 ? `<div class="card"><div class="card-title mb-12">📝 最近笔记</div>${d.notes.slice(-5).reverse().map(n => `<div class="note-item"><div class="note-date">${escapeHtml(n.bookTitle)} · ${escapeHtml(n.date)}</div><div class="note-content">${escapeHtml(n.content)}</div></div>`).join('')}</div>` : ''}
+      <div class="card"><div class="card-header"><div class="card-title">✨ AI功能</div></div>
+        <button class="ai-generate" onclick="generateReadingPlan()"><span>📋</span><span>AI生成阅读规划</span></button>
+      </div>
+    `;
+  }
+  function showAddBookDialog() {
+    openModal(`<h3>添加书籍</h3>
+      <div class="form-group"><label>书名</label><input type="text" class="input" id="bTitle" placeholder="输入书名"></div>
+      <div class="form-group"><label>作者（可选）</label><input type="text" class="input" id="bAuthor" placeholder="作者"></div>
+      <div class="form-group"><label>每日目标</label><input type="text" class="input" id="bGoal" placeholder="如：1章 / 30页"></div>
+      <div class="form-group"><label>章节分类（可选）</label><textarea class="textarea" id="bChapters" placeholder="重点章节与泛读章节分开，每行一条"></textarea></div>
+      <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">取消</button><button class="btn btn-primary" onclick="addBook()">添加</button></div>`);
+  }
+  function addBook() {
+    const t = document.getElementById('bTitle').value.trim();
+    const a = document.getElementById('bAuthor').value.trim();
+    const g = document.getElementById('bGoal').value.trim();
+    const c = document.getElementById('bChapters').value.trim();
+    if (!t) { showToast('请输入书名', 'error'); return; }
+    const d = getReadingData();
+    d.books.push({ title: t, author: a, dailyGoal: g, chapters: c, progress: 0, createdAt: new Date().toISOString(), lastRead: '' });
+    setStore(STORE_KEYS.reading, d); closeModal(); renderReadingPage(); showToast('已添加', 'success');
+  }
+  function markRead(i) {
+    const d = getReadingData();
+    d.books[i].lastRead = todayKey();
+    d.books[i].progress = Math.min(100, (d.books[i].progress || 0) + 10);
+    d.readingDays = d.readingDays || {};
+    d.readingDays[todayKey()] = true;
+    setStore(STORE_KEYS.reading, d);
+    openModal(`<h3>📖 今日阅读</h3>
+      <p class="mb-12">已打卡：${escapeHtml(d.books[i].title)}</p>
+      <div class="form-group"><label>阅读笔记</label><textarea class="textarea" id="noteContent" placeholder="记录今日阅读心得..."></textarea></div>
+      <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">关闭</button><button class="btn btn-primary" onclick="saveNote(${i})">保存笔记</button></div>`);
+  }
+  function saveNote(i) {
+    const c = document.getElementById('noteContent').value.trim();
+    if (!c) { closeModal(); return; }
+    const d = getReadingData();
+    d.notes = d.notes || [];
+    d.notes.push({ bookTitle: d.books[i].title, date: todayKey(), content: c });
+    setStore(STORE_KEYS.reading, d); closeModal(); renderReadingPage(); showToast('笔记已保存', 'success');
+  }
+  async function generateReadingPlan() {
+    showToast('AI正在生成规划...', 'info');
+    await new Promise(r => setTimeout(r, 1500));
+    const d = getReadingData();
+    d.books.forEach(b => {
+      if (!b.chapters) {
+        b.chapters = '重点精读：核心章节\n泛读：其他章节';
+        b.dailyGoal = b.dailyGoal || '30分钟 / 1章';
+      }
+    });
+    setStore(STORE_KEYS.reading, d);
+    renderReadingPage(); showToast('阅读规划已生成', 'success');
+  }
+
+  // === 设置 ===
+  function renderSettingsPage() {
+    const s = getStore(STORE_KEYS.settings) || {};
+    const gist = getStore(STORE_KEYS.gist);
+    document.getElementById('content').innerHTML = `
+      <div class="card"><div class="card-title mb-12">⚙️ 数据源配置</div>
+        <div class="form-group"><label>GitHub Gist 原始JSON地址</label><input type="text" class="input" id="gistUrl" value="${escapeHtml(s.gistUrl || '')}" placeholder="https://gist.githubusercontent.com/.../raw/..."></div>
+        <p class="text-muted text-sm mb-12">用于每日自动抓取的热榜、资讯等数据。留空则使用内置默认数据。</p>
+        <button class="btn btn-primary w-full" onclick="saveGistUrl()">保存配置</button>
+      </div>
+      <div class="card">
+        <div class="card-title mb-12">🎨 主题设置</div>
+        <div class="form-group"><label>主题色</label>
+          <select class="input" id="themeColor" onchange="changeTheme(this.value)">
+            <option value="#556B2F" ${s.theme === '#556B2F' ? 'selected' : ''}>橄榄绿（默认）</option>
+            <option value="#2d5a27" ${s.theme === '#2d5a27' ? 'selected' : ''}>深绿</option>
+            <option value="#8b6914" ${s.theme === '#8b6914' ? 'selected' : ''}>古铜棕</option>
+            <option value="#4a6741" ${s.theme === '#4a6741' ? 'selected' : ''}>森林绿</option>
+          </select>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title mb-12">📊 数据管理</div>
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-value">${Object.keys(localStorage).length}</div><div class="stat-label">存储项数</div></div>
+          <div class="stat-card"><div class="stat-value">${Math.round(performance.memory?.usedJSHeapSize / 1024 / 1024) || '~'}MB</div><div class="stat-label">内存占用</div></div>
+        </div>
+        ${gist ? `<p class="text-sm text-muted mb-8">上次数据更新：${escapeHtml(new Date(gist.updatedAt).toLocaleString('zh-CN'))}</p>` : '<p class="text-sm text-muted mb-8">暂无远程数据</p>'}
+        <button class="btn btn-secondary w-full mt-8" onclick="exportData()">📤 导出所有数据</button>
+        <button class="btn btn-secondary w-full mt-8" onclick="importData()">📥 导入数据</button>
+        <button class="btn btn-danger w-full mt-8" onclick="clearAllData()">🗑️ 清空所有数据</button>
+      </div>
+      <div class="card">
+        <div class="card-title mb-12">📱 PWA 信息</div>
+        <p class="text-sm text-muted mb-8">将本页添加到手机主屏幕，即可像原生App一样使用。</p>
+        <button class="btn btn-primary w-full" onclick="installPwa()">📲 安装为应用</button>
+      </div>
+    `;
+  }
+  function saveGistUrl() {
+    const url = document.getElementById('gistUrl').value.trim();
+    const s = getStore(STORE_KEYS.settings) || {}; s.gistUrl = url; setStore(STORE_KEYS.settings, s);
+    showToast('配置已保存', 'success');
+  }
+  function changeTheme(color) {
+    const s = getStore(STORE_KEYS.settings) || {}; s.theme = color; setStore(STORE_KEYS.settings, s);
+    document.documentElement.style.setProperty('--primary', color);
+    document.querySelector('meta[name="theme-color"]').content = color;
+    showToast('主题已更新', 'success');
+  }
+  function exportData() {
+    const all = {};
+    Object.keys(localStorage).forEach(k => { try { all[k] = JSON.parse(localStorage.getItem(k)); } catch { all[k] = localStorage.getItem(k); } });
+    const blob = new Blob([JSON.stringify(all, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = `workbench-backup-${todayKey()}.json`; a.click();
+    URL.revokeObjectURL(url); showToast('已导出备份', 'success');
+  }
+  function importData() {
+    const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'application/json';
+    inp.onchange = e => {
+      const f = e.target.files[0]; if (!f) return;
+      const r = new FileReader();
+      r.onload = () => {
+        try {
+          const data = JSON.parse(r.result);
+          Object.keys(data).forEach(k => { localStorage.setItem(k, typeof data[k] === 'string' ? data[k] : JSON.stringify(data[k])); });
+          showToast('导入成功', 'success'); renderSettingsPage();
+        } catch { showToast('导入失败', 'error'); }
+      };
+      r.readAsText(f);
+    };
+    inp.click();
+  }
+  function clearAllData() {
+    if (!confirm('确定要清空所有数据吗？此操作不可恢复。')) return;
+    localStorage.clear(); showToast('已清空', 'success'); location.reload();
+  }
+  let deferredPrompt;
+  function installPwa() {
+    if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt.userChoice.then(() => deferredPrompt = null); }
+    else showToast('请在浏览器菜单中选择"添加到主屏幕"', 'info');
+  }
+
+  // === 励志语录 ===
+  const DEFAULT_QUOTES = [
+    '星光不问赶路人，时光不负有心人。',
+    '种一棵树最好的时间是十年前，其次是现在。',
+    '你的孤独，虽败犹荣。',
+    '越努力，越幸运。',
+    '日拱一卒，功不唐捐。',
+    '世上无难事，只怕有心人。',
+    '不积跬步，无以至千里；不积小流，无以成江海。',
+    '莫愁前路无知己，天下谁人不识君。',
+    '长风破浪会有时，直挂云帆济沧海。',
+    '纸上得来终觉浅，绝知此事要躬行。'
+  ];
+  function loadQuote() {
+    const s = getStore(STORE_KEYS.settings) || {};
+    const q = s.quote || DEFAULT_QUOTES[Math.floor(Math.random() * DEFAULT_QUOTES.length)];
+    const el = document.getElementById('drawerQuote');
+    if (q) el.textContent = q;
+    else el.innerHTML = '<span class="quote-tip">点击添加一句励志语录</span>';
+  }
+  function editQuote() {
+    const s = getStore(STORE_KEYS.settings) || {};
+    openModal(`<h3>✏️ 修改励志语录</h3>
+      <div class="form-group"><label>语录内容</label><textarea class="textarea" id="quoteInput" placeholder="输入励志语录...">${escapeHtml(s.quote || '')}</textarea></div>
+      <p class="text-muted text-sm mb-12">留空则随机显示一条默认语录</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="randomQuote()">🎲 随机一条</button>
+        <button class="btn btn-primary" onclick="saveQuote()">保存</button>
+      </div>`);
+  }
+  function randomQuote() {
+    const q = DEFAULT_QUOTES[Math.floor(Math.random() * DEFAULT_QUOTES.length)];
+    document.getElementById('quoteInput').value = q;
+  }
+  function saveQuote() {
+    const q = document.getElementById('quoteInput').value.trim();
+    const s = getStore(STORE_KEYS.settings) || {};
+    s.quote = q;
+    setStore(STORE_KEYS.settings, s);
+    loadQuote();
+    closeModal();
+    showToast('语录已更新', 'success');
+  }
+
+  // === 初始化 ===
+  function init() {
+    const d = new Date();
+    document.getElementById('currentDate').textContent = `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+    loadQuote();
+    initNav();
+    navigateTo('plan');
+    const s = getStore(STORE_KEYS.settings) || {};
+    if (s.theme) {
+      document.documentElement.style.setProperty('--primary', s.theme);
+      document.querySelector('meta[name="theme-color"]').content = s.theme;
+    }
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+    window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; });
+    window.addEventListener('appinstalled', () => { deferredPrompt = null; });
+  }
+  init();
+  </script>
+</body>
+</html>

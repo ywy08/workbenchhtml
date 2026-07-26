@@ -1,0 +1,10 @@
+{
+  "name": "daily-workbench-collector",
+  "version": "1.0.0",
+  "description": "Data collector for daily workbench PWA",
+  "dependencies": {
+    "@octokit/rest": "^20.0.0",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0"
+  }
+}
