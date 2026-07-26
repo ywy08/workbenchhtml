@@ -7,7 +7,7 @@
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui", "browser"],
   "background_color": "#F0F5EE",
-  "theme_color": "#7FB77E",
+  "theme_color": "#C7DAC7",
   "orientation": "portrait",
   "lang": "zh-CN",
   "categories": ["productivity", "lifestyle"],
