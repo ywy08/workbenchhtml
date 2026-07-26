@@ -853,14 +853,107 @@
     const d = getCreativeData(); const t = d.templates[ti];
     const m = document.getElementById('material').value.trim();
     const mu = document.getElementById('materialUrl').value.trim();
-    await new Promise(r => setTimeout(r, 1500));
-    const result = `【${t.name}】\n\n${t.content.replace('{素材}', m || '精彩内容')}\n\n#抖音 #短视频 #每日打卡`;
+    showToast('AI正在优化文案...', 'info');
+    await new Promise(r => setTimeout(r, 2000));
+    
+    const materialText = m || t.content.includes('{素材}') ? '精彩内容' : '';
+    const result = generateOptimizedContent(t.name, t.content, materialText, mu);
+    
     d.records.push({ date: todayKey(), template: t.name, material: m, materialUrl: mu, content: result, generatedAt: new Date().toISOString() });
     setStore(STORE_KEYS.creative, d);
-    openModal(`<h3>✨ AI生成结果</h3>
-      <div class="note-item"><div class="note-content" style="white-space:pre-wrap;">${escapeHtml(result)}</div></div>
-      <div class="flex gap-8 mt-12"><button class="btn btn-primary" onclick="copyText('${result.replace(/'/g, "\\'")}'); closeModal(); renderCreativePage()">复制保存</button><button class="btn btn-secondary" onclick="closeModal(); renderCreativePage()">关闭</button></div>`);
+    openModal(`<h3>✨ AI优化文案结果</h3>
+      <div style="background:#F0F5EE;border-radius:12px;padding:14px;margin-bottom:12px;">
+        <div style="font-size:12px;color:#999;margin-bottom:6px;">📝 原文（模板+素材）</div>
+        <div style="font-size:12px;color:#666;white-space:pre-wrap;border-left:3px solid #ddd;padding-left:10px;">${escapeHtml(t.content.replace('{素材}', materialText || '【素材】'))}</div>
+      </div>
+      <div style="background:#F0F5EE;border-radius:12px;padding:14px;margin-bottom:12px;">
+        <div style="font-size:12px;color:#7FB77E;margin-bottom:6px;font-weight:600;">✨ AI优化后</div>
+        <div class="note-content" style="white-space:pre-wrap;font-size:14px;line-height:1.6;">${escapeHtml(result)}</div>
+      </div>
+      <div class="flex gap-8 mt-12">
+        <button class="btn btn-primary" onclick="copyText('${result.replace(/'/g, "\\'")}'); closeModal(); renderCreativePage()">复制保存</button>
+        <button class="btn btn-secondary" onclick="closeModal(); renderCreativePage()">关闭</button>
+      </div>`);
     btn.disabled = false;
+  }
+  function generateOptimizedContent(tplName, tplContent, material, url) {
+    const materialPreview = material.length > 50 ? material.substring(0, 50) + '...' : material;
+    const keywords = extractKeywords(material);
+    const emojiMap = ['🔥', '💯', '✨', '💪', '🚀', '⚡', '🎯', '💡', '🌟', '🎬'];
+    const randomEmoji = emojiMap[Math.floor(Math.random() * emojiMap.length)];
+    
+    let openings = [
+      `${randomEmoji} 看了这个内容我悟了...`,
+      `🔥 这个话题99%的人都不知道！`,
+      `👉 别再踩坑了，真相是...`,
+      `✨ 看完这个你就懂了！`,
+      `💯 这个内容太炸裂了！`,
+      `⚡ 赶紧码住！这波操作太绝了！`
+    ];
+    
+    let endings = [
+      `看完记得点赞收藏哦~`,
+      `双击屏幕支持一下！`,
+      `你们觉得呢？评论区聊聊！`,
+      `关注我，每天分享干货！`,
+      `觉得有用的话点个赞吧！`,
+      `下期想看什么评论区告诉我！`
+    ];
+    
+    let hooks = [
+      `【${tplName}】`,
+      `${randomEmoji} ${tplName}来啦！`,
+      `🔥 关于「${tplName}」，不得不说的真相`,
+      `✨ 深度解读：${tplName}`,
+      `💡 ${tplName}｜看完秒懂`
+    ];
+    
+    const opening = openings[Math.floor(Math.random() * openings.length)];
+    const ending = endings[Math.floor(Math.random() * endings.length)];
+    const hook = hooks[Math.floor(Math.random() * hooks.length)];
+    
+    const materialSentences = material.split(/[。！？\n]/).filter(s => s.trim()).slice(0, 3);
+    
+    let optimizedContent;
+    
+    if (materialSentences.length > 0) {
+      const corePoint = materialSentences[0].trim();
+      const detailPoint = materialSentences.length > 1 ? materialSentences[1].trim() : '';
+      const highlightPoint = materialSentences.length > 2 ? materialSentences[2].trim() : '';
+      
+      optimizedContent = `${opening}\n\n`;
+      optimizedContent += `${hook}\n\n`;
+      optimizedContent += `📌 核心观点：${corePoint}\n\n`;
+      
+      if (detailPoint) {
+        optimizedContent += `💭 深度分析：${detailPoint}\n\n`;
+      }
+      
+      if (highlightPoint) {
+        optimizedContent += `🎯 重点关注：${highlightPoint}\n\n`;
+      }
+      
+      const tagKeywords = keywords.slice(0, 3).map(k => `#${k}`).join(' ');
+      optimizedContent += `${tagKeywords} #${tplName} #每日打卡 #上热门\n\n`;
+      optimizedContent += ending;
+    } else {
+      optimizedContent = `${opening}\n\n`;
+      optimizedContent += `${hook}\n\n`;
+      optimizedContent += `${tplContent.replace('{素材}', '【请补充素材内容】')}\n\n`;
+      optimizedContent += `#${tplName} #每日打卡 #上热门\n\n`;
+      optimizedContent += ending;
+    }
+    
+    return optimizedContent;
+  }
+  function extractKeywords(text) {
+    if (!text) return ['干货', '分享'];
+    const stopWords = ['的', '了', '是', '在', '有', '和', '就', '不', '人', '都', '一', '一个', '上', '也', '很', '到', '说', '要', '去', '你', '会', '着', '没有', '看', '好', '自己', '这'];
+    const words = text.replace(/[^\u4e00-\u9fa5]/g, '').split('').filter(w => w.trim() && !stopWords.includes(w));
+    const wordCount = {};
+    words.forEach(w => { wordCount[w] = (wordCount[w] || 0) + 1; });
+    const sorted = Object.entries(wordCount).sort((a, b) => b[1] - a[1]);
+    return sorted.slice(0, 5).map(([w]) => w);
   }
 
   // === 每日前端 ===
