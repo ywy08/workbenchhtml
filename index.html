@@ -501,28 +501,28 @@
     document.getElementById('content').innerHTML = '';
     if (renderers[pageId]) renderers[pageId](document.getElementById('content'));
   }
-  function openDouyin(q) { const u = encodeURIComponent(q); window.location.href = `snssdk1128://webview/?url=https%3A%2F%2Fwww.douyin.com%2Fsearch%2F${u}`; setTimeout(() => window.open(`https://www.douyin.com/search/${u}`, '_blank'), 500); }
-  function openBilibili(q) { const u = encodeURIComponent(q); window.location.href = `bilibili://search?keyword=${u}`; setTimeout(() => window.open(`https://search.bilibili.com/all?keyword=${u}`, '_blank'), 500); }
+  function openDouyin(q) { 
+    const u = encodeURIComponent(q); 
+    window.open(`https://www.douyin.com/search/${u}`, '_blank', 'noopener'); 
+  }
+  function openBilibili(q) { 
+    const u = encodeURIComponent(q); 
+    window.open(`https://search.bilibili.com/all?keyword=${u}`, '_blank', 'noopener'); 
+  }
   function openVideoLink(url, platform, title) {
     if (!url || url.length < 15) {
       if (platform === 'douyin') openDouyin(title);
       else openBilibili(title);
       return;
     }
-    const searchUrl = platform === 'douyin' 
-      ? `https://www.douyin.com/search/${encodeURIComponent(title)}`
-      : `https://search.bilibili.com/all?keyword=${encodeURIComponent(title)}`;
-    const ua = navigator.userAgent.toLowerCase();
-    const isMobile = /mobile|android|iphone|ipad|ipod/i.test(ua);
-    if (isMobile) {
-      const appUrl = platform === 'douyin'
-        ? `snssdk1128://webview/?url=${encodeURIComponent(url)}`
-        : `bilibili://video/${encodeURIComponent(url.split('/').pop() || '')}`;
-      window.location.href = appUrl;
-      setTimeout(() => window.open(url, '_blank'), 800);
-    } else {
-      window.open(url, '_blank', 'noopener');
-    }
+    window.open(url, '_blank', 'noopener');
+  }
+  function copyVideoLink(url) {
+    navigator.clipboard.writeText(url).then(() => {
+      showToast('链接已复制，可粘贴到抖音App中打开', 'success');
+    }).catch(() => {
+      showToast('复制失败，请手动复制', 'error');
+    });
   }
   const DEFAULT_DATA_URL = 'https://raw.githubusercontent.com/ywy08/workbenchhtml/main/daily-data.json';
   async function fetchGistData() {
@@ -1115,11 +1115,13 @@
     const platformName = v.platform === 'douyin' ? '抖音' : 'B站';
     const searchFunc = v.platform === 'douyin' ? `openDouyin('${escapeHtml(v.title)}')` : `openBilibili('${escapeHtml(v.title)}')`;
     
-    const mainBtn = hasValidUrl
+    const openBtn = hasValidUrl
       ? `<button class="app-link app-${v.platform === 'douyin' ? 'douyin' : 'bilibili'}" onclick="openVideoLink('${escapeHtml(v.url)}', '${v.platform}', '${escapeHtml(v.title)}')" style="padding:6px 10px;font-size:12px;">${platformName}</button>`
       : `<button class="app-link app-${v.platform === 'douyin' ? 'douyin' : 'bilibili'}" onclick="${searchFunc}" style="padding:6px 10px;font-size:12px;">${platformName}</button>`;
     
-    const searchBtn = `<button class="btn btn-secondary btn-sm" onclick="${searchFunc}" style="padding:6px 10px;font-size:12px;" title="搜索">🔍</button>`;
+    const copyBtn = hasValidUrl
+      ? `<button class="btn btn-secondary btn-sm" onclick="copyVideoLink('${escapeHtml(v.url)}')" style="padding:6px 8px;font-size:12px;" title="复制链接">📋</button>`
+      : '';
     
     const deleteBtn = type === 'customVideos' 
       ? `<button class="btn btn-danger btn-sm" onclick="deleteCustomVideo(${i})" style="padding:6px 8px;font-size:12px;">删除</button>`
@@ -1129,8 +1131,8 @@
       <div class="video-thumb">${v.platform === 'douyin' ? '🎵' : '📺'}</div>
       <div class="video-info"><div class="video-title">${escapeHtml(v.title)}</div><div class="video-meta">${v.duration || ''}</div></div>
       <div class="video-actions">
-        ${mainBtn}
-        ${searchBtn}
+        ${openBtn}
+        ${copyBtn}
         ${deleteBtn}
       </div>
     </div>`;
