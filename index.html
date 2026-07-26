@@ -206,6 +206,72 @@
     .progress-bar { width: 100%; height: 8px; background: var(--primary-bg); border-radius: 4px; overflow: hidden; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-light), var(--accent)); border-radius: 4px; transition: width 0.4s ease; }
     .progress-text { font-size: 13px; color: var(--text-light); margin-top: 6px; }
+    .progress-card {
+      background: linear-gradient(135deg, #C7DAC7 0%, #E8F0E8 100%);
+      border-radius: 16px; padding: 20px; margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(199, 218, 199, 0.3);
+      position: relative; overflow: hidden;
+    }
+    .progress-card::before {
+      content: ''; position: absolute; top: -30px; right: -30px;
+      width: 100px; height: 100px; background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+    }
+    .progress-card::after {
+      content: ''; position: absolute; bottom: -20px; left: -20px;
+      width: 60px; height: 60px; background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+    }
+    .progress-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px; position: relative; z-index: 1;
+    }
+    .progress-title { font-size: 15px; font-weight: 600; color: #3A5A3A; }
+    .progress-count { font-size: 12px; color: #5A7A5A; margin-top: 4px; }
+    .progress-actions { display: flex; gap: 8px; }
+    .progress-action-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 14px; background: rgba(255,255,255,0.6);
+      border: none; border-radius: 12px; cursor: pointer;
+      font-size: 13px; font-weight: 500; color: #3A5A3A;
+      transition: all 0.2s;
+    }
+    .progress-action-btn:hover { background: rgba(255,255,255,0.8); transform: translateY(-1px); }
+    .progress-action-btn.primary {
+      background: #4A7A4A; color: white;
+      box-shadow: 0 2px 8px rgba(74, 122, 74, 0.3);
+    }
+    .progress-action-btn.primary:hover { background: #3A6A3A; }
+    .progress-ring-container {
+      display: flex; align-items: center; justify-content: center;
+      gap: 24px; padding: 8px 0; position: relative; z-index: 1;
+    }
+    .progress-ring {
+      width: 80px; height: 80px; position: relative;
+    }
+    .progress-ring svg { transform: rotate(-90deg); }
+    .progress-ring-bg { fill: none; stroke: rgba(255,255,255,0.5); stroke-width: 8; }
+    .progress-ring-fill {
+      fill: none; stroke: #4A7A4A; stroke-width: 8;
+      stroke-linecap: round; transition: stroke-dashoffset 0.5s ease;
+    }
+    .progress-ring-text {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-size: 20px; font-weight: 700; color: #3A5A3A;
+    }
+    .progress-ring-label {
+      position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: #5A7A5A; white-space: nowrap;
+    }
+    .progress-stats { display: flex; gap: 16px; }
+    .progress-stat {
+      text-align: center; padding: 8px 12px;
+      background: rgba(255,255,255,0.5); border-radius: 12px;
+      min-width: 60px;
+    }
+    .progress-stat-value { font-size: 20px; font-weight: 700; color: #3A5A3A; }
+    .progress-stat-label { font-size: 11px; color: #5A7A5A; margin-top: 2px; }
+    .progress-footer { position: relative; z-index: 1; }
     .tag { display: inline-flex; align-items: center; padding: 4px 10px; background: var(--primary-bg); color: var(--primary); border-radius: 12px; font-size: 12px; font-weight: 500; }
     .tag-accent { background: #e8f5e9; color: #4caf50; }
     .tag-warn { background: #fff3e0; color: #ff9800; }
@@ -563,23 +629,58 @@
     const total = plans.length;
     const prog = total > 0 ? Math.round((done / total) * 100) : 0;
     const tpls = getTemplatePlans();
+    const circumference = 2 * Math.PI * 34;
+    const strokeDashoffset = circumference - (prog / 100) * circumference;
+    
     document.getElementById('content').innerHTML = `
-      <div class="card">
-        <div class="card-header">
+      <div class="progress-card">
+        <div class="progress-header">
           <div>
-            <div class="card-title">今日进度</div>
-            <div class="progress-text">${done} / ${total} 完成 · ${prog}%</div>
+            <div class="progress-title">📅 今日进度</div>
+            <div class="progress-count">${new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' })}</div>
           </div>
-          <div class="flex gap-8">
-            <button class="btn btn-secondary btn-sm" onclick="showHistoryPage()">📅 历史</button>
-            <button class="btn btn-secondary btn-sm" onclick="showImportDialog()">📥 导入</button>
-            <button class="btn btn-primary btn-sm" onclick="showAddPlanDialog()">+ 新任务</button>
+          <div class="progress-actions">
+            <button class="progress-action-btn" onclick="showHistoryPage()">📅 历史</button>
+            <button class="progress-action-btn" onclick="showImportDialog()">📥 导入</button>
+            <button class="progress-action-btn primary" onclick="showAddPlanDialog()">+ 新任务</button>
           </div>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="width:${prog}%"></div></div>
+        <div class="progress-ring-container">
+          <div class="progress-ring">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="34" class="progress-ring-bg"/>
+              <circle cx="40" cy="40" r="34" class="progress-ring-fill"
+                stroke-dasharray="${circumference}"
+                stroke-dashoffset="${strokeDashoffset}"/>
+            </svg>
+            <div class="progress-ring-text">${prog}%</div>
+            <div class="progress-ring-label">完成率</div>
+          </div>
+          <div class="progress-stats">
+            <div class="progress-stat">
+              <div class="progress-stat-value">${done}</div>
+              <div class="progress-stat-label">已完成</div>
+            </div>
+            <div class="progress-stat">
+              <div class="progress-stat-value">${total - done}</div>
+              <div class="progress-stat-label">进行中</div>
+            </div>
+            <div class="progress-stat">
+              <div class="progress-stat-value">${total}</div>
+              <div class="progress-stat-label">总任务</div>
+            </div>
+          </div>
+        </div>
+        <div class="progress-footer">
+          <div class="progress-bar"><div class="progress-fill" style="width:${prog}%"></div></div>
+        </div>
       </div>
       ${plans.length === 0 ? `
-        <div class="card"><div class="empty-state"><div class="icon">📋</div><p>暂无计划，点击添加今日任务</p></div></div>
+        <div class="card" style="text-align:center;padding:40px 20px;">
+          <div style="font-size:48px;margin-bottom:12px;">📋</div>
+          <div style="color:var(--text-light);margin-bottom:20px;">暂无计划，点击上方按钮添加今日任务</div>
+          <button class="btn btn-primary" onclick="showAddPlanDialog()">+ 添加任务</button>
+        </div>
       ` : plans.map((p, i) => `
         <div class="task-item ${p.completed ? 'completed' : ''}">
           <div class="task-checkbox" onclick="togglePlan(${i})">
