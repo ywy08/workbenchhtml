@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#556B2F" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#3F5224" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#7FB77E" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#5A8A5A" media="(prefers-color-scheme: dark)">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="日常工作台">
@@ -19,19 +19,19 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     :root {
-      --primary: #556B2F;
-      --primary-dark: #3F5224;
-      --primary-light: #7A9B3D;
-      --primary-bg: #f5f7f0;
-      --primary-hover: #6B8B3A;
-      --accent: #8FBC6C;
+      --primary: #7FB77E;
+      --primary-dark: #5A8A5A;
+      --primary-light: #A8D5A2;
+      --primary-bg: #F0F5EE;
+      --primary-hover: #6B9E6A;
+      --accent: #C8E6C9;
       --text: #333;
       --text-light: #666;
       --text-muted: #999;
       --card-bg: #ffffff;
-      --border: #e0e5d8;
-      --shadow: 0 2px 12px rgba(85, 107, 47, 0.08);
-      --shadow-hover: 0 4px 20px rgba(85, 107, 47, 0.15);
+      --border: #E0E8DC;
+      --shadow: 0 2px 12px rgba(127, 183, 126, 0.1);
+      --shadow-hover: 0 4px 20px rgba(127, 183, 126, 0.18);
       --radius: 16px;
       --radius-sm: 8px;
     }
@@ -1215,37 +1215,29 @@
     const s = getStore(STORE_KEYS.settings) || {};
     const gist = getStore(STORE_KEYS.gist);
     document.getElementById('content').innerHTML = `
-      <div class="card"><div class="card-title mb-12">⚙️ 数据源配置</div>
-        <div class="form-group"><label>数据源JSON地址</label><input type="text" class="input" id="dataUrl" value="${escapeHtml(s.dataUrl || '')}" placeholder="https://raw.githubusercontent.com/.../daily-data.json"></div>
-        <p class="text-muted text-sm mb-12">用于每日自动抓取的热榜、资讯等数据。留空则使用内置默认数据。</p>
-        <button class="btn btn-primary w-full" onclick="saveGistUrl()">保存配置</button>
-      </div>
       <div class="card">
         <div class="card-title mb-12">🎨 主题设置</div>
         <div class="form-group"><label>主题色</label>
           <select class="input" id="themeColor" onchange="changeTheme(this.value)">
-            <option value="#556B2F" ${s.theme === '#556B2F' ? 'selected' : ''}>橄榄绿（默认）</option>
+            <option value="#7FB77E" ${s.theme === '#7FB77E' ? 'selected' : ''}>浅绿（默认）</option>
+            <option value="#556B2F" ${s.theme === '#556B2F' ? 'selected' : ''}>橄榄绿</option>
             <option value="#2d5a27" ${s.theme === '#2d5a27' ? 'selected' : ''}>深绿</option>
-            <option value="#8b6914" ${s.theme === '#8b6914' ? 'selected' : ''}>古铜棕</option>
             <option value="#4a6741" ${s.theme === '#4a6741' ? 'selected' : ''}>森林绿</option>
           </select>
         </div>
       </div>
       <div class="card">
-        <div class="card-title mb-12">📊 数据管理</div>
-        <div class="stat-row">
-          <div class="stat-card"><div class="stat-value">${Object.keys(localStorage).length}</div><div class="stat-label">存储项数</div></div>
-          <div class="stat-card"><div class="stat-value">${Math.round(performance.memory?.usedJSHeapSize / 1024 / 1024) || '~'}MB</div><div class="stat-label">内存占用</div></div>
-        </div>
-        ${gist ? `<p class="text-sm text-muted mb-8">上次数据更新：${escapeHtml(new Date(gist.updatedAt).toLocaleString('zh-CN'))}</p>` : '<p class="text-sm text-muted mb-8">暂无远程数据</p>'}
-        <button class="btn btn-secondary w-full mt-8" onclick="exportData()">📤 导出所有数据</button>
-        <button class="btn btn-secondary w-full mt-8" onclick="importData()">📥 导入数据</button>
-        <button class="btn btn-danger w-full mt-8" onclick="clearAllData()">🗑️ 清空所有数据</button>
+        <div class="card-title mb-12">⚙️ 数据配置</div>
+        <div class="form-group"><label>自定义数据源地址（可选）</label><input type="text" class="input" id="dataUrl" value="${escapeHtml(s.dataUrl || '')}" placeholder="留空使用默认数据"></div>
+        <p class="text-muted text-sm mb-12">配置后可从自定义地址获取每日数据更新。</p>
+        <button class="btn btn-primary w-full" onclick="saveGistUrl()">保存配置</button>
       </div>
       <div class="card">
-        <div class="card-title mb-12">📱 PWA 信息</div>
-        <p class="text-sm text-muted mb-8">将本页添加到手机主屏幕，即可像原生App一样使用。</p>
-        <button class="btn btn-primary w-full" onclick="installPwa()">📲 安装为应用</button>
+        <div class="card-title mb-12">📊 数据管理</div>
+        ${gist ? `<p class="text-sm text-muted mb-8">上次数据更新：${escapeHtml(new Date(gist.updatedAt).toLocaleString('zh-CN'))}</p>` : '<p class="text-sm text-muted mb-8">暂无远程数据</p>'}
+        <button class="btn btn-secondary w-full mt-8" onclick="exportData()">📤 导出数据备份</button>
+        <button class="btn btn-secondary w-full mt-8" onclick="importData()">📥 导入数据</button>
+        <button class="btn btn-danger w-full mt-8" onclick="clearAllData()">🗑️ 清空所有数据</button>
       </div>
     `;
   }
