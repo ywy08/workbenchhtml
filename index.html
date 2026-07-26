@@ -1086,17 +1086,40 @@
     }, 1200);
   }
   function renderVideoItem(v, type, i) {
-    const platformBtn = v.platform === 'douyin'
-      ? `<button class="app-link app-douyin" onclick="openDouyin('${escapeHtml(v.title)}')" style="padding:6px 10px;font-size:12px;">抖音</button>`
-      : `<button class="app-link app-bilibili" onclick="openBilibili('${escapeHtml(v.title)}')" style="padding:6px 10px;font-size:12px;">B站</button>`;
+    const hasValidUrl = v.url && v.url !== 'https://www.douyin.com' && v.url !== 'https://www.bilibili.com' && v.url.length > 20;
+    
+    let platformBtn;
+    if (hasValidUrl) {
+      platformBtn = v.platform === 'douyin'
+        ? `<a href="${v.url}" target="_blank" rel="noopener" class="app-link app-douyin" style="padding:6px 10px;font-size:12px;text-decoration:none;">抖音</a>`
+        : `<a href="${v.url}" target="_blank" rel="noopener" class="app-link app-bilibili" style="padding:6px 10px;font-size:12px;text-decoration:none;">B站</a>`;
+    } else {
+      platformBtn = v.platform === 'douyin'
+        ? `<button class="app-link app-douyin" onclick="openDouyin('${escapeHtml(v.title)}')" style="padding:6px 10px;font-size:12px;">抖音</button>`
+        : `<button class="app-link app-bilibili" onclick="openBilibili('${escapeHtml(v.title)}')" style="padding:6px 10px;font-size:12px;">B站</button>`;
+    }
+    
+    const deleteBtn = type === 'customVideos' 
+      ? `<button class="btn btn-danger btn-sm" onclick="deleteCustomVideo(${i})" style="padding:6px 8px;font-size:12px;">删除</button>`
+      : '';
+    
     return `<div class="video-item">
       <div class="video-thumb">${v.platform === 'douyin' ? '🎵' : '📺'}</div>
       <div class="video-info"><div class="video-title">${escapeHtml(v.title)}</div><div class="video-meta">${v.duration || ''}</div></div>
       <div class="video-actions">
         ${platformBtn}
-        <a href="${v.url}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="padding:6px 10px;font-size:12px;">网页</a>
+        ${hasValidUrl ? '' : `<a href="${v.url}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="padding:6px 10px;font-size:12px;">网页</a>`}
+        ${deleteBtn}
       </div>
     </div>`;
+  }
+  function deleteCustomVideo(index) {
+    if (!confirm('确定要删除这个视频吗？')) return;
+    const data = getExerciseData();
+    data.customVideos.splice(index, 1);
+    saveExerciseData(data);
+    renderExercisePage();
+    showToast('已删除', 'success');
   }
   function switchExerciseTab(tab) {
     document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
