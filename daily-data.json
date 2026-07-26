@@ -1,88 +1,279 @@
 {
   "date": "2026-07-26",
-  "updatedAt": "2026-07-26T08:00:00.000Z",
-  "inspirations": [
-    {"title": "职场新人避坑指南", "tag": "职场", "desc": "新人入职第一月真实经历避坑清单"},
-    {"title": "30分钟快手晚餐", "tag": "美食", "desc": "上班族必备快手菜谱摆盘精致"},
-    {"title": "极简主义穿搭", "tag": "时尚", "desc": "胶囊衣柜搭配一件多穿"},
-    {"title": "周末城市漫步", "tag": "生活", "desc": "小众打卡地治愈系vlog"},
-    {"title": "猫咪日常大赏", "tag": "萌宠", "desc": "喵主子一天搞笑瞬间合集"},
-    {"title": "健身小白入门", "tag": "运动", "desc": "零基础健身第一周真实反馈"},
-    {"title": "读书笔记分享", "tag": "知识", "desc": "本月最爱书单金句摘录"},
-    {"title": "改造出租屋", "tag": "家居", "desc": "500元预算ins风角落"},
-    {"title": "旅行vlog", "tag": "旅行", "desc": "小众目的地避开人潮"},
-    {"title": "手账排版教程", "tag": "手作", "desc": "新手友好手账布局灵感"}
-  ],
+  "updatedAt": "2026-07-26T08:01:47.717Z",
+  "inspirations": {
+    "date": "2026-07-26",
+    "items": [
+      {
+        "title": "绿植养护",
+        "tag": "家居",
+        "desc": "新手必养的10种室内植物"
+      },
+      {
+        "title": "居家健身",
+        "tag": "运动",
+        "desc": "无需器械全身燃脂21天效果记录"
+      },
+      {
+        "title": "周末城市漫步",
+        "tag": "生活",
+        "desc": "小众打卡地治愈系vlog"
+      },
+      {
+        "title": "极简主义穿搭",
+        "tag": "时尚",
+        "desc": "胶囊衣柜搭配一件多穿"
+      },
+      {
+        "title": "30分钟快手晚餐",
+        "tag": "美食",
+        "desc": "上班族必备快手菜谱摆盘精致"
+      },
+      {
+        "title": "读书笔记分享",
+        "tag": "知识",
+        "desc": "本月最爱书单金句摘录"
+      },
+      {
+        "title": "猫咪日常大赏",
+        "tag": "萌宠",
+        "desc": "喵主子一天搞笑瞬间合集"
+      },
+      {
+        "title": "手工皮具",
+        "tag": "手作",
+        "desc": "从零制作一个钱包"
+      },
+      {
+        "title": "AI工具体验",
+        "tag": "科技",
+        "desc": "最新AI工具真实使用感受"
+      },
+      {
+        "title": "职场穿搭",
+        "tag": "职场",
+        "desc": "办公室穿搭专业时尚"
+      }
+    ]
+  },
   "videos": {
     "date": "2026-07-26",
     "items": [
       {
-        "hotspot": "AI工具新突破",
-        "original": "最新AI模型发布引发热议",
-        "ideas": ["AI vs 人工同一任务对比挑战", "AI创意实验生成艺术作品", "AI科普系列通俗易懂"]
-      },
-      {
-        "hotspot": "网红美食探店翻车",
-        "original": "某网红餐厅实际与视频不符",
-        "ideas": ["实测验证真实记录体验", "科普网红营销套路", "反套路讽刺剧本创作"]
+        "hotspot": "国货品牌崛起",
+        "original": "某国货品牌海外走红",
+        "ideas": [
+          "中外品牌深度测评",
+          "国货品牌故事挖掘",
+          "支持国货挑战发起"
+        ]
       },
       {
         "hotspot": "热门影视剧结局",
         "original": "某大结局引发观众讨论",
-        "ideas": ["替代结局剪辑创作", "深度解析角色动机", "街头采访观众看法"]
+        "ideas": [
+          "替代结局剪辑创作",
+          "深度解析角色动机",
+          "街头采访观众看法"
+        ]
+      },
+      {
+        "hotspot": "短视频电商新玩法",
+        "original": "直播带货新模式兴起",
+        "ideas": [
+          "无人直播运营技巧",
+          "短视频引流电商方法",
+          "私域变现路径探索"
+        ]
       },
       {
         "hotspot": "社会新闻热点",
         "original": "某社会事件引发广泛关注",
-        "ideas": ["事件时间线梳理", "专家观点分析解读", "科普延伸知识讲解"]
+        "ideas": [
+          "事件时间线梳理",
+          "专家观点分析解读",
+          "科普延伸知识讲解"
+        ]
       },
       {
-        "hotspot": "国货品牌崛起",
-        "original": "某国货品牌海外走红",
-        "ideas": ["中外品牌深度测评", "国货品牌故事挖掘", "支持国货挑战发起"]
+        "hotspot": "元宇宙概念升温",
+        "original": "VR/AR技术新突破",
+        "ideas": [
+          "VR体验真实测评",
+          "元宇宙科普通俗易懂",
+          "虚拟社交真实体验"
+        ]
       }
     ]
   },
   "frontend": {
     "date": "2026-07-26",
     "news": [
-      {"title": "React 19 正式发布：全新编译器和Hooks优化", "source": "掘金前端", "url": "https://juejin.cn/frontend"},
-      {"title": "TypeScript 5.6 新特性解析", "source": "InfoQ", "url": "https://infoq.cn/topic/front-end"},
-      {"title": "Chrome DevTools 性能分析功能增强", "source": "Chrome DevTools", "url": "https://developer.chrome.com/docs/devtools/"},
-      {"title": "前端性能优化：View Transitions API实践", "source": "掘金前端", "url": "https://juejin.cn/frontend"},
-      {"title": "Vue 3.5 正式版发布", "source": "GitHub Trending", "url": "https://github.com/trending/javascript"},
-      {"title": "MDN新增WebGPU API文档", "source": "MDN", "url": "https://developer.mozilla.org/"}
+      {
+        "title": "A shell colon does nothing. Use it anyway",
+        "source": "Hacker News",
+        "url": "https://refp.se/articles/your-shell-and-the-magic-colon"
+      },
+      {
+        "title": "An ESP32 based plane radar for my desk",
+        "source": "Hacker News",
+        "url": "https://blog.ktz.me/esp32-plane-radar/"
+      },
+      {
+        "title": "The new rules of context engineering for Claude 5 generation models",
+        "source": "Hacker News",
+        "url": "https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models"
+      },
+      {
+        "title": "Show HN: I mapped every US golf course",
+        "source": "Hacker News",
+        "url": "https://golfcoursebrowser.com/"
+      },
+      {
+        "title": "Inflect-Micro-v2: complete voice in 9.36M parameters",
+        "source": "Hacker News",
+        "url": "https://huggingface.co/owensong/Inflect-Micro-v2"
+      },
+      {
+        "title": "Stinkpot: SQLite-backed shell history",
+        "source": "Hacker News",
+        "url": "https://tangled.org/oppi.li/stinkpot"
+      },
+      {
+        "title": "🔥 Luker - LLM Frontend for Power Users. Better SillyTavern.",
+        "source": "GitHub Trending",
+        "url": "https://github.com/funnycups/Luker"
+      },
+      {
+        "title": "🔥 neo - Neo.mjs is a self-evolving software organism: a professional end-to-end AI engineering team whose cross-model swarm inhabits live apps via Neural Link, Active Hybrid GraphRAG, DreamService, and self-healing loops.",
+        "source": "GitHub Trending",
+        "url": "https://github.com/neomjs/neo"
+      }
     ],
     "learningPlan": [
-      "📖 精读 React 19 官方文档，重点理解新编译器工作原理",
-      "🛠️ 动手实践 View Transitions API，制作页面过渡效果",
-      "📝 整理 TypeScript 5.6 新特性笔记",
-      "🔍 调研 GitHub Trending 项目，了解热门新技术栈"
+      "📖 精读今天推荐的技术文章",
+      "🛠️ 实践一个新API或框架",
+      "📝 整理今日学习笔记",
+      "🔍 调研一个感兴趣的技术方向"
     ]
   },
   "exercise": {
     "date": "2026-07-26",
     "gufa": [
-      {"title": "八段锦完整版", "duration": "30分钟", "platform": "douyin", "url": "https://www.douyin.com"},
-      {"title": "太极拳二十四式", "duration": "25分钟", "platform": "bilibili", "url": "https://www.bilibili.com"},
-      {"title": "五禽戏养生操", "duration": "20分钟", "platform": "douyin", "url": "https://www.douyin.com"}
+      {
+        "title": "八段锦完整版",
+        "duration": "30分钟",
+        "platform": "douyin",
+        "url": "https://www.douyin.com"
+      },
+      {
+        "title": "太极拳二十四式",
+        "duration": "25分钟",
+        "platform": "bilibili",
+        "url": "https://www.bilibili.com"
+      },
+      {
+        "title": "五禽戏养生操",
+        "duration": "20分钟",
+        "platform": "douyin",
+        "url": "https://www.douyin.com"
+      },
+      {
+        "title": "六字诀养气功",
+        "duration": "20分钟",
+        "platform": "bilibili",
+        "url": "https://www.bilibili.com"
+      },
+      {
+        "title": "八段锦分解教学",
+        "duration": "40分钟",
+        "platform": "douyin",
+        "url": "https://www.douyin.com"
+      }
     ],
     "eye": [
-      {"title": "眼球运动训练", "duration": "5分钟", "platform": "douyin", "url": "https://www.douyin.com"},
-      {"title": "眼部按摩放松", "duration": "10分钟", "platform": "bilibili", "url": "https://www.bilibili.com"},
-      {"title": "视力恢复训练", "duration": "15分钟", "platform": "douyin", "url": "https://www.douyin.com"}
+      {
+        "title": "眼球运动训练",
+        "duration": "5分钟",
+        "platform": "douyin",
+        "url": "https://www.douyin.com"
+      },
+      {
+        "title": "眼部按摩放松",
+        "duration": "10分钟",
+        "platform": "bilibili",
+        "url": "https://www.bilibili.com"
+      },
+      {
+        "title": "视力恢复训练",
+        "duration": "15分钟",
+        "platform": "douyin",
+        "url": "https://www.douyin.com"
+      },
+      {
+        "title": "眼保健操标准版",
+        "duration": "5分钟",
+        "platform": "bilibili",
+        "url": "https://www.bilibili.com"
+      },
+      {
+        "title": "缓解视疲劳眼部瑜伽",
+        "duration": "10分钟",
+        "platform": "douyin",
+        "url": "https://www.douyin.com"
+      }
     ]
   },
   "hotSearch": [
-    {"title": "AI大模型最新突破", "hot": 9800000, "url": "https://www.toutiao.com"},
-    {"title": "新能源汽车销量创新高", "hot": 8500000, "url": "https://www.toutiao.com"},
-    {"title": "年轻人为什么不爱发朋友圈了", "hot": 7200000, "url": "https://www.toutiao.com"},
-    {"title": "多地出台楼市新政", "hot": 6800000, "url": "https://www.toutiao.com"},
-    {"title": "高温天气如何养生", "hot": 5600000, "url": "https://www.toutiao.com"},
-    {"title": "国产电影票房突破", "hot": 5200000, "url": "https://www.toutiao.com"},
-    {"title": "科技公司最新发布", "hot": 4800000, "url": "https://www.toutiao.com"},
-    {"title": "奥运赛事精彩回顾", "hot": 4500000, "url": "https://www.toutiao.com"},
-    {"title": "教育改革新动向", "hot": 3900000, "url": "https://www.toutiao.com"},
-    {"title": "生活小妙招大盘点", "hot": 3200000, "url": "https://www.toutiao.com"}
+    {
+      "title": "女孩连人带床被台风卷到户外绿化带",
+      "hot": "17726995",
+      "url": "https://www.toutiao.com/trending/7666507413402550278/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%221%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227666507413402550278%22%2C%22hot_board_impr_id%22%3A%222026072616014758D059D6559C999CF022%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%A5%B3%E5%AD%A9%E8%BF%9E%E4%BA%BA%E5%B8%A6%E5%BA%8A%E8%A2%AB%E5%8F%B0%E9%A3%8E%E5%8D%B7%E5%88%B0%E6%88%B7%E5%A4%96%E7%BB%BF%E5%8C%96%E5%B8%A6%22%7D&rank=&style_id=40132&topic_id=7666507413402550278"
+    },
+    {
+      "title": "院方通报女童接受基因编辑试验后死亡",
+      "hot": "16040048",
+      "url": "https://www.toutiao.com/trending/7666699971936947763/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%225%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227666699971936947763%22%2C%22hot_board_impr_id%22%3A%222026072616014758D059D6559C999CF022%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E9%99%A2%E6%96%B9%E9%80%9A%E6%8A%A5%E5%A5%B3%E7%AB%A5%E6%8E%A5%E5%8F%97%E5%9F%BA%E5%9B%A0%E7%BC%96%E8%BE%91%E8%AF%95%E9%AA%8C%E5%90%8E%E6%AD%BB%E4%BA%A1%22%7D&rank=&style_id=40132&topic_id=7666699971936947763"
+    },
+    {
+      "title": "多家外媒：中国经济展现出较强韧性",
+      "hot": "14513636",
+      "url": "https://www.toutiao.com/article/7666638471267631631"
+    },
+    {
+      "title": "中国粉丝被泰国GMM工作人员暴力对待",
+      "hot": "13132481",
+      "url": "https://www.toutiao.com/trending/7666573995709530154/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%228%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227666573995709530154%22%2C%22hot_board_impr_id%22%3A%222026072616014758D059D6559C999CF022%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E4%B8%AD%E5%9B%BD%E7%B2%89%E4%B8%9D%E8%A2%AB%E6%B3%B0%E5%9B%BDGMM%E5%B7%A5%E4%BD%9C%E4%BA%BA%E5%91%98%E6%9A%B4%E5%8A%9B%E5%AF%B9%E5%BE%85%22%7D&rank=&style_id=40132&topic_id=7666573995709530154"
+    },
+    {
+      "title": "瓷砖贴到一半业主才发现装错房",
+      "hot": "11882760",
+      "url": "https://www.toutiao.com/trending/7666707800051400723/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%226%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227666707800051400723%22%2C%22hot_board_impr_id%22%3A%222026072616014758D059D6559C999CF022%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%93%B7%E7%A0%96%E8%B4%B4%E5%88%B0%E4%B8%80%E5%8D%8A%E4%B8%9A%E4%B8%BB%E6%89%8D%E5%8F%91%E7%8E%B0%E8%A3%85%E9%94%99%E6%88%BF%22%7D&rank=&style_id=40132&topic_id=7666707800051400723"
+    },
+    {
+      "title": "直击台风“红霞”登陆后排险现场",
+      "hot": "10751966",
+      "url": "https://webcast-open.douyin.com/open/media_live/280801178870"
+    },
+    {
+      "title": "小伙徒步10年走遍180城超10万公里",
+      "hot": "9728781",
+      "url": "https://www.toutiao.com/trending/7666248406537355270/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%228%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227666248406537355270%22%2C%22hot_board_impr_id%22%3A%222026072616014758D059D6559C999CF022%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%B0%8F%E4%BC%99%E5%BE%92%E6%AD%A510%E5%B9%B4%E8%B5%B0%E9%81%8D180%E5%9F%8E%E8%B6%8510%E4%B8%87%E5%85%AC%E9%87%8C%22%7D&rank=&style_id=40132&topic_id=7666248406537355270"
+    },
+    {
+      "title": "2米高乘警不踮脚便可俯视列车行李架",
+      "hot": "8802965",
+      "url": "https://www.toutiao.com/trending/7666323533597032494/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%222%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227666323533597032494%22%2C%22hot_board_impr_id%22%3A%222026072616014758D059D6559C999CF022%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%222%E7%B1%B3%E9%AB%98%E4%B9%98%E8%AD%A6%E4%B8%8D%E8%B8%AE%E8%84%9A%E4%BE%BF%E5%8F%AF%E4%BF%AF%E8%A7%86%E5%88%97%E8%BD%A6%E8%A1%8C%E6%9D%8E%E6%9E%B6%22%7D&rank=&style_id=40132&topic_id=7666323533597032494"
+    },
+    {
+      "title": "台风天2名工人被困高空 官方介入调查",
+      "hot": "7965252",
+      "url": "https://www.toutiao.com/trending/7666684253400481801/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%226%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227666684253400481801%22%2C%22hot_board_impr_id%22%3A%222026072616014758D059D6559C999CF022%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%8F%B0%E9%A3%8E%E5%A4%A92%E5%90%8D%E5%B7%A5%E4%BA%BA%E8%A2%AB%E5%9B%B0%E9%AB%98%E7%A9%BA+%E5%AE%98%E6%96%B9%E4%BB%8B%E5%85%A5%E8%B0%83%E6%9F%A5%22%7D&rank=&style_id=40132&topic_id=7666684253400481801"
+    },
+    {
+      "title": "乌对一艘伊朗商船发动袭击致1死1伤",
+      "hot": "7207258",
+      "url": "https://www.toutiao.com/trending/7665693038513127478/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%226%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227665693038513127478%22%2C%22hot_board_impr_id%22%3A%222026072616014758D059D6559C999CF022%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E4%B9%8C%E5%AF%B9%E4%B8%80%E8%89%98%E4%BC%8A%E6%9C%97%E5%95%86%E8%88%B9%E5%8F%91%E5%8A%A8%E8%A2%AD%E5%87%BB%E8%87%B41%E6%AD%BB1%E4%BC%A4%22%7D&rank=&style_id=40132&topic_id=7665693038513127478"
+    }
   ]
 }
