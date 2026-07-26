@@ -10,10 +10,10 @@
   <meta name="apple-mobile-web-app-title" content="日常工作台">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
-  <link rel="manifest" href="/workbenchhtml/manifest.webmanifest">
-  <link rel="icon" type="image/png" href="/workbenchhtml/icon-192.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/workbenchhtml/icon-192.png">
-  <link rel="apple-touch-icon" href="/workbenchhtml/icon-192.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
   <meta name="description" content="移动端日常工作台，每日计划、选题灵感、爆款二创、创作打卡一站式管理">
   <title>日常工作台</title>
   <style>
@@ -1710,8 +1710,7 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js').catch(() => {});
     }
-    window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; });
-    window.addEventListener('appinstalled', () => { deferredPrompt = null; });
+    window.addEventListener('appinstalled', () => {});
   }
   init();
   </script>

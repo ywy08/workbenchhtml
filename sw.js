@@ -1,12 +1,10 @@
-const CACHE_NAME = 'daily-workbench-v4';
-const BASE_PATH = '/workbenchhtml/';
+const CACHE_NAME = 'daily-workbench-v5';
 const OFFLINE_URLS = [
-  BASE_PATH,
-  BASE_PATH + 'index.html',
-  BASE_PATH + 'manifest.webmanifest',
-  BASE_PATH + 'icon-192.png',
-  BASE_PATH + 'icon-512.png',
-  BASE_PATH + 'icon-maskable-512.png'
+  './',
+  './index.html',
+  './manifest.webmanifest',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -33,8 +31,9 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   const requestUrl = new URL(event.request.url);
+  const sameOrigin = requestUrl.origin === self.location.origin;
   
-  if (requestUrl.pathname.startsWith(BASE_PATH)) {
+  if (sameOrigin) {
     if (requestUrl.pathname.match(/\.(png|svg|webmanifest|jpg|jpeg|gif)$/)) {
       event.respondWith(
         caches.match(event.request).then((response) => {
@@ -44,7 +43,7 @@ self.addEventListener('fetch', (event) => {
               cache.put(event.request, networkResponse.clone());
             });
             return networkResponse;
-          }).catch(() => caches.match(BASE_PATH + 'index.html'));
+          }).catch(() => caches.match('./index.html'));
         })
       );
       return;
@@ -68,8 +67,8 @@ self.addEventListener('fetch', (event) => {
           });
           return networkResponse;
         }).catch(() => {
-          if (requestUrl.pathname.endsWith('index.html') || requestUrl.pathname === BASE_PATH) {
-            return caches.match(BASE_PATH + 'index.html');
+          if (requestUrl.pathname.endsWith('index.html') || requestUrl.pathname === '/') {
+            return caches.match('./index.html');
           }
           return new Response('Offline', { status: 503, statusText: 'Offline' });
         });
