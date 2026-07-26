@@ -1,6 +1,6 @@
 {
   "name": "日常工作台",
-  "short_name": "工作台",
+  "short_name": "日常工作台",
   "description": "移动端日常工作台，每日计划、灵感、创作一站式管理",
   "start_url": "/workbenchhtml/index.html",
   "scope": "/workbenchhtml/",
