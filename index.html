@@ -1113,15 +1113,14 @@
     const hasValidUrl = v.url && v.url.length > 15 && !isDefaultUrl;
     
     const platformName = v.platform === 'douyin' ? '抖音' : 'B站';
+    const appName = v.platform === 'douyin' ? '抖音App' : 'B站App';
     const searchFunc = v.platform === 'douyin' ? `openDouyin('${escapeHtml(v.title)}')` : `openBilibili('${escapeHtml(v.title)}')`;
     
-    const openBtn = hasValidUrl
-      ? `<button class="app-link app-${v.platform === 'douyin' ? 'douyin' : 'bilibili'}" onclick="openVideoLink('${escapeHtml(v.url)}', '${v.platform}', '${escapeHtml(v.title)}')" style="padding:6px 10px;font-size:12px;">${platformName}</button>`
+    const mainBtn = hasValidUrl
+      ? `<button class="app-link app-${v.platform === 'douyin' ? 'douyin' : 'bilibili'}" onclick="copyAndOpenApp('${escapeHtml(v.url)}', '${appName}')" style="padding:6px 10px;font-size:12px;">${platformName}</button>`
       : `<button class="app-link app-${v.platform === 'douyin' ? 'douyin' : 'bilibili'}" onclick="${searchFunc}" style="padding:6px 10px;font-size:12px;">${platformName}</button>`;
     
-    const copyBtn = hasValidUrl
-      ? `<button class="btn btn-secondary btn-sm" onclick="copyVideoLink('${escapeHtml(v.url)}')" style="padding:6px 8px;font-size:12px;" title="复制链接">📋</button>`
-      : '';
+    const searchBtn = `<button class="btn btn-secondary btn-sm" onclick="${searchFunc}" style="padding:6px 8px;font-size:12px;" title="搜索视频">🔍</button>`;
     
     const deleteBtn = type === 'customVideos' 
       ? `<button class="btn btn-danger btn-sm" onclick="deleteCustomVideo(${i})" style="padding:6px 8px;font-size:12px;">删除</button>`
@@ -1131,11 +1130,28 @@
       <div class="video-thumb">${v.platform === 'douyin' ? '🎵' : '📺'}</div>
       <div class="video-info"><div class="video-title">${escapeHtml(v.title)}</div><div class="video-meta">${v.duration || ''}</div></div>
       <div class="video-actions">
-        ${openBtn}
-        ${copyBtn}
+        ${mainBtn}
+        ${searchBtn}
         ${deleteBtn}
       </div>
     </div>`;
+  }
+  function copyAndOpenApp(url, appName) {
+    navigator.clipboard.writeText(url).then(() => {
+      showToast(`已复制链接，请打开${appName}粘贴打开`, 'success');
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(`已复制链接，请打开${appName}粘贴打开`, 'success');
+      } catch {
+        showToast('复制失败，请长按手动复制', 'error');
+      }
+      document.body.removeChild(ta);
+    });
   }
   function deleteCustomVideo(index) {
     if (!confirm('确定要删除这个视频吗？')) return;
