@@ -1221,6 +1221,7 @@
                   ${b.aiPlan ? '<span style="color:#7FB77E;font-weight:500;">✨ 已生成规划</span>' : ''}
                 </div>
               </div>
+              <button class="btn" onclick="deleteBook(${i})" style="background:none;border:none;color:#999;font-size:18px;padding:4px 8px;" title="删除">🗑️</button>
             </div>
             <div style="display:flex;gap:8px;margin-top:10px;">
               <button class="btn btn-primary btn-sm" onclick="markRead(${i})" style="flex:1;">打卡</button>
@@ -1251,6 +1252,23 @@
     const d = getReadingData();
     d.books.push({ title: t, author: a, dailyGoal: g, chapters: c, progress: 0, createdAt: new Date().toISOString(), lastRead: '' });
     setStore(STORE_KEYS.reading, d); closeModal(); renderReadingPage(); showToast('已添加', 'success');
+  }
+  function deleteBook(i) {
+    const d = getReadingData();
+    const title = d.books[i].title;
+    openModal(`<h3>删除书籍</h3>
+      <p class="mb-12">确定要删除《${escapeHtml(title)}》吗？相关的阅读笔记也会一并删除。</p>
+      <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">取消</button><button class="btn btn-primary" style="background:#d9534f;" onclick="confirmDeleteBook(${i})">确认删除</button></div>`);
+  }
+  function confirmDeleteBook(i) {
+    const d = getReadingData();
+    const title = d.books[i].title;
+    d.books.splice(i, 1);
+    d.notes = (d.notes || []).filter(n => n.bookTitle !== title);
+    setStore(STORE_KEYS.reading, d);
+    closeModal();
+    renderReadingPage();
+    showToast('已删除', 'success');
   }
   function markRead(i) {
     const d = getReadingData();
@@ -1283,21 +1301,15 @@
       const title = b.title;
       const author = b.author || '未知';
       const goal = b.dailyGoal || '30分钟';
+      const userChapters = b.chapters || '';
       
-      const plan = {
-        title: title,
-        author: author,
-        dailyGoal: goal,
-        keyChapters: b.chapters || '序言、导论、核心章节、结论',
-        readPlan: {
-          intensive: `📖 重点精读（约40%内容）\n• 核心章节：理解主要论点和方法论\n• 关键概念：做笔记、画思维导图\n• 重要段落：划线标注、摘录金句\n• 预计用时：10-15天`,
-          skim: `📝 粗读章节（约40%内容）\n• 通读一遍：把握整体脉络\n• 跳过次要细节，关注框架结构\n• 做好段落小结\n• 预计用时：7-10天`,
-          scan: `👀 略读章节（约20%内容）\n• 快速浏览：了解大意即可\n• 关注标题、小标题、结论\n• 标记感兴趣的点，回头再看\n• 预计用时：3-5天`
-        },
-        tips: `💡 阅读建议\n• 每天固定时间阅读，形成习惯\n• 先粗读后精读，效率更高\n• 每读完一章做小结\n• 遇到好书，愿意做笔记的说明真正读懂了`
-      };
+      let plan;
+      if (userChapters && userChapters.includes('第')) {
+        plan = generateDetailPlanFromChapters(title, author, goal, userChapters);
+      } else {
+        plan = generateDetailPlanByType(title, author, goal);
+      }
       plans.push(plan);
-      
       b.chapters = plan.keyChapters;
       b.dailyGoal = goal;
       b.aiPlan = plan;
@@ -1306,19 +1318,157 @@
     
     let html = '<h3>📋 AI阅读规划详情</h3>';
     plans.forEach((p, i) => {
-      html += `
-      <div style="background:#F0F5EE;border-radius:12px;padding:16px;margin-bottom:16px;">
-        <div style="font-weight:600;font-size:16px;margin-bottom:8px;color:#3A5A3A;">📖 ${escapeHtml(p.title)}</div>
-        <div style="font-size:13px;color:#666;margin-bottom:12px;">作者：${escapeHtml(p.author)} · 每日目标：${escapeHtml(p.dailyGoal)}</div>
-        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;margin-bottom:12px;">${escapeHtml(p.readPlan.intensive)}</div>
-        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;margin-bottom:12px;">${escapeHtml(p.readPlan.skim)}</div>
-        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;margin-bottom:12px;">${escapeHtml(p.readPlan.scan)}</div>
-        <div style="background:rgba(127,183,126,0.1);border-radius:8px;padding:10px;font-size:12px;line-height:1.6;color:#3A5A3A;white-space:pre-wrap;">${escapeHtml(p.tips)}</div>
-      </div>`;
+      html += renderPlanHtml(p);
     });
     html += `<div class="modal-actions"><button class="btn btn-primary" onclick="closeModal(); renderReadingPage()">我知道了</button></div>`;
     
     openModal(html);
+  }
+  function generateDetailPlanFromChapters(title, author, goal, userChapters) {
+    const chapters = userChapters.split('\n').map(c => c.trim()).filter(Boolean);
+    const totalChapters = chapters.length;
+    const readIntensive = Math.ceil(totalChapters * 0.4);
+    const readSkim = Math.ceil(totalChapters * 0.35);
+    const readScan = totalChapters - readIntensive - readSkim;
+    
+    const intensiveChapters = chapters.slice(0, readIntensive);
+    const skimChapters = chapters.slice(readIntensive, readIntensive + readSkim);
+    const scanChapters = chapters.slice(readIntensive + readSkim);
+    
+    const plan = {
+      title: title,
+      author: author,
+      dailyGoal: goal,
+      keyChapters: userChapters,
+      chapters: chapters,
+      totalChapters: totalChapters,
+      readPlan: {
+        intensive: intensiveChapters.map((c, idx) => `  ${idx + 1}. ${c} - 精读，做笔记`).join('\n'),
+        skim: skimChapters.map((c, idx) => `  ${readIntensive + idx + 1}. ${c} - 粗读，把握脉络`).join('\n'),
+        scan: scanChapters.map((c, idx) => `  ${readIntensive + readSkim + idx + 1}. ${c} - 略读，了解大意`).join('\n')
+      },
+      timeline: generateTimeline(totalChapters, goal),
+      tips: `💡 精读方法：\n• 每章读完用自己的话复述核心内容\n• 划出关键句和重要概念\n• 遇到不懂的地方标记，回头复习\n\n💡 粗读方法：\n• 快速扫读，关注段落首句和尾句\n• 理解章节逻辑，不必深究细节\n• 有疑问的地方做记号，后续精读时再看\n\n💡 略读方法：\n• 浏览标题、小标题和结论\n• 关注图表、案例和总结部分\n• 重点扫一眼，了解章节主题`
+    };
+    return plan;
+  }
+  function generateDetailPlanByType(title, author, goal) {
+    const typeKeywords = {
+      tech: ['技术', '编程', '程序', '算法', '计算机', '软件', '开发', '代码', '工程'],
+      novel: ['小说', '故事', '传记', '历史', '散文', '文学'],
+      business: ['商业', '经济', '管理', '投资', '金融', '创业'],
+      selfhelp: ['成长', '自我', '心理', '励志', '习惯', '效率']
+    };
+    
+    let bookType = 'general';
+    const lowerTitle = title.toLowerCase();
+    for (const [type, keywords] of Object.entries(typeKeywords)) {
+      if (keywords.some(k => lowerTitle.includes(k))) {
+        bookType = type;
+        break;
+      }
+    }
+    
+    const templates = {
+      tech: {
+        totalChapters: '建议按15-20章规划',
+        intensive: '第1-4章：核心概念与基础\n第5-7章：关键技术深入\n第12-14章：实战案例分析\n\n📖 精读要求：\n• 动手实践书中的代码示例\n• 理解每个技术点的原理\n• 对比不同方案的优劣',
+        skim: '第8-10章：进阶特性与扩展\n第15-17章：部署与优化\n\n📝 粗读要求：\n• 了解有哪些功能和特性\n• 知道适用场景和限制\n• 记录需要时再深入的内容',
+        scan: '第11章：生态与工具\n第18-20章：未来展望\n\n👀 略读要求：\n• 浏览了解即可\n• 需要用到时再查阅\n• 关注结论和建议部分'
+      },
+      novel: {
+        totalChapters: '建议按全书章节数量规划',
+        intensive: '开篇章节（1-3章）：了解背景、人物、世界观\n高潮章节：重点情节、核心冲突\n结尾章节：结局、主题升华\n\n📖 精读要求：\n• 关注人物性格和心理变化\n• 品味语言风格和写作技巧\n• 做好人物关系图和情节线',
+        skim: '过渡章节：次要情节、支线故事\n\n📝 粗读要求：\n• 把握故事发展脉络\n• 关注与主线的联系\n• 记住关键人物和事件',
+        scan: '背景描写、环境叙述\n\n👀 略读要求：\n• 快速浏览了解即可\n• 遇到精彩段落可回头细看'
+      },
+      business: {
+        totalChapters: '建议按12-15章规划',
+        intensive: '核心观点章节（1-3章）：理解全书主旨\n方法论章节：掌握具体工具和模型\n案例分析章节：学习实战应用\n\n📖 精读要求：\n• 重点理解核心概念\n• 记录可应用的方法\n• 结合自身情况思考',
+        skim: '理论背景章节：了解学术支撑\n对比分析章节：不同观点和流派\n\n📝 粗读要求：\n• 理解主要论点\n• 不必深究数据和公式\n• 关注结论和启示',
+        scan: '案例附录、参考文献\n\n👀 略读要求：\n• 需要时再查阅\n• 重点看经典案例'
+      },
+      selfhelp: {
+        totalChapters: '建议按10-12章规划',
+        intensive: '第1-2章：问题诊断与核心理论\n第3-5章：具体方法与实践步骤\n最后1-2章：长期养成与心态建设\n\n📖 精读要求：\n• 认真做练习和反思\n• 结合自己的生活实践\n• 写读书笔记总结感悟',
+        skim: '第6-8章：案例分析与常见问题\n\n📝 粗读要求：\n• 了解他人的经验\n• 找到自己的共鸣点\n• 记录可借鉴的做法',
+        scan: '附录、推荐书单\n\n👀 略读要求：\n• 快速浏览\n• 需要时再查阅'
+      },
+      general: {
+        totalChapters: '建议按10-15章规划',
+        intensive: '第1-3章：开篇引入、核心观点\n中间关键章节：主题内容、重点论述\n结尾章节：总结回顾、启示展望\n\n📖 精读要求：\n• 理解作者的核心论点\n• 做好读书笔记\n• 标记重要观点和金句',
+        skim: '过渡章节：次要内容、补充说明\n\n📝 粗读要求：\n• 把握章节大意\n• 关注与核心观点的联系\n• 标记可能需要回顾的内容',
+        scan: '附录、序言、后记\n\n👀 略读要求：\n• 快速浏览即可\n• 序言和后记可细看'
+      }
+    };
+    
+    const tpl = templates[bookType];
+    
+    return {
+      title: title,
+      author: author,
+      dailyGoal: goal,
+      keyChapters: tpl.intensive.split('\n').filter(l => l.includes('第') || l.includes('章')).join('\n'),
+      chapters: [],
+      totalChapters: tpl.totalChapters,
+      readPlan: {
+        intensive: tpl.intensive,
+        skim: tpl.skim,
+        scan: tpl.scan
+      },
+      timeline: generateGenericTimeline(goal),
+      tips: getReadingTips(bookType)
+    };
+  }
+  function generateTimeline(totalChapters, goal) {
+    const daysPerChapter = goal.includes('章') ? 1 : 2;
+    const totalDays = Math.ceil(totalChapters * daysPerChapter);
+    const weeks = Math.ceil(totalDays / 7);
+    return `📅 阅读时间线建议：\n• 预计总用时：${totalDays} 天（约 ${weeks} 周）\n• 每天目标：${goal}\n• 建议节奏：前紧后松，开始集中精读\n\n第1周计划：\n• Day 1-3：精读前3章，做好笔记\n• Day 4-5：粗读4-7章\n• Day 6-7：略读其余，复习本周内容\n\n第2周起：\n• 每周精读3-4章\n• 同步粗读和略读其他章节\n• 周末回顾本周所学，整理笔记`;
+  }
+  function generateGenericTimeline(goal) {
+    return `📅 阅读时间线建议：\n• 每日目标：${goal}\n• 建议用时：2-3周读完\n• 阅读节奏：先慢后快\n\n第1周：\n• Day 1-2：通读开篇，建立整体框架\n• Day 3-5：精读核心章节\n• Day 6-7：复习+整理笔记\n\n第2-3周：\n• 持续按精读/粗读/略读分类推进\n• 每天结束花5分钟回顾\n• 周末做总结和思维导图`;
+  }
+  function getReadingTips(bookType) {
+    const tips = {
+      tech: '💡 技术书阅读建议：\n• 边读边实践，代码一定要跑\n• 遇到看不懂的先跳过，后面可能会解释\n• 建立知识地图，各知识点如何关联\n• 读完能讲清楚才算真的懂了',
+      novel: '💡 小说阅读建议：\n• 沉浸阅读，不要跳着看\n• 留意伏笔和细节\n• 做好人物关系图\n• 读完写读后感，哪怕只是几句话',
+      business: '💡 商业书阅读建议：\n• 关注框架和模型，不是具体案例\n• 用自己的话复述核心观点\n• 思考如何应用到实际工作中\n• 对比不同作者的观点差异',
+      selfhelp: '💡 自我成长书阅读建议：\n• 读一章实践一章\n• 做练习比读书更重要\n• 记录改变和感悟\n• 定期回顾，检查进度',
+      general: '💡 通用阅读建议：\n• 先读序言和目录，了解结构\n• 重点章节精读，其他粗读\n• 做好读书笔记\n• 用自己的话总结，检验是否真的理解'
+    };
+    return tips[bookType] || tips.general;
+  }
+  function renderPlanHtml(p) {
+    return `
+    <div style="background:#F0F5EE;border-radius:12px;padding:16px;margin-bottom:16px;">
+      <div style="font-weight:600;font-size:16px;margin-bottom:8px;color:#3A5A3A;">📖 ${escapeHtml(p.title)}</div>
+      <div style="font-size:13px;color:#666;margin-bottom:12px;">作者：${escapeHtml(p.author)} · 每日目标：${escapeHtml(p.dailyGoal)} · ${p.totalChapters || ''}</div>
+      
+      <div style="background:rgba(217,83,79,0.08);border-radius:8px;padding:12px;margin-bottom:10px;">
+        <div style="font-weight:600;font-size:14px;color:#d9534f;margin-bottom:8px;">📖 精读章节（深读细研）</div>
+        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;">${escapeHtml(p.readPlan.intensive)}</div>
+      </div>
+      
+      <div style="background:rgba(240,173,78,0.08);border-radius:8px;padding:12px;margin-bottom:10px;">
+        <div style="font-weight:600;font-size:14px;color:#b8860b;margin-bottom:8px;">📝 粗读章节（通读理解）</div>
+        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;">${escapeHtml(p.readPlan.skim)}</div>
+      </div>
+      
+      <div style="background:rgba(127,183,126,0.12);border-radius:8px;padding:12px;margin-bottom:10px;">
+        <div style="font-weight:600;font-size:14px;color:#5a8a5a;margin-bottom:8px;">👀 略读章节（快速浏览）</div>
+        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;">${escapeHtml(p.readPlan.scan)}</div>
+      </div>
+      
+      <div style="background:rgba(74,130,180,0.08);border-radius:8px;padding:12px;margin-bottom:10px;">
+        <div style="font-weight:600;font-size:14px;color:#4a82b4;margin-bottom:8px;">📅 阅读时间线</div>
+        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;">${escapeHtml(p.timeline)}</div>
+      </div>
+      
+      <div style="background:rgba(127,183,126,0.15);border-radius:8px;padding:10px;">
+        <div style="font-size:12px;line-height:1.6;color:#3A5A3A;white-space:pre-wrap;">${escapeHtml(p.tips)}</div>
+      </div>
+    </div>`;
   }
   function viewBookPlan(i) {
     const d = getReadingData();
@@ -1327,13 +1477,7 @@
     const p = b.aiPlan;
     const html = `
       <h3>📋 阅读规划：${escapeHtml(b.title)}</h3>
-      <div style="background:#F0F5EE;border-radius:12px;padding:16px;">
-        <div style="font-size:13px;color:#666;margin-bottom:12px;">作者：${escapeHtml(p.author)} · 每日目标：${escapeHtml(p.dailyGoal)}</div>
-        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;margin-bottom:12px;">${escapeHtml(p.readPlan.intensive)}</div>
-        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;margin-bottom:12px;">${escapeHtml(p.readPlan.skim)}</div>
-        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;margin-bottom:12px;">${escapeHtml(p.readPlan.scan)}</div>
-        <div style="background:rgba(127,183,126,0.1);border-radius:8px;padding:10px;font-size:12px;line-height:1.6;color:#3A5A3A;white-space:pre-wrap;">${escapeHtml(p.tips)}</div>
-      </div>
+      ${renderPlanHtml(p)}
       <div class="modal-actions"><button class="btn btn-primary" onclick="closeModal()">关闭</button></div>`;
     openModal(html);
   }
