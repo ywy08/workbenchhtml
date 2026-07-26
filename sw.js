@@ -1,10 +1,11 @@
-const CACHE_NAME = 'daily-workbench-v2';
+const CACHE_NAME = 'daily-workbench-v3';
 const OFFLINE_URLS = [
   './',
   './index.html',
   './manifest.webmanifest',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
+  './icon-maskable.svg'
 ];
 
 self.addEventListener('install', (event) => {
