@@ -658,91 +658,95 @@
     const plans = getTodayPlans();
     let addedCount = 0;
     
+    const defaultItems = {
+      exercise: { text: '💪 完成每日锻炼', source: '每日锻炼' },
+      reading: { text: '📖 完成每日阅读', source: '每日阅读' },
+      creative: { text: '✍️ 完成每日创作打卡', source: '创作打卡' },
+      frontend: { text: '💻 学习前端知识', source: '每日前端' }
+    };
+    
+    const items = [];
+    
     if (module === 'exercise') {
       const ex = getStore(STORE_KEYS.exercise);
       if (ex?.customPlans) {
-        ex.customPlans.forEach(p => {
-          plans.push({ text: `💪 锻炼：${p}`, completed: false, createdAt: new Date().toISOString(), source: '每日锻炼' });
-          addedCount++;
-        });
+        ex.customPlans.forEach(p => items.push({ text: `💪 锻炼：${p}`, source: '每日锻炼' }));
       }
       if (ex?.videos) {
-        ex.videos.slice(0, 3).forEach(v => {
-          plans.push({ text: `🎬 跟练：${v.title}`, completed: false, createdAt: new Date().toISOString(), source: '每日锻炼' });
-          addedCount++;
-        });
+        ex.videos.slice(0, 3).forEach(v => items.push({ text: `🎬 跟练：${v.title}`, source: '每日锻炼' }));
       }
     } else if (module === 'reading') {
       const rd = getStore(STORE_KEYS.reading);
       if (rd?.books) {
-        rd.books.forEach(b => {
-          plans.push({ text: `📖 阅读：${b.title}${b.dailyGoal ? ' - ' + b.dailyGoal : ''}`, completed: false, createdAt: new Date().toISOString(), source: '每日阅读' });
-          addedCount++;
-        });
+        rd.books.forEach(b => items.push({ text: `📖 阅读：${b.title}${b.dailyGoal ? ' - ' + b.dailyGoal : ''}`, source: '每日阅读' }));
       }
     } else if (module === 'creative') {
       const cr = getStore(STORE_KEYS.creative);
       if (cr?.records) {
-        cr.records.slice(-3).forEach(r => {
-          plans.push({ text: `✍️ 创作：${r.template}`, completed: false, createdAt: new Date().toISOString(), source: '创作打卡' });
-          addedCount++;
-        });
+        cr.records.slice(-3).forEach(r => items.push({ text: `✍️ 创作：${r.template}`, source: '创作打卡' }));
       }
     } else if (module === 'frontend') {
       const fe = getStore(STORE_KEYS.frontend);
       if (fe?.learningPlan) {
-        fe.learningPlan.forEach(p => {
-          plans.push({ text: `💻 前端：${p}`, completed: false, createdAt: new Date().toISOString(), source: '每日前端' });
-          addedCount++;
-        });
+        fe.learningPlan.forEach(p => items.push({ text: `💻 前端：${p}`, source: '每日前端' }));
       }
     }
+    
+    if (items.length === 0 && defaultItems[module]) {
+      items.push(defaultItems[module]);
+      showToast('该模块暂无具体内容，已添加默认计划', 'info');
+    }
+    
+    items.forEach(p => {
+      plans.push({ text: p.text, completed: false, createdAt: new Date().toISOString(), source: p.source });
+      addedCount++;
+    });
     
     if (addedCount > 0) {
       saveTodayPlans(plans);
       renderPlanPage();
       showToast(`已导入 ${addedCount} 项计划`, 'success');
-    } else {
-      showToast('该模块暂无内容可导入', 'error');
     }
   }
   function importAll() {
     const plans = getTodayPlans();
     let addedCount = 0;
     
+    const defaultItems = {
+      exercise: { text: '💪 完成每日锻炼', source: '每日锻炼' },
+      reading: { text: '📖 完成每日阅读', source: '每日阅读' },
+      creative: { text: '✍️ 完成每日创作打卡', source: '创作打卡' },
+      frontend: { text: '💻 学习前端知识', source: '每日前端' }
+    };
+    
     const modules = ['exercise', 'reading', 'creative', 'frontend'];
     modules.forEach(m => {
       const tempPlans = [];
-      const orig = getTodayPlans;
       
       if (m === 'exercise') {
         const ex = getStore(STORE_KEYS.exercise);
         if (ex?.customPlans) {
-          ex.customPlans.forEach(p => {
-            tempPlans.push({ text: `💪 锻炼：${p}`, source: '每日锻炼' });
-          });
+          ex.customPlans.forEach(p => tempPlans.push({ text: `💪 锻炼：${p}`, source: '每日锻炼' }));
         }
       } else if (m === 'reading') {
         const rd = getStore(STORE_KEYS.reading);
         if (rd?.books) {
-          rd.books.forEach(b => {
-            tempPlans.push({ text: `📖 阅读：${b.title}${b.dailyGoal ? ' - ' + b.dailyGoal : ''}`, source: '每日阅读' });
-          });
+          rd.books.forEach(b => tempPlans.push({ text: `📖 阅读：${b.title}${b.dailyGoal ? ' - ' + b.dailyGoal : ''}`, source: '每日阅读' }));
         }
       } else if (m === 'creative') {
         const cr = getStore(STORE_KEYS.creative);
         if (cr?.records) {
-          cr.records.slice(-2).forEach(r => {
-            tempPlans.push({ text: `✍️ 创作：${r.template}`, source: '创作打卡' });
-          });
+          cr.records.slice(-2).forEach(r => tempPlans.push({ text: `✍️ 创作：${r.template}`, source: '创作打卡' }));
         }
       } else if (m === 'frontend') {
         const fe = getStore(STORE_KEYS.frontend);
         if (fe?.learningPlan) {
-          fe.learningPlan.forEach(p => {
-            tempPlans.push({ text: `💻 前端：${p}`, source: '每日前端' });
-          });
+          fe.learningPlan.forEach(p => tempPlans.push({ text: `💻 前端：${p}`, source: '每日前端' }));
         }
+      }
+      
+      if (tempPlans.length === 0 && defaultItems[m]) {
+        tempPlans.push(defaultItems[m]);
       }
       
       tempPlans.forEach(p => {
@@ -755,8 +759,6 @@
       saveTodayPlans(plans);
       renderPlanPage();
       showToast(`✨ 已全部导入 ${addedCount} 项计划`, 'success');
-    } else {
-      showToast('暂无内容可导入', 'error');
     }
   }
   function showTemplateDialog() {
