@@ -1114,10 +1114,12 @@
     
     const platformName = v.platform === 'douyin' ? '抖音' : 'B站';
     const appName = v.platform === 'douyin' ? '抖音App' : 'B站App';
-    const searchFunc = v.platform === 'douyin' ? `openDouyin('${escapeHtml(v.title)}')` : `openBilibili('${escapeHtml(v.title)}')`;
+    const titleStr = escapeHtml(v.title).replace(/'/g, "\\'");
+    const searchFunc = v.platform === 'douyin' ? `openDouyin('${titleStr}')` : `openBilibili('${titleStr}')`;
+    const urlStr = v.url ? v.url.replace(/'/g, "\\'") : '';
     
     const mainBtn = hasValidUrl
-      ? `<button class="app-link app-${v.platform === 'douyin' ? 'douyin' : 'bilibili'}" onclick="copyAndOpenApp('${escapeHtml(v.url)}', '${appName}')" style="padding:6px 10px;font-size:12px;">${platformName}</button>`
+      ? `<button class="app-link app-${v.platform === 'douyin' ? 'douyin' : 'bilibili'}" onclick="copyAndOpenApp('${urlStr}', '${appName}')" style="padding:6px 10px;font-size:12px;">${platformName}</button>`
       : `<button class="app-link app-${v.platform === 'douyin' ? 'douyin' : 'bilibili'}" onclick="${searchFunc}" style="padding:6px 10px;font-size:12px;">${platformName}</button>`;
     
     const searchBtn = `<button class="btn btn-secondary btn-sm" onclick="${searchFunc}" style="padding:6px 8px;font-size:12px;" title="搜索视频">🔍</button>`;
@@ -1137,18 +1139,23 @@
     </div>`;
   }
   function copyAndOpenApp(url, appName) {
+    if (!url) { showToast('链接无效', 'error'); return; }
     navigator.clipboard.writeText(url).then(() => {
-      showToast(`已复制链接，请打开${appName}粘贴打开`, 'success');
+      showToast(`已复制${appName}链接，打开App粘贴即可`, 'success');
     }).catch(() => {
       const ta = document.createElement('textarea');
       ta.value = url;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'absolute';
+      ta.style.left = '-9999px';
       document.body.appendChild(ta);
       ta.select();
+      ta.setSelectionRange(0, url.length);
       try {
         document.execCommand('copy');
-        showToast(`已复制链接，请打开${appName}粘贴打开`, 'success');
+        showToast(`已复制${appName}链接，打开App粘贴即可`, 'success');
       } catch {
-        showToast('复制失败，请长按手动复制', 'error');
+        showToast('复制失败，请长按文本手动复制', 'error');
       }
       document.body.removeChild(ta);
     });
