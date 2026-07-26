@@ -1209,17 +1209,23 @@
       </div>
       <div class="card"><div class="card-header"><div class="card-title">📖 我的书架</div><button class="btn btn-secondary btn-sm" onclick="showAddBookDialog()">+ 加书</button></div>
         ${d.books.length === 0 ? `<div class="empty-state"><div class="icon">📚</div><p>还没有书籍，点击添加开始阅读</p></div>` : d.books.map((b, i) => `
-          <div class="reading-book">
-            <div class="book-cover">📖</div>
-            <div class="book-info">
-              <div class="book-title">${escapeHtml(b.title)}</div>
-              <div class="book-progress">
-                <span>📊 ${b.progress || 0}%</span>
-                <span>${b.dailyGoal || '未设置目标'}</span>
-                ${b.lastRead === todayKey() ? '<span class="tag tag-accent">今日已读</span>' : ''}
+          <div class="reading-book" style="display:block;padding:14px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="book-cover">📖</div>
+              <div class="book-info" style="flex:1;">
+                <div class="book-title">${escapeHtml(b.title)}</div>
+                <div class="book-progress" style="display:flex;gap:8px;flex-wrap:wrap;font-size:12px;color:#666;margin-top:4px;">
+                  <span>📊 ${b.progress || 0}%</span>
+                  <span>${b.dailyGoal || '未设置目标'}</span>
+                  ${b.lastRead === todayKey() ? '<span class="tag tag-accent">今日已读</span>' : ''}
+                  ${b.aiPlan ? '<span style="color:#7FB77E;font-weight:500;">✨ 已生成规划</span>' : ''}
+                </div>
               </div>
             </div>
-            <button class="btn btn-primary btn-sm" onclick="markRead(${i})">打卡</button>
+            <div style="display:flex;gap:8px;margin-top:10px;">
+              <button class="btn btn-primary btn-sm" onclick="markRead(${i})" style="flex:1;">打卡</button>
+              ${b.aiPlan ? `<button class="btn btn-secondary btn-sm" onclick="viewBookPlan(${i})">📋 规划</button>` : ''}
+            </div>
           </div>`).join('')}
       </div>
       ${d.notes.length > 0 ? `<div class="card"><div class="card-title mb-12">📝 最近笔记</div>${d.notes.slice(-5).reverse().map(n => `<div class="note-item"><div class="note-date">${escapeHtml(n.bookTitle)} · ${escapeHtml(n.date)}</div><div class="note-content">${escapeHtml(n.content)}</div></div>`).join('')}</div>` : ''}
@@ -1267,17 +1273,69 @@
     setStore(STORE_KEYS.reading, d); closeModal(); renderReadingPage(); showToast('笔记已保存', 'success');
   }
   async function generateReadingPlan() {
+    const d = getReadingData();
+    if (d.books.length === 0) { showToast('请先添加书籍', 'error'); return; }
     showToast('AI正在生成规划...', 'info');
     await new Promise(r => setTimeout(r, 1500));
-    const d = getReadingData();
+    
+    const plans = [];
     d.books.forEach(b => {
-      if (!b.chapters) {
-        b.chapters = '重点精读：核心章节\n泛读：其他章节';
-        b.dailyGoal = b.dailyGoal || '30分钟 / 1章';
-      }
+      const title = b.title;
+      const author = b.author || '未知';
+      const goal = b.dailyGoal || '30分钟';
+      
+      const plan = {
+        title: title,
+        author: author,
+        dailyGoal: goal,
+        keyChapters: b.chapters || '序言、导论、核心章节、结论',
+        readPlan: {
+          intensive: `📖 重点精读（约40%内容）\n• 核心章节：理解主要论点和方法论\n• 关键概念：做笔记、画思维导图\n• 重要段落：划线标注、摘录金句\n• 预计用时：10-15天`,
+          skim: `📝 粗读章节（约40%内容）\n• 通读一遍：把握整体脉络\n• 跳过次要细节，关注框架结构\n• 做好段落小结\n• 预计用时：7-10天`,
+          scan: `👀 略读章节（约20%内容）\n• 快速浏览：了解大意即可\n• 关注标题、小标题、结论\n• 标记感兴趣的点，回头再看\n• 预计用时：3-5天`
+        },
+        tips: `💡 阅读建议\n• 每天固定时间阅读，形成习惯\n• 先粗读后精读，效率更高\n• 每读完一章做小结\n• 遇到好书，愿意做笔记的说明真正读懂了`
+      };
+      plans.push(plan);
+      
+      b.chapters = plan.keyChapters;
+      b.dailyGoal = goal;
+      b.aiPlan = plan;
     });
     setStore(STORE_KEYS.reading, d);
-    renderReadingPage(); showToast('阅读规划已生成', 'success');
+    
+    let html = '<h3>📋 AI阅读规划详情</h3>';
+    plans.forEach((p, i) => {
+      html += `
+      <div style="background:#F0F5EE;border-radius:12px;padding:16px;margin-bottom:16px;">
+        <div style="font-weight:600;font-size:16px;margin-bottom:8px;color:#3A5A3A;">📖 ${escapeHtml(p.title)}</div>
+        <div style="font-size:13px;color:#666;margin-bottom:12px;">作者：${escapeHtml(p.author)} · 每日目标：${escapeHtml(p.dailyGoal)}</div>
+        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;margin-bottom:12px;">${escapeHtml(p.readPlan.intensive)}</div>
+        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;margin-bottom:12px;">${escapeHtml(p.readPlan.skim)}</div>
+        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;margin-bottom:12px;">${escapeHtml(p.readPlan.scan)}</div>
+        <div style="background:rgba(127,183,126,0.1);border-radius:8px;padding:10px;font-size:12px;line-height:1.6;color:#3A5A3A;white-space:pre-wrap;">${escapeHtml(p.tips)}</div>
+      </div>`;
+    });
+    html += `<div class="modal-actions"><button class="btn btn-primary" onclick="closeModal(); renderReadingPage()">我知道了</button></div>`;
+    
+    openModal(html);
+  }
+  function viewBookPlan(i) {
+    const d = getReadingData();
+    const b = d.books[i];
+    if (!b || !b.aiPlan) { showToast('暂无规划', 'error'); return; }
+    const p = b.aiPlan;
+    const html = `
+      <h3>📋 阅读规划：${escapeHtml(b.title)}</h3>
+      <div style="background:#F0F5EE;border-radius:12px;padding:16px;">
+        <div style="font-size:13px;color:#666;margin-bottom:12px;">作者：${escapeHtml(p.author)} · 每日目标：${escapeHtml(p.dailyGoal)}</div>
+        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;margin-bottom:12px;">${escapeHtml(p.readPlan.intensive)}</div>
+        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;margin-bottom:12px;">${escapeHtml(p.readPlan.skim)}</div>
+        <div style="font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap;margin-bottom:12px;">${escapeHtml(p.readPlan.scan)}</div>
+        <div style="background:rgba(127,183,126,0.1);border-radius:8px;padding:10px;font-size:12px;line-height:1.6;color:#3A5A3A;white-space:pre-wrap;">${escapeHtml(p.tips)}</div>
+      </div>
+      <div class="modal-actions"><button class="btn btn-primary" onclick="closeModal()">关闭</button></div>`;
+    openModal(html);
   }
 
   // === 设置 ===
