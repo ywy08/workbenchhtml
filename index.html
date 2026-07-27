@@ -352,7 +352,7 @@
     .ai-generate { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; border: none; padding: 14px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 16px; transition: transform 0.2s; }
     .ai-generate:hover { transform: translateY(-2px); }
     .ai-generate:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--text); color: white; padding: 12px 20px; border-radius: var(--radius-sm); font-size: 14px; z-index: 3000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+    .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--text); color: white; padding: 10px 18px; border-radius: var(--radius-sm); font-size: 13px; z-index: 3000; opacity: 0; transition: opacity 0.3s; pointer-events: none; max-width: 85vw; text-align: center; }
     .toast.show { opacity: 1; }
     .toast.success { background: var(--primary); }
     .toast.error { background: #e74c3c; }
@@ -605,7 +605,7 @@
       showToast('数据刷新成功！', 'success');
       const active = document.querySelector('.nav-item.active');
       if (active) renderPage(active.dataset.page);
-    } else { showToast('无法获取远程数据，请检查网络或在设置中配置数据地址', 'error'); }
+    } else { showToast('数据刷新失败，请检查网络', 'error'); }
   }
   function copyText(text) { navigator.clipboard.writeText(text).then(() => showToast('已复制到剪贴板', 'success')); }
 
@@ -1027,14 +1027,14 @@
         <div class="card-header"><div><div class="card-title">🔥 今日热榜</div><div class="text-sm text-muted mt-8">实时热点 · 共 ${hotList.length} 条</div></div><button class="btn btn-secondary btn-sm" onclick="refreshAllData()">🔄</button></div>
         <div class="hot-search-list">
           ${hotList.map((h, i) => `
-            <a class="hot-search-item" href="${h.url || 'https://www.toutiao.com'}" target="_blank" rel="noopener">
+            <div class="hot-search-item" onclick="openHotItem(${i})" style="cursor:pointer;">
               <span class="hot-rank ${i < 3 ? 'rank-top' : ''}">${i + 1}</span>
               <div class="hot-info">
                 <div class="hot-title">${escapeHtml(h.title)}</div>
                 <div class="hot-heat">🔥 ${formatHot(h.hot)}</div>
               </div>
               <span class="hot-arrow">›</span>
-            </a>`).join('')}
+            </div>`).join('')}
         </div>
       </div>
       <div class="card"><div class="card-header"><div><div class="card-title">🎬 爆款二创灵感</div><div class="text-sm text-muted mt-8">聚合今日热点输出二创方向</div></div><button class="btn btn-secondary btn-sm" onclick="generateVideoIdeas()">✨ 生成</button></div></div>
@@ -1062,6 +1062,15 @@
     ];
     setStore(STORE_KEYS.videoIdeas, { date: todayKey(), items: n });
     renderVideoPage(); showToast('已生成新二创方向', 'success');
+  }
+  function openHotItem(i) {
+    const list = getHotSearchData();
+    const h = list[i];
+    if (h && h.url) {
+      window.open(h.url, '_blank', 'noopener');
+    } else if (h) {
+      window.open('https://www.toutiao.com/search/?keyword=' + encodeURIComponent(h.title), '_blank', 'noopener');
+    }
   }
 
   // === 创作打卡 ===
@@ -1233,7 +1242,7 @@
     const customPlans = d.customPlans || [];
     document.getElementById('content').innerHTML = `
       <div class="card"><div class="card-header"><div><div class="card-title">💻 每日前端资讯</div><div class="text-sm text-muted mt-8">${d.news.length} 条资讯</div></div><button class="btn btn-secondary btn-sm" onclick="generateLearningPlan()">✨ AI生成</button></div></div>
-      <div class="card"><div class="card-title mb-12">📰 前沿资讯</div>${d.news.map(n => `<a class="news-item" href="${n.url}" target="_blank" rel="noopener"><div class="news-content"><div class="news-title">${escapeHtml(n.title)}</div><div class="news-source">📌 ${escapeHtml(n.source)}</div></div><span class="news-arrow">›</span></a>`).join('')}</div>
+      <div class="card"><div class="card-title mb-12">📰 前沿资讯</div>${d.news.map((n, i) => `<div class="news-item" onclick="openNewsUrl(${i})" style="cursor:pointer;"><div class="news-content"><div class="news-title">${escapeHtml(n.title)}</div><div class="news-source">📌 ${escapeHtml(n.source)}</div></div><span class="news-arrow">›</span></div>`).join('')}</div>
       <div class="card">
         <div class="flex-between mb-12">
           <div class="card-title">🎯 AI学习计划</div>
@@ -1308,6 +1317,13 @@
       const d = getFrontendData(); d.learningPlan = p; setStore(STORE_KEYS.frontend, d);
       renderFrontendPage(); showToast('已生成学习计划', 'success');
     }, 1500);
+  }
+  function openNewsUrl(i) {
+    const d = getFrontendData();
+    const n = d.news[i];
+    if (n && n.url) {
+      window.open(n.url, '_blank', 'noopener');
+    }
   }
   function addToPlan(text, source) {
     const plans = getTodayPlans();
@@ -1965,6 +1981,37 @@
       navigator.serviceWorker.register('./sw.js').catch(() => {});
     }
     window.addEventListener('appinstalled', () => {});
+    checkAndRefreshData();
+  }
+  function checkAndRefreshData() {
+    const today = todayKey();
+    const gist = getStore(STORE_KEYS.gist);
+    const fe = getStore(STORE_KEYS.frontend);
+    const insp = getStore(STORE_KEYS.inspirations);
+    const hot = getStore(STORE_KEYS.hotSearch);
+    
+    const needsRefresh = 
+      !gist || gist.date !== today ||
+      !fe || fe.date !== today ||
+      !insp || insp.date !== today ||
+      !hot || hot.date !== today;
+    
+    if (needsRefresh) {
+      setTimeout(() => {
+        fetchGistData().then(data => {
+          if (data) {
+            setStore(STORE_KEYS.gist, { data, updatedAt: new Date().toISOString() });
+            if (data.inspirations) setStore(STORE_KEYS.inspirations, data.inspirations);
+            if (data.frontend) setStore(STORE_KEYS.frontend, data.frontend);
+            if (data.videos) setStore(STORE_KEYS.videoIdeas, data.videos);
+            if (data.exercise) setStore(STORE_KEYS.exercise, data.exercise);
+            if (data.hotSearch) setStore(STORE_KEYS.hotSearch, { date: todayKey(), items: data.hotSearch });
+            const active = document.querySelector('.nav-item.active');
+            if (active) renderPage(active.dataset.page);
+          }
+        });
+      }, 1000);
+    }
   }
   init();
   </script>
