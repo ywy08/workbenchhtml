@@ -1,38 +1,28 @@
 {
-  "date": "2026-11-09",
-  "updatedAt": "2026-11-09T20:31:14.831Z",
+  "date": "2026-11-10",
+  "updatedAt": "2026-11-10T03:52:46.395Z",
   "inspirations": {
-    "date": "2026-11-09",
+    "date": "2026-11-10",
     "items": [
       {
-        "title": "职场新人避坑指南",
-        "tag": "职场",
-        "desc": "新人入职第一月真实经历避坑清单"
+        "title": "骑行日记",
+        "tag": "运动",
+        "desc": "城市骑行路线推荐"
       },
       {
-        "title": "AI工具体验",
-        "tag": "科技",
-        "desc": "最新AI工具真实使用感受"
+        "title": "下班后的副业收入",
+        "tag": "副业",
+        "desc": "普通人可做的5种副业真实收入"
       },
       {
-        "title": "手工皮具",
-        "tag": "手作",
-        "desc": "从零制作一个钱包"
+        "title": "读书笔记分享",
+        "tag": "知识",
+        "desc": "本月最爱书单金句摘录"
       },
       {
-        "title": "深夜食堂",
-        "tag": "美食",
-        "desc": "深夜治愈系美食合集"
-      },
-      {
-        "title": "城市citywalk",
-        "tag": "生活",
-        "desc": "老城区隐藏宝藏走一遍爱上"
-      },
-      {
-        "title": "手账排版教程",
-        "tag": "手作",
-        "desc": "新手友好手账布局灵感"
+        "title": "读书分享",
+        "tag": "知识",
+        "desc": "改变人生的3本书每本都值得"
       },
       {
         "title": "猫咪日常大赏",
@@ -40,32 +30,42 @@
         "desc": "喵主子一天搞笑瞬间合集"
       },
       {
-        "title": "绿植养护",
-        "tag": "家居",
-        "desc": "新手必养的10种室内植物"
-      },
-      {
-        "title": "30分钟快手晚餐",
+        "title": "深夜食堂",
         "tag": "美食",
-        "desc": "上班族必备快手菜谱摆盘精致"
+        "desc": "深夜治愈系美食合集"
       },
       {
-        "title": "极简主义穿搭",
-        "tag": "时尚",
-        "desc": "胶囊衣柜搭配一件多穿"
+        "title": "居家健身",
+        "tag": "运动",
+        "desc": "无需器械全身燃脂21天效果记录"
+      },
+      {
+        "title": "周末城市漫步",
+        "tag": "生活",
+        "desc": "小众打卡地治愈系vlog"
+      },
+      {
+        "title": "职场穿搭",
+        "tag": "职场",
+        "desc": "办公室穿搭专业时尚"
+      },
+      {
+        "title": "健身小白入门",
+        "tag": "运动",
+        "desc": "零基础健身第一周真实反馈"
       }
     ]
   },
   "videos": {
-    "date": "2026-11-09",
+    "date": "2026-11-10",
     "items": [
       {
-        "hotspot": "国货品牌崛起",
-        "original": "某国货品牌海外走红",
+        "hotspot": "环保生活方式",
+        "original": "低碳生活成为新趋势",
         "ideas": [
-          "中外品牌深度测评",
-          "国货品牌故事挖掘",
-          "支持国货挑战发起"
+          "24小时零废弃挑战",
+          "环保好物测评体验",
+          "传统消费vs极简生活"
         ]
       },
       {
@@ -78,6 +78,15 @@
         ]
       },
       {
+        "hotspot": "短视频电商新玩法",
+        "original": "直播带货新模式兴起",
+        "ideas": [
+          "无人直播运营技巧",
+          "短视频引流电商方法",
+          "私域变现路径探索"
+        ]
+      },
+      {
         "hotspot": "社会新闻热点",
         "original": "某社会事件引发广泛关注",
         "ideas": [
@@ -87,33 +96,19 @@
         ]
       },
       {
-        "hotspot": "环保生活方式",
-        "original": "低碳生活成为新趋势",
+        "hotspot": "热门影视剧结局",
+        "original": "某大结局引发观众讨论",
         "ideas": [
-          "24小时零废弃挑战",
-          "环保好物测评体验",
-          "传统消费vs极简生活"
-        ]
-      },
-      {
-        "hotspot": "远程办公常态化",
-        "original": "越来越多企业采用混合办公模式",
-        "ideas": [
-          "远程办公效率技巧分享",
-          "不同职业远程真实一天",
-          "远程设备选购指南"
+          "替代结局剪辑创作",
+          "深度解析角色动机",
+          "街头采访观众看法"
         ]
       }
     ]
   },
   "frontend": {
-    "date": "2026-11-09",
+    "date": "2026-11-10",
     "news": [
-      {
-        "title": "Payments Canada announces launch of Canada's Real-Time Rail (RTR) payment system",
-        "source": "Hacker News",
-        "url": "https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy"
-      },
       {
         "title": "Claude Fable 5.2 and Mythos 5.2",
         "source": "Hacker News",
@@ -125,19 +120,24 @@
         "url": "https://postalpro.usps.com/zcb"
       },
       {
-        "title": "CUI – Native UI components for C",
+        "title": "Payments Canada announces launch of Canada's Real-Time Rail (RTR) payment system",
         "source": "Hacker News",
-        "url": "https://yappologistic.github.io/CUI/"
+        "url": "https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy"
       },
       {
-        "title": "Our Smallest, Most Efficient Model: Muse Ember",
-        "source": "Hacker News",
-        "url": "https://research.meta.ai/blog/muse-ember"
-      },
-      {
-        "title": "E-means: 10x faster k-means at equal loss",
+        "title": "E-means: Outperforming k-means in one-tenth the epochs",
         "source": "Hacker News",
         "url": "https://e-means.github.io/"
+      },
+      {
+        "title": "Foldable Flight: The Best Paper Airplanes",
+        "source": "Hacker News",
+        "url": "https://www.foldableflight.com"
+      },
+      {
+        "title": "Horible public key tricks",
+        "source": "Hacker News",
+        "url": "https://maurycyz.com/projects/badcert/"
       },
       {
         "title": "🔥 marko - A declarative, HTML-based language that makes building web apps fun",
@@ -145,9 +145,9 @@
         "url": "https://github.com/marko-js/marko"
       },
       {
-        "title": "🔥 snapdom - High-performance engine for capturing, modifying, and converting DOM elements into any format.",
+        "title": "🔥 neo - Neo.mjs is a self-evolving software organism: a professional end-to-end AI engineering team whose cross-model swarm inhabits live apps via Neural Link, Active Hybrid GraphRAG, DreamService, and self-healing loops.",
         "source": "GitHub Trending",
-        "url": "https://github.com/zumerlab/snapdom"
+        "url": "https://github.com/neomjs/neo"
       }
     ],
     "learningPlan": [
@@ -158,7 +158,7 @@
     ]
   },
   "exercise": {
-    "date": "2026-11-09",
+    "date": "2026-11-10",
     "gufa": [
       {
         "title": "八段锦完整版",
@@ -226,54 +226,54 @@
   },
   "hotSearch": [
     {
-      "title": "老人立遗嘱将6亿遗产留给再婚妻子",
-      "hot": "104446260",
-      "url": "https://www.toutiao.com/trending/7706132006567968804/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%226%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706132006567968804%22%2C%22hot_board_impr_id%22%3A%2220261110043114D51A71B1337C757E3605%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E8%80%81%E4%BA%BA%E7%AB%8B%E9%81%97%E5%98%B1%E5%B0%866%E4%BA%BF%E9%81%97%E4%BA%A7%E7%95%99%E7%BB%99%E5%86%8D%E5%A9%9A%E5%A6%BB%E5%AD%90%22%7D&rank=&style_id=40132&topic_id=7706132006567968804"
+      "title": "华为推出全新小折叠电脑",
+      "hot": "83460894",
+      "url": "https://www.toutiao.com/trending/7706338693765710386/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2215%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706338693765710386%22%2C%22hot_board_impr_id%22%3A%2220261110115245243698AF0C5B530766AE%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%8D%8E%E4%B8%BA%E6%8E%A8%E5%87%BA%E5%85%A8%E6%96%B0%E5%B0%8F%E6%8A%98%E5%8F%A0%E7%94%B5%E8%84%91%22%7D&rank=&style_id=40132&topic_id=7706338693765710386"
     },
     {
-      "title": "英伟达巨额货物失踪哪些细节值得推敲",
-      "hot": "94506885",
-      "url": "https://www.toutiao.com/trending/7706117206945304100/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706117206945304100%22%2C%22hot_board_impr_id%22%3A%2220261110043114D51A71B1337C757E3605%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E8%8B%B1%E4%BC%9F%E8%BE%BE%E5%B7%A8%E9%A2%9D%E8%B4%A7%E7%89%A9%E5%A4%B1%E8%B8%AA%E5%93%AA%E4%BA%9B%E7%BB%86%E8%8A%82%E5%80%BC%E5%BE%97%E6%8E%A8%E6%95%B2%22%7D&rank=&style_id=40132&topic_id=7706117206945304100"
+      "title": "女子买7元早餐发现卡里近26万没了",
+      "hot": "75518540",
+      "url": "https://www.toutiao.com/trending/7706134341668078130/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2215%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706134341668078130%22%2C%22hot_board_impr_id%22%3A%2220261110115245243698AF0C5B530766AE%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%A5%B3%E5%AD%90%E4%B9%B07%E5%85%83%E6%97%A9%E9%A4%90%E5%8F%91%E7%8E%B0%E5%8D%A1%E9%87%8C%E8%BF%9126%E4%B8%87%E6%B2%A1%E4%BA%86%22%7D&rank=&style_id=40132&topic_id=7706134341668078130"
     },
     {
-      "title": "三大变化折射进博会开放新内涵",
-      "hot": "85513365",
-      "url": "https://www.toutiao.com/article/7706085493029454387"
+      "title": "共绘“健康中国”美好生活图景",
+      "hot": "68332001",
+      "url": "https://www.toutiao.com/article/7706163301859836435"
     },
     {
-      "title": "油价预计将大幅下调",
-      "hot": "77375693",
-      "url": "https://www.toutiao.com/trending/7705083710051222043/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%224%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227705083710051222043%22%2C%22hot_board_impr_id%22%3A%2220261110043114D51A71B1337C757E3605%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E6%B2%B9%E4%BB%B7%E9%A2%84%E8%AE%A1%E5%B0%86%E5%A4%A7%E5%B9%85%E4%B8%8B%E8%B0%83%22%7D&rank=&style_id=40132&topic_id=7705083710051222043"
+      "title": "宇树科技市值重回3000亿元",
+      "hot": "61829351",
+      "url": "https://www.toutiao.com/trending/7706375400275840548/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%225%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706375400275840548%22%2C%22hot_board_impr_id%22%3A%2220261110115245243698AF0C5B530766AE%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%AE%87%E6%A0%91%E7%A7%91%E6%8A%80%E5%B8%82%E5%80%BC%E9%87%8D%E5%9B%9E3000%E4%BA%BF%E5%85%83%22%7D&rank=&style_id=40132&topic_id=7706375400275840548"
     },
     {
-      "title": "山姆为何低价甩卖始祖鸟加拿大鹅",
-      "hot": "70012422",
-      "url": "https://www.toutiao.com/trending/7706095473626451510/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706095473626451510%22%2C%22hot_board_impr_id%22%3A%2220261110043114D51A71B1337C757E3605%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%B1%B1%E5%A7%86%E4%B8%BA%E4%BD%95%E4%BD%8E%E4%BB%B7%E7%94%A9%E5%8D%96%E5%A7%8B%E7%A5%96%E9%B8%9F%E5%8A%A0%E6%8B%BF%E5%A4%A7%E9%B9%85%22%7D&rank=&style_id=40132&topic_id=7706095473626451510"
+      "title": "一碗免费面咋把隔壁小店逼到想搬家",
+      "hot": "55945510",
+      "url": "https://www.toutiao.com/trending/7706333469177069595/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%221%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706333469177069595%22%2C%22hot_board_impr_id%22%3A%2220261110115245243698AF0C5B530766AE%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E4%B8%80%E7%A2%97%E5%85%8D%E8%B4%B9%E9%9D%A2%E5%92%8B%E6%8A%8A%E9%9A%94%E5%A3%81%E5%B0%8F%E5%BA%97%E9%80%BC%E5%88%B0%E6%83%B3%E6%90%AC%E5%AE%B6%22%7D&rank=&style_id=40132&topic_id=7706333469177069595"
     },
     {
-      "title": "猪油被称“心血管杀手”冤不冤",
-      "hot": "63349859",
-      "url": "https://www.toutiao.com/trending/7706064001884569636/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%226%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706064001884569636%22%2C%22hot_board_impr_id%22%3A%2220261110043114D51A71B1337C757E3605%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%8C%AA%E6%B2%B9%E8%A2%AB%E7%A7%B0%E2%80%9C%E5%BF%83%E8%A1%80%E7%AE%A1%E6%9D%80%E6%89%8B%E2%80%9D%E5%86%A4%E4%B8%8D%E5%86%A4%22%7D&rank=&style_id=40132&topic_id=7706064001884569636"
+      "title": "带状疱疹进入高发期",
+      "hot": "50621591",
+      "url": "https://www.toutiao.com/trending/7705988611359130162/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2215%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227705988611359130162%22%2C%22hot_board_impr_id%22%3A%2220261110115245243698AF0C5B530766AE%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%B8%A6%E7%8A%B6%E7%96%B1%E7%96%B9%E8%BF%9B%E5%85%A5%E9%AB%98%E5%8F%91%E6%9C%9F%22%7D&rank=&style_id=40132&topic_id=7705988611359130162"
     },
     {
-      "title": "猪肉又便宜了",
-      "hot": "57321323",
-      "url": "https://www.toutiao.com/trending/7706168308793376819/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%221%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706168308793376819%22%2C%22hot_board_impr_id%22%3A%2220261110043114D51A71B1337C757E3605%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%8C%AA%E8%82%89%E5%8F%88%E4%BE%BF%E5%AE%9C%E4%BA%86%22%7D&rank=&style_id=40132&topic_id=7706168308793376819"
+      "title": "江苏姑娘赴河北找到三四块流星陨石",
+      "hot": "45804310",
+      "url": "https://www.toutiao.com/trending/7705800963071771146/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2215%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227705800963071771146%22%2C%22hot_board_impr_id%22%3A%2220261110115245243698AF0C5B530766AE%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E6%B1%9F%E8%8B%8F%E5%A7%91%E5%A8%98%E8%B5%B4%E6%B2%B3%E5%8C%97%E6%89%BE%E5%88%B0%E4%B8%89%E5%9B%9B%E5%9D%97%E6%B5%81%E6%98%9F%E9%99%A8%E7%9F%B3%22%7D&rank=&style_id=40132&topic_id=7705800963071771146"
     },
     {
-      "title": "中方回应外媒涉60万枚英伟达芯片报道",
-      "hot": "51866478",
-      "url": "https://www.toutiao.com/trending/7706070287443329034/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%222%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706070287443329034%22%2C%22hot_board_impr_id%22%3A%2220261110043114D51A71B1337C757E3605%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E4%B8%AD%E6%96%B9%E5%9B%9E%E5%BA%94%E5%A4%96%E5%AA%92%E6%B6%8960%E4%B8%87%E6%9E%9A%E8%8B%B1%E4%BC%9F%E8%BE%BE%E8%8A%AF%E7%89%87%E6%8A%A5%E9%81%93%22%7D&rank=&style_id=40132&topic_id=7706070287443329034"
+      "title": "晨起后有这4个习惯的人更长寿",
+      "hot": "41445453",
+      "url": "https://www.toutiao.com/trending/7706361319699562506/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%226%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706361319699562506%22%2C%22hot_board_impr_id%22%3A%2220261110115245243698AF0C5B530766AE%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E6%99%A8%E8%B5%B7%E5%90%8E%E6%9C%89%E8%BF%994%E4%B8%AA%E4%B9%A0%E6%83%AF%E7%9A%84%E4%BA%BA%E6%9B%B4%E9%95%BF%E5%AF%BF%22%7D&rank=&style_id=40132&topic_id=7706361319699562506"
     },
     {
-      "title": "评论员：日本越来越多企业押注军工",
-      "hot": "46930730",
-      "url": "https://www.toutiao.com/trending/7706137052550532651/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706137052550532651%22%2C%22hot_board_impr_id%22%3A%2220261110043114D51A71B1337C757E3605%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E8%AF%84%E8%AE%BA%E5%91%98%EF%BC%9A%E6%97%A5%E6%9C%AC%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%A4%9A%E4%BC%81%E4%B8%9A%E6%8A%BC%E6%B3%A8%E5%86%9B%E5%B7%A5%22%7D&rank=&style_id=40132&topic_id=7706137052550532651"
+      "title": "冷空气已致广东降温超10℃",
+      "hot": "37501397",
+      "url": "https://www.toutiao.com/trending/7706126197743059482/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2215%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706126197743059482%22%2C%22hot_board_impr_id%22%3A%2220261110115245243698AF0C5B530766AE%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%86%B7%E7%A9%BA%E6%B0%94%E5%B7%B2%E8%87%B4%E5%B9%BF%E4%B8%9C%E9%99%8D%E6%B8%A9%E8%B6%8510%E2%84%83%22%7D&rank=&style_id=40132&topic_id=7706126197743059482"
     },
     {
-      "title": "专家：AI已越过“超级智能逃逸速度”",
-      "hot": "42464680",
-      "url": "https://www.toutiao.com/trending/7706178432840764982/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706178432840764982%22%2C%22hot_board_impr_id%22%3A%2220261110043114D51A71B1337C757E3605%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E4%B8%93%E5%AE%B6%EF%BC%9AAI%E5%B7%B2%E8%B6%8A%E8%BF%87%E2%80%9C%E8%B6%85%E7%BA%A7%E6%99%BA%E8%83%BD%E9%80%83%E9%80%B8%E9%80%9F%E5%BA%A6%E2%80%9D%22%7D&rank=&style_id=40132&topic_id=7706178432840764982"
+      "title": "国际油价集体大跌 布油跌6.24%",
+      "hot": "33932667",
+      "url": "https://www.toutiao.com/trending/7706181046018212361/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2216%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227706181046018212361%22%2C%22hot_board_impr_id%22%3A%2220261110115245243698AF0C5B530766AE%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%9B%BD%E9%99%85%E6%B2%B9%E4%BB%B7%E9%9B%86%E4%BD%93%E5%A4%A7%E8%B7%8C+%E5%B8%83%E6%B2%B9%E8%B7%8C6.24%25%22%7D&rank=&style_id=40132&topic_id=7706181046018212361"
     }
   ]
 }
