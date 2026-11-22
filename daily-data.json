@@ -1,33 +1,13 @@
 {
-  "date": "2026-11-21",
-  "updatedAt": "2026-11-21T17:12:28.013Z",
+  "date": "2026-11-22",
+  "updatedAt": "2026-11-22T01:46:18.924Z",
   "inspirations": {
-    "date": "2026-11-21",
+    "date": "2026-11-22",
     "items": [
-      {
-        "title": "AI工具体验",
-        "tag": "科技",
-        "desc": "最新AI工具真实使用感受"
-      },
       {
         "title": "极简主义穿搭",
         "tag": "时尚",
         "desc": "胶囊衣柜搭配一件多穿"
-      },
-      {
-        "title": "读书分享",
-        "tag": "知识",
-        "desc": "改变人生的3本书每本都值得"
-      },
-      {
-        "title": "手账排版教程",
-        "tag": "手作",
-        "desc": "新手友好手账布局灵感"
-      },
-      {
-        "title": "秋冬穿搭",
-        "tag": "时尚",
-        "desc": "氛围感秋冬穿搭温柔知性"
       },
       {
         "title": "健身小白入门",
@@ -35,14 +15,29 @@
         "desc": "零基础健身第一周真实反馈"
       },
       {
-        "title": "周末城市漫步",
-        "tag": "生活",
-        "desc": "小众打卡地治愈系vlog"
+        "title": "职场新人避坑指南",
+        "tag": "职场",
+        "desc": "新人入职第一月真实经历避坑清单"
       },
       {
-        "title": "理财入门",
-        "tag": "财经",
-        "desc": "月薪3000如何存钱"
+        "title": "骑行日记",
+        "tag": "运动",
+        "desc": "城市骑行路线推荐"
+      },
+      {
+        "title": "读书笔记分享",
+        "tag": "知识",
+        "desc": "本月最爱书单金句摘录"
+      },
+      {
+        "title": "改造出租屋",
+        "tag": "家居",
+        "desc": "500元预算ins风角落"
+      },
+      {
+        "title": "摄影入门",
+        "tag": "摄影",
+        "desc": "手机也能拍出大片"
       },
       {
         "title": "深夜食堂",
@@ -50,15 +45,38 @@
         "desc": "深夜治愈系美食合集"
       },
       {
-        "title": "独处的乐趣",
-        "tag": "生活",
-        "desc": "一个人看电影吃火锅的快乐"
+        "title": "居家健身",
+        "tag": "运动",
+        "desc": "无需器械全身燃脂21天效果记录"
+      },
+      {
+        "title": "手工皮具",
+        "tag": "手作",
+        "desc": "从零制作一个钱包"
       }
     ]
   },
   "videos": {
-    "date": "2026-11-21",
+    "date": "2026-11-22",
     "items": [
+      {
+        "hotspot": "元宇宙概念升温",
+        "original": "VR/AR技术新突破",
+        "ideas": [
+          "VR体验真实测评",
+          "元宇宙科普通俗易懂",
+          "虚拟社交真实体验"
+        ]
+      },
+      {
+        "hotspot": "社会新闻热点",
+        "original": "某社会事件引发广泛关注",
+        "ideas": [
+          "事件时间线梳理",
+          "专家观点分析解读",
+          "科普延伸知识讲解"
+        ]
+      },
       {
         "hotspot": "网红美食探店翻车",
         "original": "某网红餐厅实际与视频不符",
@@ -69,12 +87,12 @@
         ]
       },
       {
-        "hotspot": "新能源汽车爆发",
-        "original": "新能源车销量创新高",
+        "hotspot": "热门影视剧结局",
+        "original": "某大结局引发观众讨论",
         "ideas": [
-          "新能源车深度测评",
-          "充电设施体验",
-          "车主真实用车感受"
+          "替代结局剪辑创作",
+          "深度解析角色动机",
+          "街头采访观众看法"
         ]
       },
       {
@@ -85,39 +103,26 @@
           "短视频引流电商方法",
           "私域变现路径探索"
         ]
-      },
-      {
-        "hotspot": "环保生活方式",
-        "original": "低碳生活成为新趋势",
-        "ideas": [
-          "24小时零废弃挑战",
-          "环保好物测评体验",
-          "传统消费vs极简生活"
-        ]
-      },
-      {
-        "hotspot": "AI工具新突破",
-        "original": "最新AI模型发布引发热议",
-        "ideas": [
-          "AI vs 人工同一任务对比挑战",
-          "AI创意实验生成艺术作品",
-          "AI科普系列通俗易懂"
-        ]
       }
     ]
   },
   "frontend": {
-    "date": "2026-11-21",
+    "date": "2026-11-22",
     "news": [
       {
-        "title": "Derek Lowe: Detonating a Pile of Lead Azide",
+        "title": "Pill to treat pancreatic cancer hailed as 'biggest breakthrough in decades'",
         "source": "Hacker News",
-        "url": "https://www.science.org/content/blog-post/detonating-huge-pile-lead-azide-really"
+        "url": "https://www.theguardian.com/society/2026/nov/20/pill-pancreatic-cancer-breakthrough-daraxonrasib"
       },
       {
-        "title": "Lean Verification of the Riemann Hypothesis - Joint statement by...",
+        "title": "Lean verification of the Riemann Hypothesis",
         "source": "Hacker News",
         "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/"
+      },
+      {
+        "title": "Inkling-2-Mini in 5.4 GB Memory",
+        "source": "Hacker News",
+        "url": "https://github.com/ShinMegamiBoson/lookatmyquant"
       },
       {
         "title": "Brazil's tax authority open-sources its tax calculator on GitHub under MIT",
@@ -125,29 +130,24 @@
         "url": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-publica-primeiro-codigo-fonte-aberto-no-github-e-amplia-transparencia-da-reforma-tributaria"
       },
       {
-        "title": "My Monitor Was Cutting My Download Speed by 75%",
+        "title": "Detonating a pile of lead azide",
         "source": "Hacker News",
-        "url": "https://blog.tymscar.com/posts/studiodisplayethernet/"
+        "url": "https://www.science.org/content/blog-post/detonating-huge-pile-lead-azide-really"
       },
       {
-        "title": "Hurried Announcement: Alessandro Masullo GRH",
+        "title": "PcapAnalyzer – self-hosted pcap analyzer with 27 problem detectors",
         "source": "Hacker News",
-        "url": "https://math216.wordpress.com/2026/11/20/hurried-announcement-alessandro-masullo-grh/"
+        "url": "https://github.com/sebaandrada-cell/PcapAnalyzer"
       },
       {
-        "title": "Show HN: Zero C#, Power of C# without any GC",
-        "source": "Hacker News",
-        "url": "https://onurgumus.github.io/zero-csharp/index.html"
-      },
-      {
-        "title": "🔥 neo - Neo.mjs is a self-evolving software organism: a professional end-to-end AI engineering team whose cross-model swarm inhabits live apps via Neural Link, Active Hybrid GraphRAG, DreamService, and self-healing loops.",
+        "title": "🔥 taste-skill - Agent skills that give coding agents taste: art direction, reference images and a browser check instead of generic AI pages",
         "source": "GitHub Trending",
-        "url": "https://github.com/neomjs/neo"
+        "url": "https://github.com/Leonxlnx/taste-skill"
       },
       {
-        "title": "🔥 dnb-frontend - ✨ Deen Bridge 🕌 — Next.js platform for authentic Islamic education (courses, books, spaces, mentorship) with a cited AI assistant and non-custodial Stellar/USDC payments.",
+        "title": "🔥 SaltGUI - A web interface for managing SaltStack based infrastructure.",
         "source": "GitHub Trending",
-        "url": "https://github.com/Deen-Bridge/dnb-frontend"
+        "url": "https://github.com/erwindon/SaltGUI"
       }
     ],
     "learningPlan": [
@@ -158,7 +158,7 @@
     ]
   },
   "exercise": {
-    "date": "2026-11-21",
+    "date": "2026-11-22",
     "gufa": [
       {
         "title": "八段锦完整版",
@@ -226,54 +226,54 @@
   },
   "hotSearch": [
     {
-      "title": "美国人为什么开始反对AI了",
-      "hot": "1131959",
-      "url": "https://www.toutiao.com/trending/7710632433913171494/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710632433913171494%22%2C%22hot_board_impr_id%22%3A%22202611220112279BCC6C36A974451D8D80%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%BE%8E%E5%9B%BD%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BC%80%E5%A7%8B%E5%8F%8D%E5%AF%B9AI%E4%BA%86%22%7D&rank=&style_id=40132&topic_id=7710632433913171494"
+      "title": "金价何时会止跌",
+      "hot": "1045915",
+      "url": "https://www.toutiao.com/trending/7710787859191451179/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710787859191451179%22%2C%22hot_board_impr_id%22%3A%2220261122094618201C21DA21402E31C465%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E9%87%91%E4%BB%B7%E4%BD%95%E6%97%B6%E4%BC%9A%E6%AD%A2%E8%B7%8C%22%7D&rank=&style_id=40132&topic_id=7710787859191451179"
     },
     {
-      "title": "还40年房贷和租40年房怎么选",
-      "hot": "1024239",
-      "url": "https://www.toutiao.com/trending/7710596002696138281/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710596002696138281%22%2C%22hot_board_impr_id%22%3A%22202611220112279BCC6C36A974451D8D80%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E8%BF%9840%E5%B9%B4%E6%88%BF%E8%B4%B7%E5%92%8C%E7%A7%9F40%E5%B9%B4%E6%88%BF%E6%80%8E%E4%B9%88%E9%80%89%22%7D&rank=&style_id=40132&topic_id=7710596002696138281"
+      "title": "特朗普回应深圳乘车时不拉窗帘",
+      "hot": "946383",
+      "url": "https://www.toutiao.com/trending/7710089748098076223/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%222%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710089748098076223%22%2C%22hot_board_impr_id%22%3A%2220261122094618201C21DA21402E31C465%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%89%B9%E6%9C%97%E6%99%AE%E5%9B%9E%E5%BA%94%E6%B7%B1%E5%9C%B3%E4%B9%98%E8%BD%A6%E6%97%B6%E4%B8%8D%E6%8B%89%E7%AA%97%E5%B8%98%22%7D&rank=&style_id=40132&topic_id=7710089748098076223"
     },
     {
       "title": "APEC“中国年”取得哪些成果",
-      "hot": "926770",
-      "url": "https://www.toutiao.com/trending/7710560818030448170/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%222%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710560818030448170%22%2C%22hot_board_impr_id%22%3A%22202611220112279BCC6C36A974451D8D80%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22APEC%E2%80%9C%E4%B8%AD%E5%9B%BD%E5%B9%B4%E2%80%9D%E5%8F%96%E5%BE%97%E5%93%AA%E4%BA%9B%E6%88%90%E6%9E%9C%22%7D&rank=&style_id=40132&topic_id=7710560818030448170"
+      "hot": "856323",
+      "url": "https://www.toutiao.com/trending/7710560818030448170/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%222%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710560818030448170%22%2C%22hot_board_impr_id%22%3A%2220261122094618201C21DA21402E31C465%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22APEC%E2%80%9C%E4%B8%AD%E5%9B%BD%E5%B9%B4%E2%80%9D%E5%8F%96%E5%BE%97%E5%93%AA%E4%BA%9B%E6%88%90%E6%9E%9C%22%7D&rank=&style_id=40132&topic_id=7710560818030448170"
     },
     {
-      "title": "鲁比奥会参选下届美国总统吗",
-      "hot": "838576",
-      "url": "https://www.toutiao.com/trending/7710590698059206195/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710590698059206195%22%2C%22hot_board_impr_id%22%3A%22202611220112279BCC6C36A974451D8D80%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E9%B2%81%E6%AF%94%E5%A5%A5%E4%BC%9A%E5%8F%82%E9%80%89%E4%B8%8B%E5%B1%8A%E7%BE%8E%E5%9B%BD%E6%80%BB%E7%BB%9F%E5%90%97%22%7D&rank=&style_id=40132&topic_id=7710590698059206195"
+      "title": "张雪骑机车没上赛道就摔车",
+      "hot": "774833",
+      "url": "https://www.toutiao.com/trending/7710287693711835177/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%222%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710287693711835177%22%2C%22hot_board_impr_id%22%3A%2220261122094618201C21DA21402E31C465%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%BC%A0%E9%9B%AA%E9%AA%91%E6%9C%BA%E8%BD%A6%E6%B2%A1%E4%B8%8A%E8%B5%9B%E9%81%93%E5%B0%B1%E6%91%94%E8%BD%A6%22%7D&rank=&style_id=40132&topic_id=7710287693711835177"
     },
     {
-      "title": "外国人眼里的深圳长什么样",
-      "hot": "758775",
-      "url": "https://www.toutiao.com/trending/7710608061865397823/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710608061865397823%22%2C%22hot_board_impr_id%22%3A%22202611220112279BCC6C36A974451D8D80%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%A4%96%E5%9B%BD%E4%BA%BA%E7%9C%BC%E9%87%8C%E7%9A%84%E6%B7%B1%E5%9C%B3%E9%95%BF%E4%BB%80%E4%B9%88%E6%A0%B7%22%7D&rank=&style_id=40132&topic_id=7710608061865397823"
+      "title": "特朗普称将与伊朗达成永久性协议",
+      "hot": "701098",
+      "url": "https://www.toutiao.com/trending/7710763190757363209/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%225%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710763190757363209%22%2C%22hot_board_impr_id%22%3A%2220261122094618201C21DA21402E31C465%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%89%B9%E6%9C%97%E6%99%AE%E7%A7%B0%E5%B0%86%E4%B8%8E%E4%BC%8A%E6%9C%97%E8%BE%BE%E6%88%90%E6%B0%B8%E4%B9%85%E6%80%A7%E5%8D%8F%E8%AE%AE%22%7D&rank=&style_id=40132&topic_id=7710763190757363209"
+    },
+    {
+      "title": "小雪节气有何习俗",
+      "hot": "634380",
+      "url": "https://www.toutiao.com/trending/7710547804083683364/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2216%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710547804083683364%22%2C%22hot_board_impr_id%22%3A%2220261122094618201C21DA21402E31C465%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%B0%8F%E9%9B%AA%E8%8A%82%E6%B0%94%E6%9C%89%E4%BD%95%E4%B9%A0%E4%BF%97%22%7D&rank=&style_id=40132&topic_id=7710547804083683364"
     },
     {
       "title": "演员张国强为何突然霸屏",
-      "hot": "686568",
-      "url": "https://www.toutiao.com/trending/7710426173206856219/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%224%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710426173206856219%22%2C%22hot_board_impr_id%22%3A%22202611220112279BCC6C36A974451D8D80%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E6%BC%94%E5%91%98%E5%BC%A0%E5%9B%BD%E5%BC%BA%E4%B8%BA%E4%BD%95%E7%AA%81%E7%84%B6%E9%9C%B8%E5%B1%8F%22%7D&rank=&style_id=40132&topic_id=7710426173206856219"
+      "hot": "574010",
+      "url": "https://www.toutiao.com/trending/7710426173206856219/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%224%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710426173206856219%22%2C%22hot_board_impr_id%22%3A%2220261122094618201C21DA21402E31C465%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E6%BC%94%E5%91%98%E5%BC%A0%E5%9B%BD%E5%BC%BA%E4%B8%BA%E4%BD%95%E7%AA%81%E7%84%B6%E9%9C%B8%E5%B1%8F%22%7D&rank=&style_id=40132&topic_id=7710426173206856219"
     },
     {
-      "title": "建议大家不要一直穿同一双鞋",
-      "hot": "621232",
-      "url": "https://www.toutiao.com/trending/7710142116449730603/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%226%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710142116449730603%22%2C%22hot_board_impr_id%22%3A%22202611220112279BCC6C36A974451D8D80%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%BB%BA%E8%AE%AE%E5%A4%A7%E5%AE%B6%E4%B8%8D%E8%A6%81%E4%B8%80%E7%9B%B4%E7%A9%BF%E5%90%8C%E4%B8%80%E5%8F%8C%E9%9E%8B%22%7D&rank=&style_id=40132&topic_id=7710142116449730603"
+      "title": "《两京十五日》口碑两极分化",
+      "hot": "519386",
+      "url": "https://www.toutiao.com/trending/7710608319765611058/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2216%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710608319765611058%22%2C%22hot_board_impr_id%22%3A%2220261122094618201C21DA21402E31C465%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E3%80%8A%E4%B8%A4%E4%BA%AC%E5%8D%81%E4%BA%94%E6%97%A5%E3%80%8B%E5%8F%A3%E7%A2%91%E4%B8%A4%E6%9E%81%E5%88%86%E5%8C%96%22%7D&rank=&style_id=40132&topic_id=7710608319765611058"
     },
     {
-      "title": "特朗普称不支持“台独”引岛内震动",
-      "hot": "562114",
-      "url": "https://www.toutiao.com/trending/7710415118915472922/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%222%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710415118915472922%22%2C%22hot_board_impr_id%22%3A%22202611220112279BCC6C36A974451D8D80%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%89%B9%E6%9C%97%E6%99%AE%E7%A7%B0%E4%B8%8D%E6%94%AF%E6%8C%81%E2%80%9C%E5%8F%B0%E7%8B%AC%E2%80%9D%E5%BC%95%E5%B2%9B%E5%86%85%E9%9C%87%E5%8A%A8%22%7D&rank=&style_id=40132&topic_id=7710415118915472922"
+      "title": "特朗普：中国的活力令人惊叹",
+      "hot": "469960",
+      "url": "https://www.toutiao.com/trending/7710739909857775147/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%222%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710739909857775147%22%2C%22hot_board_impr_id%22%3A%2220261122094618201C21DA21402E31C465%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%89%B9%E6%9C%97%E6%99%AE%EF%BC%9A%E4%B8%AD%E5%9B%BD%E7%9A%84%E6%B4%BB%E5%8A%9B%E4%BB%A4%E4%BA%BA%E6%83%8A%E5%8F%B9%22%7D&rank=&style_id=40132&topic_id=7710739909857775147"
     },
     {
-      "title": "伊朗称击中一架F-16战机",
-      "hot": "508622",
-      "url": "https://www.toutiao.com/trending/7710617050968588850/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%223%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710617050968588850%22%2C%22hot_board_impr_id%22%3A%22202611220112279BCC6C36A974451D8D80%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E4%BC%8A%E6%9C%97%E7%A7%B0%E5%87%BB%E4%B8%AD%E4%B8%80%E6%9E%B6F-16%E6%88%98%E6%9C%BA%22%7D&rank=&style_id=40132&topic_id=7710617050968588850"
-    },
-    {
-      "title": "青海德令哈目前总体情况平稳",
-      "hot": "460220",
-      "url": "https://www.toutiao.com/trending/7710591936147374602/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2215%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710591936147374602%22%2C%22hot_board_impr_id%22%3A%22202611220112279BCC6C36A974451D8D80%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E9%9D%92%E6%B5%B7%E5%BE%B7%E4%BB%A4%E5%93%88%E7%9B%AE%E5%89%8D%E6%80%BB%E4%BD%93%E6%83%85%E5%86%B5%E5%B9%B3%E7%A8%B3%22%7D&rank=&style_id=40132&topic_id=7710591936147374602"
+      "title": "记者直击克里米亚大桥连续遭袭",
+      "hot": "425237",
+      "url": "https://www.toutiao.com/trending/7710452526436532787/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2215%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227710452526436532787%22%2C%22hot_board_impr_id%22%3A%2220261122094618201C21DA21402E31C465%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E8%AE%B0%E8%80%85%E7%9B%B4%E5%87%BB%E5%85%8B%E9%87%8C%E7%B1%B3%E4%BA%9A%E5%A4%A7%E6%A1%A5%E8%BF%9E%E7%BB%AD%E9%81%AD%E8%A2%AD%22%7D&rank=&style_id=40132&topic_id=7710452526436532787"
     }
   ]
 }
