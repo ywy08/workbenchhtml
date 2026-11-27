@@ -1,23 +1,38 @@
 {
   "date": "2026-11-27",
-  "updatedAt": "2026-11-27T03:51:55.361Z",
+  "updatedAt": "2026-11-27T13:39:04.589Z",
   "inspirations": {
     "date": "2026-11-27",
     "items": [
+      {
+        "title": "咖啡日记",
+        "tag": "美食",
+        "desc": "周末咖啡馆手冲入门教程"
+      },
+      {
+        "title": "居家健身",
+        "tag": "运动",
+        "desc": "无需器械全身燃脂21天效果记录"
+      },
       {
         "title": "理财入门",
         "tag": "财经",
         "desc": "月薪3000如何存钱"
       },
       {
-        "title": "职场新人避坑指南",
-        "tag": "职场",
-        "desc": "新人入职第一月真实经历避坑清单"
+        "title": "手账排版教程",
+        "tag": "手作",
+        "desc": "新手友好手账布局灵感"
       },
       {
-        "title": "健身小白入门",
-        "tag": "运动",
-        "desc": "零基础健身第一周真实反馈"
+        "title": "极简主义穿搭",
+        "tag": "时尚",
+        "desc": "胶囊衣柜搭配一件多穿"
+      },
+      {
+        "title": "读书分享",
+        "tag": "知识",
+        "desc": "改变人生的3本书每本都值得"
       },
       {
         "title": "绿植养护",
@@ -25,9 +40,9 @@
         "desc": "新手必养的10种室内植物"
       },
       {
-        "title": "深夜食堂",
-        "tag": "美食",
-        "desc": "深夜治愈系美食合集"
+        "title": "旅行vlog",
+        "tag": "旅行",
+        "desc": "小众目的地避开人潮"
       },
       {
         "title": "情绪管理",
@@ -35,24 +50,9 @@
         "desc": "上班族减压5个小方法"
       },
       {
-        "title": "秋冬穿搭",
-        "tag": "时尚",
-        "desc": "氛围感秋冬穿搭温柔知性"
-      },
-      {
-        "title": "手作时光",
-        "tag": "手作",
-        "desc": "周末陶艺体验治愈慢生活"
-      },
-      {
-        "title": "英语学习",
-        "tag": "教育",
-        "desc": "每天15分钟英语口语进步"
-      },
-      {
-        "title": "周末城市漫步",
-        "tag": "生活",
-        "desc": "小众打卡地治愈系vlog"
+        "title": "下班后的副业收入",
+        "tag": "副业",
+        "desc": "普通人可做的5种副业真实收入"
       }
     ]
   },
@@ -60,12 +60,30 @@
     "date": "2026-11-27",
     "items": [
       {
-        "hotspot": "社会新闻热点",
-        "original": "某社会事件引发广泛关注",
+        "hotspot": "元宇宙概念升温",
+        "original": "VR/AR技术新突破",
         "ideas": [
-          "事件时间线梳理",
-          "专家观点分析解读",
-          "科普延伸知识讲解"
+          "VR体验真实测评",
+          "元宇宙科普通俗易懂",
+          "虚拟社交真实体验"
+        ]
+      },
+      {
+        "hotspot": "远程办公常态化",
+        "original": "越来越多企业采用混合办公模式",
+        "ideas": [
+          "远程办公效率技巧分享",
+          "不同职业远程真实一天",
+          "远程设备选购指南"
+        ]
+      },
+      {
+        "hotspot": "网红美食探店翻车",
+        "original": "某网红餐厅实际与视频不符",
+        "ideas": [
+          "实测验证真实记录体验",
+          "科普网红营销套路",
+          "反套路讽刺剧本创作"
         ]
       },
       {
@@ -78,30 +96,12 @@
         ]
       },
       {
-        "hotspot": "新能源汽车爆发",
-        "original": "新能源车销量创新高",
+        "hotspot": "社会新闻热点",
+        "original": "某社会事件引发广泛关注",
         "ideas": [
-          "新能源车深度测评",
-          "充电设施体验",
-          "车主真实用车感受"
-        ]
-      },
-      {
-        "hotspot": "热门影视剧结局",
-        "original": "某大结局引发观众讨论",
-        "ideas": [
-          "替代结局剪辑创作",
-          "深度解析角色动机",
-          "街头采访观众看法"
-        ]
-      },
-      {
-        "hotspot": "远程办公常态化",
-        "original": "越来越多企业采用混合办公模式",
-        "ideas": [
-          "远程办公效率技巧分享",
-          "不同职业远程真实一天",
-          "远程设备选购指南"
+          "事件时间线梳理",
+          "专家观点分析解读",
+          "科普延伸知识讲解"
         ]
       }
     ]
@@ -110,9 +110,24 @@
     "date": "2026-11-27",
     "news": [
       {
-        "title": "Hard Drive pricing has gotten bad",
+        "title": "A Deterministic Subexponential-Time Algorithm for the Discrete Logarithm Problem [pdf]",
         "source": "Hacker News",
-        "url": "https://blog.ktz.me/black-friday-hard-drive-prices-are-messed-up/"
+        "url": "https://eprint.iacr.org/2026/3020.pdf"
+      },
+      {
+        "title": "Counseling for mental health decreases likelihood of protesting by 34%–39%",
+        "source": "Hacker News",
+        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/ssqu.70219"
+      },
+      {
+        "title": "Kimi for Science: More scientific ideas, made possible",
+        "source": "Hacker News",
+        "url": "https://www.kimi.ai/news/kimi-for-science-program"
+      },
+      {
+        "title": "The group chat where your AI talks behind your back",
+        "source": "Hacker News",
+        "url": "https://construct22.com/"
       },
       {
         "title": "AI made self-hosting fun again",
@@ -120,24 +135,9 @@
         "url": "https://janlukas.blog/posts/ai-self-hosting"
       },
       {
-        "title": "Kamil Khan Mumtaz: Pakistani architect, admired at home, almost invisible abroad",
+        "title": "New York and California Age Gating Rules Go into Effect in the New Year",
         "source": "Hacker News",
-        "url": "https://worksinprogress.co/issue/the-greatest-architect-youve-never-heard-of-is-in-pakistan/"
-      },
-      {
-        "title": "YouTube Ad Punisher – Auto-reloads YouTube pages when an ad plays",
-        "source": "Hacker News",
-        "url": "https://github.com/antonpictures/youtube-punisher"
-      },
-      {
-        "title": "AMD-specific fork of llama.cpp",
-        "source": "Hacker News",
-        "url": "https://devnull.land/amd-specific-llama-cpp"
-      },
-      {
-        "title": "CTO of 'RansomwareHelp' indicted for wire fraud",
-        "source": "Hacker News",
-        "url": "https://krebsonsecurity.com/2026/11/cto-of-ransomwarehelp-indicted-for-wire-fraud/"
+        "url": "https://www.eff.org/deeplinks/2026/11/new-york-and-california-age-gating-rules-go-effect-new-year"
       },
       {
         "title": "🔥 neo - Neo.mjs is a self-evolving software organism: a professional end-to-end AI engineering team whose cross-model swarm inhabits live apps via Neural Link, Active Hybrid GraphRAG, DreamService, and self-healing loops.",
@@ -145,9 +145,9 @@
         "url": "https://github.com/neomjs/neo"
       },
       {
-        "title": "🔥 fred - MDN's frontend since late 2025, built with Web Components, Lit, and SSR for a fast, clean documentation experience. Fred = /fr(ont)e(n)d/.",
+        "title": "🔥 ui-craft - Design engineering system for AI coding agents — ship UI with craft-level quality. Install as an agent skill.",
         "source": "GitHub Trending",
-        "url": "https://github.com/mdn/fred"
+        "url": "https://github.com/educlopez/ui-craft"
       }
     ],
     "learningPlan": [
@@ -226,54 +226,54 @@
   },
   "hotSearch": [
     {
-      "title": "三只松鼠员工必须用“鼠”取名字",
-      "hot": "17398531",
-      "url": "https://www.toutiao.com/trending/7712472413543792703/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%228%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712472413543792703%22%2C%22hot_board_impr_id%22%3A%2220261127115155BFED3E54A2C833DEDE68%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E4%B8%89%E5%8F%AA%E6%9D%BE%E9%BC%A0%E5%91%98%E5%B7%A5%E5%BF%85%E9%A1%BB%E7%94%A8%E2%80%9C%E9%BC%A0%E2%80%9D%E5%8F%96%E5%90%8D%E5%AD%97%22%7D&rank=&style_id=40132&topic_id=7712472413543792703"
+      "title": "国家队抄底力度已超“924”",
+      "hot": "10858155",
+      "url": "https://www.toutiao.com/trending/7712761193228321307/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2215%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712761193228321307%22%2C%22hot_board_impr_id%22%3A%2220261127213904FCA54604086AE5522F6B%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%9B%BD%E5%AE%B6%E9%98%9F%E6%8A%84%E5%BA%95%E5%8A%9B%E5%BA%A6%E5%B7%B2%E8%B6%85%E2%80%9C924%E2%80%9D%22%7D&rank=&style_id=40132&topic_id=7712761193228321307"
     },
     {
-      "title": "原来鹅毛大雪是真的",
-      "hot": "15742842",
-      "url": "https://www.toutiao.com/trending/7711496363305878054/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%220%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227711496363305878054%22%2C%22hot_board_impr_id%22%3A%2220261127115155BFED3E54A2C833DEDE68%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%8E%9F%E6%9D%A5%E9%B9%85%E6%AF%9B%E5%A4%A7%E9%9B%AA%E6%98%AF%E7%9C%9F%E7%9A%84%22%7D&rank=&style_id=40132&topic_id=7711496363305878054"
+      "title": "董明珠当魏建军面数次训斥员工",
+      "hot": "9824865",
+      "url": "https://www.toutiao.com/trending/7712803926554398218/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%222%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712803926554398218%22%2C%22hot_board_impr_id%22%3A%2220261127213904FCA54604086AE5522F6B%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E8%91%A3%E6%98%8E%E7%8F%A0%E5%BD%93%E9%AD%8F%E5%BB%BA%E5%86%9B%E9%9D%A2%E6%95%B0%E6%AC%A1%E8%AE%AD%E6%96%A5%E5%91%98%E5%B7%A5%22%7D&rank=&style_id=40132&topic_id=7712803926554398218"
     },
     {
-      "title": "延时看神舟二十四号与绚烂朝霞同框",
-      "hot": "14244713",
-      "url": "https://www.toutiao.com/article/7712448016912761371"
+      "title": "我国知识产权创造量质齐升",
+      "hot": "8889905",
+      "url": "https://www.toutiao.com/trending/7711994617415270443/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%222%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227711994617415270443%22%2C%22hot_board_impr_id%22%3A%2220261127213904FCA54604086AE5522F6B%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E6%88%91%E5%9B%BD%E7%9F%A5%E8%AF%86%E4%BA%A7%E6%9D%83%E5%88%9B%E9%80%A0%E9%87%8F%E8%B4%A8%E9%BD%90%E5%8D%87%22%7D&rank=&style_id=40132&topic_id=7711994617415270443"
     },
     {
-      "title": "今起电视开机广告没了",
-      "hot": "12889149",
-      "url": "https://www.toutiao.com/trending/7712385205429764618/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%220%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712385205429764618%22%2C%22hot_board_impr_id%22%3A%2220261127115155BFED3E54A2C833DEDE68%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E4%BB%8A%E8%B5%B7%E7%94%B5%E8%A7%86%E5%BC%80%E6%9C%BA%E5%B9%BF%E5%91%8A%E6%B2%A1%E4%BA%86%22%7D&rank=&style_id=40132&topic_id=7712385205429764618"
+      "title": "正部级蓝天立被判死缓",
+      "hot": "8043919",
+      "url": "https://www.toutiao.com/trending/7712773151733645331/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%222%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712773151733645331%22%2C%22hot_board_impr_id%22%3A%2220261127213904FCA54604086AE5522F6B%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E6%AD%A3%E9%83%A8%E7%BA%A7%E8%93%9D%E5%A4%A9%E7%AB%8B%E8%A2%AB%E5%88%A4%E6%AD%BB%E7%BC%93%22%7D&rank=&style_id=40132&topic_id=7712773151733645331"
     },
     {
-      "title": "商务部：政府机关带头过紧日子",
-      "hot": "11662584",
-      "url": "https://www.toutiao.com/trending/7712390729003401252/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%221%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712390729003401252%22%2C%22hot_board_impr_id%22%3A%2220261127115155BFED3E54A2C833DEDE68%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%95%86%E5%8A%A1%E9%83%A8%EF%BC%9A%E6%94%BF%E5%BA%9C%E6%9C%BA%E5%85%B3%E5%B8%A6%E5%A4%B4%E8%BF%87%E7%B4%A7%E6%97%A5%E5%AD%90%22%7D&rank=&style_id=40132&topic_id=7712390729003401252"
+      "title": "武契奇：我一旦绝食将拒绝接受救治",
+      "hot": "7278439",
+      "url": "https://www.toutiao.com/trending/7712429326217920555/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%221%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712429326217920555%22%2C%22hot_board_impr_id%22%3A%2220261127213904FCA54604086AE5522F6B%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E6%AD%A6%E5%A5%91%E5%A5%87%EF%BC%9A%E6%88%91%E4%B8%80%E6%97%A6%E7%BB%9D%E9%A3%9F%E5%B0%86%E6%8B%92%E7%BB%9D%E6%8E%A5%E5%8F%97%E6%95%91%E6%B2%BB%22%7D&rank=&style_id=40132&topic_id=7712429326217920555"
     },
     {
-      "title": "周琦肘击对手被驱逐",
-      "hot": "10552743",
-      "url": "https://www.toutiao.com/trending/7712490611991494707/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%221%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712490611991494707%22%2C%22hot_board_impr_id%22%3A%2220261127115155BFED3E54A2C833DEDE68%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%91%A8%E7%90%A6%E8%82%98%E5%87%BB%E5%AF%B9%E6%89%8B%E8%A2%AB%E9%A9%B1%E9%80%90%22%7D&rank=&style_id=40132&topic_id=7712490611991494707"
+      "title": "孕妇生下裹着完整胎膜的宝宝",
+      "hot": "6585804",
+      "url": "https://www.toutiao.com/trending/7712682062435959347/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2215%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712682062435959347%22%2C%22hot_board_impr_id%22%3A%2220261127213904FCA54604086AE5522F6B%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%AD%95%E5%A6%87%E7%94%9F%E4%B8%8B%E8%A3%B9%E7%9D%80%E5%AE%8C%E6%95%B4%E8%83%8E%E8%86%9C%E7%9A%84%E5%AE%9D%E5%AE%9D%22%7D&rank=&style_id=40132&topic_id=7712682062435959347"
     },
     {
-      "title": "50余人摘走数百斤橘子仅留下10元",
-      "hot": "9548516",
-      "url": "https://www.toutiao.com/trending/7712410677591786034/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%220%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712410677591786034%22%2C%22hot_board_impr_id%22%3A%2220261127115155BFED3E54A2C833DEDE68%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%2250%E4%BD%99%E4%BA%BA%E6%91%98%E8%B5%B0%E6%95%B0%E7%99%BE%E6%96%A4%E6%A9%98%E5%AD%90%E4%BB%85%E7%95%99%E4%B8%8B10%E5%85%83%22%7D&rank=&style_id=40132&topic_id=7712410677591786034"
+      "title": "科创板一天收复全年跌幅",
+      "hot": "5959081",
+      "url": "https://www.toutiao.com/trending/7711893978844758058/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%221%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227711893978844758058%22%2C%22hot_board_impr_id%22%3A%2220261127213904FCA54604086AE5522F6B%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%A7%91%E5%88%9B%E6%9D%BF%E4%B8%80%E5%A4%A9%E6%94%B6%E5%A4%8D%E5%85%A8%E5%B9%B4%E8%B7%8C%E5%B9%85%22%7D&rank=&style_id=40132&topic_id=7711893978844758058"
     },
     {
-      "title": "加满一箱92号汽油少花18元",
-      "hot": "8639855",
-      "url": "https://www.toutiao.com/trending/7712452381481009715/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%226%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712452381481009715%22%2C%22hot_board_impr_id%22%3A%2220261127115155BFED3E54A2C833DEDE68%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%8A%A0%E6%BB%A1%E4%B8%80%E7%AE%B192%E5%8F%B7%E6%B1%BD%E6%B2%B9%E5%B0%91%E8%8A%B118%E5%85%83%22%7D&rank=&style_id=40132&topic_id=7712452381481009715"
+      "title": "特朗普称奥巴马把普京踢出G8是羞辱",
+      "hot": "5392000",
+      "url": "https://www.toutiao.com/trending/7712749309976855049/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2215%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712749309976855049%22%2C%22hot_board_impr_id%22%3A%2220261127213904FCA54604086AE5522F6B%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%89%B9%E6%9C%97%E6%99%AE%E7%A7%B0%E5%A5%A5%E5%B7%B4%E9%A9%AC%E6%8A%8A%E6%99%AE%E4%BA%AC%E8%B8%A2%E5%87%BAG8%E6%98%AF%E7%BE%9E%E8%BE%B1%22%7D&rank=&style_id=40132&topic_id=7712749309976855049"
     },
     {
-      "title": "中国男篮主教练回应不敌沙特",
-      "hot": "7817664",
-      "url": "https://www.toutiao.com/trending/7712046785002897450/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%226%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712046785002897450%22%2C%22hot_board_impr_id%22%3A%2220261127115155BFED3E54A2C833DEDE68%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E4%B8%AD%E5%9B%BD%E7%94%B7%E7%AF%AE%E4%B8%BB%E6%95%99%E7%BB%83%E5%9B%9E%E5%BA%94%E4%B8%8D%E6%95%8C%E6%B2%99%E7%89%B9%22%7D&rank=&style_id=40132&topic_id=7712046785002897450"
+      "title": "大众被建议卖身中国让德国人吵翻了",
+      "hot": "4878883",
+      "url": "https://www.toutiao.com/trending/7712784448424513067/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712784448424513067%22%2C%22hot_board_impr_id%22%3A%2220261127213904FCA54604086AE5522F6B%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%A4%A7%E4%BC%97%E8%A2%AB%E5%BB%BA%E8%AE%AE%E5%8D%96%E8%BA%AB%E4%B8%AD%E5%9B%BD%E8%AE%A9%E5%BE%B7%E5%9B%BD%E4%BA%BA%E5%90%B5%E7%BF%BB%E4%BA%86%22%7D&rank=&style_id=40132&topic_id=7712784448424513067"
     },
     {
-      "title": "董明珠回应不招留学生争议",
-      "hot": "7073715",
-      "url": "https://www.toutiao.com/trending/7712420530217107510/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%221%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712420530217107510%22%2C%22hot_board_impr_id%22%3A%2220261127115155BFED3E54A2C833DEDE68%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E8%91%A3%E6%98%8E%E7%8F%A0%E5%9B%9E%E5%BA%94%E4%B8%8D%E6%8B%9B%E7%95%99%E5%AD%A6%E7%94%9F%E4%BA%89%E8%AE%AE%22%7D&rank=&style_id=40132&topic_id=7712420530217107510"
+      "title": "比亚迪仰望汽车高管：仰望就是仰望",
+      "hot": "4414596",
+      "url": "https://www.toutiao.com/trending/7712767863052009993/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2215%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227712767863052009993%22%2C%22hot_board_impr_id%22%3A%2220261127213904FCA54604086AE5522F6B%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E6%AF%94%E4%BA%9A%E8%BF%AA%E4%BB%B0%E6%9C%9B%E6%B1%BD%E8%BD%A6%E9%AB%98%E7%AE%A1%EF%BC%9A%E4%BB%B0%E6%9C%9B%E5%B0%B1%E6%98%AF%E4%BB%B0%E6%9C%9B%22%7D&rank=&style_id=40132&topic_id=7712767863052009993"
     }
   ]
 }
